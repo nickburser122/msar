@@ -19,6 +19,6 @@ Everything is stored in `localStorage` (`masar.v1`).
 - **Portable settings**: export / import exclusions, merges, weights and schedule options as JSON; directory `استبعاد` column for exclusions that travel with the data.
 - Report: new sections «جودة البيانات» and «الجدول المقترح»; print CSS avoids orphaned headings and wraps long cells.
 
-## Remaining ideas
+## Remaining steps
 - Render-test PDF output on real data across browsers.
 - Optional per-region quotas in the schedule.
