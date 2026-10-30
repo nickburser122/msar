@@ -1,20 +1,28 @@
-# مَسار — Masar v3
+# مَسار — Masar v3.2
 
 Single-page, client-only analytics for inspection visits (members, facilities, regions, locations, plans). Open `index.html`; no build, no backend.
 
 ## Data
-Paste or upload three tables in «البيانات» (CSV / TSV / XLSX):
+Paste or upload the three tables in «البيانات» (CSV / TSV / XLSX):
 - Visits (required): جهة المرور، المنطقة، الخطة، المرور، التاريخ، القائم بالمرور
 - Facility directory (optional): الجهة، المنطقة، الموقع، استبعاد (optional; نعم / TRUE excludes permanently)
 - Location cost (optional): الموقع، بدل سفر، السعر، المسافة
 
 Everything is stored in `localStorage` (`masar.v1`).
 
-## Smart import (v3.1)
-- Upload one or many `.xlsx` / `.xls` / `.csv` files at once (button or drag and drop anywhere). Every sheet and every side-by-side table in a sheet is scanned; the header row is found even under title rows, merged cells are filled, hidden sheets are deprioritised.
-- Tables are classified as visits, per-member visit rows, facility directory or location cost, then the best visits table is selected (most distinct site+date visits, with plan, region and type columns preferred). Pickers let you override any choice.
-- Member names are filled from sibling sheets that cover the same site and date; region, location and plan gaps are filled the same way. Visits that still have no members stay in coverage and are listed in data quality.
-- Previously only the first sheet was read, so a workbook whose first sheet was not the visits table lost most or all rows.
+## Import (v3.2): one pipeline, three fields
+«البيانات» has three fields, each seeking its own table: **visits** (required), **facility directory** (optional), **location cost** (optional). Every upload, whether dropped anywhere on the page, added through the general button or sent to a single field, goes through the same path:
+
+1. Each file is read in full: every sheet, and every side-by-side table inside a sheet. Header rows are found under title rows, merged cells are filled, hidden sheets are deprioritised. CSV / TSV work the same way.
+2. Every detected table joins one pool and is classified (visits, per-member visit rows, directory, cost). Previously saved data joins the pool as a source too, so a later upload can never shrink what you already have.
+3. Each field picks the best candidate from the whole pool (visits: most distinct site+date visits, with plan, region and type columns preferred). A field can be overridden from its own dropdown, including «بدون» for the optional ones.
+4. Member names, region, location and plan gaps in the chosen visits table are filled from sibling visit tables covering the same site and date.
+
+Consequences: uploading `خطة_المرور.xlsx` and then `مأموريات.xlsx` (or the reverse) gives the same result: visits from the plan file, directory and costs from `مأموريات`'s `الجهات` sheet, member names filled in. Uploading to one field forces that field from the new file and leaves the others alone. Files appear as chips and can be removed individually; the fields re-resolve from what remains.
+
+## UI controls (v3.2)
+- No native browser controls: dropdowns (sources, sort, rows per page, saved report templates), switches and date fields are app components with the same look, keyboard support (arrows, Home / End, Enter, Escape, Tab) and phone-safe popup placement.
+- Report modal: every section has an include switch. «تضمين الرسوم» toggles charts; **«كل قسم في صفحة مستقلة»** (PDF) starts each section on its own page with its title in the running header. Turn it off for a continuous flow. The choice is saved with report presets.
 
 ## What's new in v3 — "what you see is what you copy"
 - **One table model, two renderers.** Every on-screen table and chart is backed by plain data (`columns` with `type`, raw `rows`). The screen renders HTML from it; copy, CSV, XLSX and PDF serialise the same model. Column builders (`plansCols`, `prioCols`, `sitesCols`, ...) are shared by the tabs and the report, so exports match the screen. `modelOf(id)` returns the model with the current sort, search and filters applied.

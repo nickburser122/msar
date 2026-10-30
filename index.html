@@ -12,7 +12,7 @@
 body{background:var(--bg);color:var(--text);font:400 14px/1.6 'IBM Plex Sans Arabic',system-ui,sans-serif;font-variant-numeric:tabular-nums;min-height:100vh}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.04;z-index:100;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 body::after{content:"";position:fixed;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--plum));z-index:60}
-html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}button,input,select,textarea{font:inherit;color:inherit}button,[role=button],.chip,.btn,.tab,.mc,.rc,th{touch-action:manipulation}button{cursor:pointer;border:0;background:none}
+html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}button,input,textarea{font:inherit;color:inherit}button,[role=button],.chip,.btn,.tab,.mc,.rc,th{touch-action:manipulation}button{cursor:pointer;border:0;background:none}
 :focus-visible{outline:2px solid var(--plum-2);outline-offset:2px}
 input[type=checkbox]{appearance:none;-webkit-appearance:none;position:relative;flex:none;width:17px;height:17px;margin:0;border:1.5px solid var(--muted);border-radius:6px;background:var(--surface-2);cursor:pointer;transition:background .18s var(--e),border-color .18s var(--e)}
 input[type=checkbox]:hover{border-color:var(--plum-2)}input[type=checkbox]:checked{background:var(--plum);border-color:var(--plum)}
@@ -76,8 +76,31 @@ th{color:var(--muted);font-weight:500;cursor:pointer;font-size:12px}tbody tr:hov
 .dc textarea{width:100%;height:110px;resize:vertical;background:var(--surface-2);border:1px dashed var(--line);border-radius:14px;padding:10px;font-size:12px;outline:0}
 .dc textarea.drag,.dc textarea:focus{border-color:var(--plum-2)}.dc .row{display:flex;gap:8px;align-items:center;margin-top:8px;font-size:12px;color:var(--muted)}
 .err{color:var(--bad);font-size:12px}
-.dc.up{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px;border-style:dashed}.dc.up.drag{border-color:var(--plum-2)}
-.imp{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:14px;margin-bottom:14px}.imr{display:grid;gap:6px;margin:12px 0}.imr b{font-weight:500}.imr .inp{width:100%;text-overflow:ellipsis}.imp ul{margin:8px 0 0;padding-inline-start:20px;font-size:12.5px;line-height:1.8}.imp details{margin-top:10px}.imp summary{cursor:pointer;font-size:12px;color:var(--muted)}.nt{font-size:12px;margin-top:4px}
+.cs{position:relative;min-width:0}
+.csb{display:flex;align-items:center;gap:8px;width:100%;min-height:38px;background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:7px 12px;text-align:start;transition:border-color .2s var(--e),background-color .2s var(--e)}
+.csb:hover,.csb:focus-visible,.csb[aria-expanded=true]{border-color:var(--plum-2);outline:0}
+.csb .csv{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.csb .csv.ph{color:var(--muted)}
+.csb>.ic{width:15px;height:15px;flex:none;color:var(--muted);transition:transform .2s var(--e)}.csb[aria-expanded=true]>.ic{transform:rotate(180deg)}
+.cs.sm .csb{min-height:0;padding:3px 10px;border-radius:10px;font-size:12.5px}.cs.sm{display:inline-block}
+#csm{padding:6px;max-height:min(340px,60vh);overflow:auto}
+.cso{display:flex;align-items:center;gap:10px;width:100%;padding:8px 10px;border-radius:10px;text-align:start;color:var(--muted);transition:background-color .15s var(--e),color .15s var(--e)}
+.cso .cot{display:grid;gap:1px;flex:1;min-width:0}.cso .cot b{font-weight:400;overflow-wrap:anywhere}.cso .cot small{font-size:11.5px;color:var(--muted)}
+.cso:hover,.cso:focus-visible{background:var(--surface-2);color:var(--text);outline:0}.cso.on{color:var(--text)}.cso .ck{opacity:0;flex:none}.cso.on .ck{opacity:1}
+input.sw[type=checkbox]{width:36px;height:21px;border-radius:999px}
+input.sw[type=checkbox]::after{inset:auto;top:50%;inset-inline-start:3px;width:13px;height:13px;margin-top:-6.5px;border-radius:50%;clip-path:none;background:var(--muted);opacity:1;transform:none;transition:inset-inline-start .2s var(--e),background-color .2s var(--e)}
+input.sw[type=checkbox]:checked::after{background:#fff;inset-inline-start:calc(100% - 17px)}
+input.sw[type=checkbox]:focus-visible{outline:2px solid var(--plum-2);outline-offset:2px}
+.swr{display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;font-size:13px;padding:2px 0}.swr>span{display:grid;gap:1px;min-width:0}.swr small{font-size:11.5px}
+.swg{display:grid;gap:6px}#cmenu .swr{padding:6px 10px;border-radius:10px}#cmenu .swr:hover{background:var(--surface-2)}
+.psl .cs{flex:none}
+.ifl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+.ifc{gap:8px;max-width:100%}.ifc .ifn{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:210px}.ifc em{font-style:normal;color:var(--muted);font-size:11.5px}
+.ifc button{display:inline-flex;align-items:center;color:var(--muted);padding:0}.ifc button:hover,.ifc button:focus-visible{color:var(--bad)}.ifc .ic{width:14px;height:14px}
+.ihint{font-size:12px;margin:0 0 14px}
+.dc{transition:border-color .2s var(--e),box-shadow .2s var(--e)}.dc.drag{border-color:var(--plum-2);box-shadow:0 0 0 3px var(--plum-soft)}
+.isrc{display:grid;gap:6px;margin-bottom:8px}.isrc:empty{display:none}.isrc .ist,.isrc .isn{font-size:12.5px}
+.isl{margin:2px 0 0;padding-inline-start:18px;font-size:12px;line-height:1.8;color:var(--muted)}
+.nt{font-size:12px;margin-top:4px}
 .modal{position:fixed;top:5vh;left:50%;transform:translate(-50%,10px);width:min(680px,94vw);max-height:90vh;overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:22px;padding:20px;z-index:90;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s var(--e),transform .22s var(--e),visibility 0s .22s}
 .modal.on{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0);transition-delay:0s}
 .secs{list-style:none;padding:0;margin:0 0 14px;display:grid;gap:6px}.secs li{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 12px;border-radius:14px;background:var(--surface-2);cursor:grab}.secs li.dg{opacity:.4}
@@ -163,7 +186,7 @@ main{padding:0 14px 110px}
 @media (max-width:380px){.tab{padding:6px 9px}.dock{padding:5px}main{padding:0 10px 110px}.top{padding:8px 10px}}
 @media (pointer:coarse){.chip{padding:8px 14px}.btn{padding:10px 14px}.slic .chip{padding:7px 13px}}
 .cl,.srt{display:none}
-.srt{gap:8px;align-items:center;margin-bottom:10px}.srt select{flex:1;min-width:0;background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:8px 12px;outline:0}.srt select:focus{border-color:var(--plum-2)}.srt .btn{padding:8px 14px}
+.srt{gap:8px;align-items:center;margin-bottom:10px}.srt .cs{flex:1;min-width:0}.srt .btn{padding:8px 14px}
 .rc2{display:grid;gap:7px;padding:12px 14px;border-radius:16px;background:var(--surface-2);border:1px solid transparent;cursor:pointer;transition:border-color .2s var(--e),transform .14s var(--e)}.rc2:hover,.rc2:focus-visible{border-color:var(--plum-2)}.rc2:active{transform:scale(.99)}
 .rc2 .r1{display:flex;align-items:center;gap:8px}.rc2 .r1 b{font-weight:500;flex:1;min-width:0;overflow-wrap:anywhere}
 .rc2 .r2{font-size:12.5px}.rc2 .r3{display:flex;flex-wrap:wrap;gap:6px 12px}.rc2 .r4{display:flex;flex-wrap:wrap;gap:3px 14px;font-size:12px}
@@ -186,7 +209,6 @@ main{padding:0 14px 110px}
 #cmenu .seg{margin:6px 8px 4px}
 .sep{height:1px;background:var(--line);margin:6px 4px}
 .psl{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 10px;font-size:12.5px;color:var(--muted)}
-.psel{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:3px 8px;outline:0}.psel:focus-visible{border-color:var(--plum-2)}
 html.dense th,html.dense td{padding:3px 8px}html.dense table{font-size:12.5px}html.dense .card{padding:12px}html.dense .rc2{padding:8px 10px}
 .cpt th{cursor:default}
 @media print{@page{size:A4 landscape;margin:12mm;@bottom-center{content:counter(page) " / " counter(pages);font-size:9px;color:#7D7180;direction:ltr;unicode-bidi:bidi-override}}
@@ -194,7 +216,7 @@ body{background:#fff!important;color:#2A2430}*{-webkit-print-color-adjust:exact;
 #print-root{display:block;color-scheme:light;--plum-2:#8F5A82;--ok:#2F7A5C;--bad:#B24848;--accent:#B5702F;--bg:#fff;--surface:#fff;--surface-2:#F7F1F4;--line:#E5DCE2;--text:#2A2430;--muted:#7D7180;--plum-soft:#EFE1EA;font-size:11px;color:#2A2430}
 #print-root h1{font-weight:500;font-size:22px;margin:0}#print-root h2{font-weight:500;font-size:15px;color:#7E4E73;margin:16px 0 8px}
 #print-root table{font-size:10px}#print-root table.sm{font-size:8.5px}#print-root table.sm th,#print-root table.sm td{padding:3px 4px}#print-root th,#print-root td{padding:4px 6px;white-space:normal}#print-root thead{display:table-header-group}#print-root tr{break-inside:avoid}
-.pc{break-inside:avoid;break-after:avoid;margin-bottom:12px}#print-root h2{break-after:avoid}#print-root td{overflow-wrap:anywhere}.pb{break-before:page}.pcov{display:flex;align-items:center;gap:14px;border-bottom:2px solid #7E4E73;padding-bottom:12px;margin-bottom:14px}.pcov svg{width:54px;height:54px}}
+.pc{break-inside:avoid;break-after:avoid;margin-bottom:12px}#print-root h2{break-after:avoid}#print-root td{overflow-wrap:anywhere}.pb{break-before:page}.rs{break-before:page}.pcov{display:flex;align-items:center;gap:14px;border-bottom:2px solid #7E4E73;padding-bottom:12px;margin-bottom:14px}.pcov svg{width:54px;height:54px}}
 </style></head>
 <body>
 <noscript><p style="padding:20px">يتطلب مَسار تفعيل JavaScript.</p></noscript>
@@ -211,6 +233,7 @@ body{background:#fff!important;color:#2A2430}*{-webkit-print-color-adjust:exact;
 <div class="pop" id="pop"></div>
 <div class="pop tmenu" id="tmenu" role="menu" aria-label="المظهر"></div>
 <div class="pop tmenu" id="cmenu" role="menu" aria-label="خيارات النسخ"></div>
+<div class="pop" id="csm" role="listbox"></div>
 <div id="tip"></div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <div id="print-root"></div>
@@ -224,7 +247,7 @@ const SB='الجهة\tالمنطقة\tالموقع\nهيئة التأمين ال
 const SC='الموقع\tبدل سفر\tالسعر\tالمسافة\nابو المطامير\tFALSE\t22\t38.2\nابو حمص\tFALSE\t13.5\t21\nادفينا\tFALSE\t23\t33\nادكو\tFALSE\t23\t40.5\nالبيضا\tFALSE\t28\t7\nالدلنجات\tFALSE\t18\t26.6\nدمنهور\tFALSE\t0\t0\nايتاي البارود\tFALSE\t15\t30\nالرحمانية\tTRUE\t12\t18\nكفر الدوار\tFALSE\t20\t30\nرشيد\tFALSE\t30\t55\nالمحمودية\tFALSE\t14\t22\nبدر\tTRUE\t18\t28\nوادي النطرون\tTRUE\t35\t70\nكوم حمادة\tFALSE\t17\t24\nقليشان\tFALSE\t16\t25\nالقاهرة\tTRUE\t60\t160\nكفر الشيخ\tTRUE\t45\t90';
 const W0={nv:60,nvp:7,tr:20,trs:10,sn2:20,sn1:12,sn0:6,gp:5,lw:8},WL=[['nv','لم تُزر قط: الأساس'],['nvp','لم تُزر قط: لكل خطة مكتملة (حتى 4)'],['tr','غابت عن آخر خطة'],['trs','لكل خطة غياب إضافية (حتى 3)'],['sn2','منذ آخر زيارة ≥ 1.5 × الحد'],['sn1','منذ آخر زيارة ≥ الحد'],['sn0','منذ آخر زيارة ≥ 90 يوماً'],['gp','فجوة سابقة ≥ 1.5 × الحد'],['lw','زيارات أقل من نصف وسيط المنطقة']];
 const S={raw:{a:'',b:'',c:''},visits:[],rows:[],dir:new Map(),cost:new Map(),filters:{},tab:'overview',sel:{},tbl:{},D:new Map(),cnt:{a:0,b:0,c:0},err:{},un:[],f:[],fNoM:[],prev:null,memo:{},hasLoc:false,excl:new Set(),dexcl:new Set(),dis:new Set(),alias:{s:{},m:{}},q:{bad:[],dup:[],reg:[],nom:[],skip:0},nt:{},imp:null,dqc:{},opt:{gapT:120,ong:'auto',slots:0,w:{...W0},sch:{start:'',per:0,days:'',team:0,plan:''}}};
-const $=s=>document.querySelector(s),pop=$('#pop'),tip=$('#tip'),tm=$('#tmenu');
+const $=s=>document.querySelector(s),pop=$('#pop'),tip=$('#tip'),tm=$('#tmenu'),csm=$('#csm');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm=s=>String(s??'').replace(/[\u0640\u064B-\u065F\u0670]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/ؤ/g,'و').replace(/ئ/g,'ي').replace(/\s+/g,' ').trim().toLowerCase();
 const key=s=>{s=String(s??'').replace(/\s+/g,' ').trim();const k=norm(s);if(k&&!S.D.has(k))S.D.set(k,s);return k};
@@ -327,7 +350,7 @@ function gbars0(data,names){if(!data.length)return EMP;const mx=Math.max(1,...da
 S.T={};
 function tbl(id,cols,rows,o={}){S.T[id]={cols,rows,o};return`<div id="t-${esc(id)}" data-tbl="${esc(id)}">${tblH(id)}</div>`}
 const ASC=['rank','name','region','loc','tm','d'];
-function sortSel(id,cols,st){return`<div class="srt"><select data-sortsel="${esc(id)}" aria-label="ترتيب">${cols.filter(c=>c.label).map(c=>`<option value="${c.k}" ${st.k===c.k?'selected':''}>${esc(c.label)}</option>`).join('')}</select><button class="btn" data-action="sortdir" data-t="${esc(id)}" aria-label="اتجاه الترتيب">${st.d>0?'↑':'↓'}</button></div>`}
+function sortSel(id,cols,st){return`<div class="srt">${csel('sort-'+id,`data-sortsel="${esc(id)}"`,cols.filter(c=>c.label).map(c=>[c.k,c.label]),st.k,{al:'ترتيب'})}<button class="btn" data-action="sortdir" data-t="${esc(id)}" aria-label="اتجاه الترتيب">${st.d>0?'↑':'↓'}</button></div>`}
 function tblH(id){const{cols,rows,o}=S.T[id],st=S.tbl[id]??={k:o.sort??null,d:o.dir??-1,p:0},ps=tblPs(o);let R=rows;if(st.k!=null){const c=cols.find(c=>c.k===st.k);if(c){const g=c.v||(r=>r[c.k]);R=[...rows].sort((a,b)=>{const x=g(a),y=g(b);return(typeof x==='string'?x.localeCompare(y,'ar'):(x??-1e15)-(y??-1e15))*st.d})}}
 S.T[id].eff=R;const pages=Math.max(1,Math.ceil(R.length/ps));if(st.p>=pages)st.p=pages-1;const P=R.slice(st.p*ps,st.p*ps+ps);
 return`${o.card?sortSel(id,cols,st):''}<div class="tw${o.card?' wc':''}"><table${cols.length>5?' class="stk"':''}><thead><tr>${cols.map(c=>`<th tabindex="0" data-action="sort" data-t="${esc(id)}" data-k="${c.k}">${esc(c.label)}${st.k===c.k?(st.d>0?' ↑':' ↓'):''}</th>`).join('')}</tr></thead><tbody>${P.map(r=>`<tr>${cols.map(c=>`<td>${c.f?c.f(r):esc(r[c.k])}</td>`).join('')}</tr>`).join('')||`<tr><td colspan="${cols.length}" class="mut">—</td></tr>`}</tbody></table></div>${o.card?`<div class="cl">${P.map(o.card).join('')||EMP}</div>`:''}${pages>1?`<div class="pg"><button class="btn" data-action="page" data-t="${esc(id)}" data-d="-1">→</button><span dir="ltr">${st.p+1} / ${pages}</span><button class="btn" data-action="page" data-t="${esc(id)}" data-d="1">←</button></div>`:''}`}
@@ -519,7 +542,7 @@ const tm=[...pool].sort((x,y)=>load.get(x)-load.get(y)||(fam.get(y)||0)-(fam.get
 rs.forEach(r=>{const c=S.cost.get(r.loc);if(c){cost+=c.fare*tm.length;km+=c.km}out.push({d:t,r,team:tm})});dl.push(t)}t+=DAY}
 return{out,days,per,team,plan,start,end:dl.length?dl[dl.length-1]:null,nd:dl.length,cost,km,load}}
 function schedCards(a){const sc=sched(a);if(!sc.out.length)return'';const sn=n=>`<input class="inp" id="s-${n}" data-sch="${n}" inputmode="numeric" value="${sc[n]}">`;
-return card('جدول مقترح للخطة القادمة',ic('calendar'),`<div class="ctl"><label>البداية<input class="inp" type="date" id="s-start" data-sch="start" value="${iso(sc.start)}" style="width:150px"></label><label>جهات في اليوم${sn('per')}</label><label>حجم الفريق${sn('team')}</label><label>رقم الخطة<input class="inp" id="s-plan" data-sch="plan" value="${esc(sc.plan)}"></label></div><div class="ctl" style="margin-top:8px"><span class="mut">أيام المرور</span>${[6,0,1,2,3,4,5].map(d=>`<button class="chip ${sc.days.includes(d)?'on':''}" aria-pressed="${sc.days.includes(d)}" data-action="schd" data-k="${d}">${WD[d]}</button>`).join('')}<span class="sp"></span><button class="btn" data-action="sreset">الافتراضي</button><button class="btn" data-action="scopy">${ic('upload')}نسخ</button><button class="btn p" data-action="scsv">${ic('download')}تنزيل CSV</button></div><p class="mut" style="font-size:12.5px;margin:10px 0">${sc.out.length} جهة على ${cn(sc.nd,U.day)} مرور · ${fd(sc.start)} — ${fd(sc.end)} · ${sc.team} أعضاء لكل يوم${S.cost.size?' · تكلفة تقديرية '+n0(sc.cost)+' · '+n0(sc.km)+' كم':''}. الترتيب يتبع الأولوية مع جمع جهات الموقع الواحد في أيام متتالية، والفريق يُختار بالتناوب حسب عدد الأيام المسندة ثم الخبرة السابقة بالجهة. الملف المصدَّر بأعمدة جدول الزيارات نفسها (${SH.join('، ')}) فيمكن لصقه في أداة الخطط أو هنا مباشرة.</p>`+tbl('sched',schedUiCols(),sc.out,{sort:'d',dir:1,ps:30,card:schedCard}))
+return card('جدول مقترح للخطة القادمة',ic('calendar'),`<div class="ctl"><label>البداية${dateField('sch','البداية',iso(sc.start),1)}</label><label>جهات في اليوم${sn('per')}</label><label>حجم الفريق${sn('team')}</label><label>رقم الخطة<input class="inp" id="s-plan" data-sch="plan" value="${esc(sc.plan)}"></label></div><div class="ctl" style="margin-top:8px"><span class="mut">أيام المرور</span>${[6,0,1,2,3,4,5].map(d=>`<button class="chip ${sc.days.includes(d)?'on':''}" aria-pressed="${sc.days.includes(d)}" data-action="schd" data-k="${d}">${WD[d]}</button>`).join('')}<span class="sp"></span><button class="btn" data-action="sreset">الافتراضي</button><button class="btn" data-action="scopy">${ic('upload')}نسخ</button><button class="btn p" data-action="scsv">${ic('download')}تنزيل CSV</button></div><p class="mut" style="font-size:12.5px;margin:10px 0">${sc.out.length} جهة على ${cn(sc.nd,U.day)} مرور · ${fd(sc.start)} — ${fd(sc.end)} · ${sc.team} أعضاء لكل يوم${S.cost.size?' · تكلفة تقديرية '+n0(sc.cost)+' · '+n0(sc.km)+' كم':''}. الترتيب يتبع الأولوية مع جمع جهات الموقع الواحد في أيام متتالية، والفريق يُختار بالتناوب حسب عدد الأيام المسندة ثم الخبرة السابقة بالجهة. الملف المصدَّر بأعمدة جدول الزيارات نفسها (${SH.join('، ')}) فيمكن لصقه في أداة الخطط أو هنا مباشرة.</p>`+tbl('sched',schedUiCols(),sc.out,{sort:'d',dir:1,ps:30,card:schedCard}))
 +card('أجندة الجدول المقترح',ic('calendar'),agendaHTML(sc))+card('أيام الأعضاء في الجدول',ic('users'),bars(cm(topK(sc.load).filter(x=>x[1]).map(([k,v])=>({label:nm(k),v,a:aM(k)})),'العضو','أيام في الجدول','int')))}
 V.quality=()=>{const q=dqData(),hasD=S.dir.size>0,sb='style="padding:3px 10px;font-size:12px"';
 const pairT=(id,L,t)=>tbl(id,pairCols(t,sb),L,{sort:'s'});
@@ -595,7 +618,7 @@ const cpScope=()=>[periodTxt(),fsum(),fd(cpToday())].join(' · ');
 const cpCell=v=>v==null||v===''||(typeof v==='number'&&!isFinite(v))?null:v;
 const cpInfer=vs=>{const x=vs.find(v=>v!=null);return Array.isArray(x)?'list':typeof x==='number'?(Number.isInteger(x)?'int':'dec'):'text'};
 const tblPs=o=>S.cp.ps>0?S.cp.ps:S.cp.ps<0?1e9:(S.cp.dense?Math.max(50,o.ps||25):(o.ps||25));
-const psSel=()=>`<select class="psel" data-cpps aria-label="عدد الصفوف في الصفحة">${[[0,'تلقائي'],[25,'25'],[50,'50'],[100,'100'],[-1,'الكل']].map(([v,l])=>`<option value="${v}" ${S.cp.ps===v?'selected':''}>${l}</option>`).join('')}</select>`;
+const psSel=()=>csel('ps','data-cpps',[[0,'تلقائي'],[25,'25'],[50,'50'],[100,'100'],[-1,'الكل']],S.cp.ps,{sm:1,al:'عدد الصفوف في الصفحة'});
 const cpLbl=(l,t)=>t==='pct'&&!/%/.test(l)?l+' %':l;
 function cpCols(cols){return cols.flatMap(c=>{if(c.copy===false||(!c.label&&!c.cp))return[];if(c.cp)return c.cp.map((x,i)=>({key:c.k+'#'+i,label:cpLbl(x.label,x.type),type:x.type,fmt:x.fmt,t:x.t}));return[{key:c.k,label:cpLbl(c.label,c.type),type:c.type,fmt:c.fmt,t:c.t||c.v||(r=>r[c.k])}]})}
 function cpModel(title,cols,rows,x){const cc=cpCols(cols),data=rows.map(r=>cc.map(c=>cpCell(c.t(r))));return{title,columns:cc.map((c,i)=>({key:c.key,label:c.label,type:c.type||cpInfer(data.map(r=>r[i])),fmt:c.fmt})),rows:data,...x}}
@@ -689,12 +712,12 @@ function cpOutCell(v,c,D){if(v==null)return'';if(c.type==='date')return D(v);if(
 function secData(id,D){const m=secModel(id);return{head:m.columns.map(c=>c.label),rows:m.rows.map(r=>r.map((v,i)=>cpOutCell(v,m.columns[i],D))),chart:m.chart,members:m.members,model:m}}
 function cpSave(){save()}
 function cpLoad(st){const c=st.cp;if(c&&typeof c==='object'){['hdr','scope','all','dense'].forEach(k=>{if(typeof c[k]==='boolean')S.cp[k]=c[k]});if([0,25,50,100,-1].includes(c.ps))S.cp.ps=c.ps;if(['tsv','text','md'].includes(c.fmt))S.cp.fmt=c.fmt;if(['auto','iso','long'].includes(c.date))S.cp.date=c.date}
-if(Array.isArray(st.presets))S.presets=st.presets.filter(p=>p&&typeof p.name==='string'&&p.name&&Array.isArray(p.order)&&Array.isArray(p.on)).slice(0,30).map(p=>({name:p.name.slice(0,60),order:p.order.map(String),on:p.on.map(String),title:typeof p.title==='string'?p.title.slice(0,120):'',author:typeof p.author==='string'?p.author.slice(0,120):'',charts:p.charts!==false,cp:p.cp&&typeof p.cp==='object'?{fmt:['tsv','text','md'].includes(p.cp.fmt)?p.cp.fmt:'tsv',hdr:p.cp.hdr!==false,scope:!!p.cp.scope,date:['auto','iso','long'].includes(p.cp.date)?p.cp.date:'auto'}:null}))}
-function cpPresetNow(name){return{name,order:[...S.rep.order],on:[...S.rep.on],title:S.rep.title,author:S.rep.author,charts:S.rep.charts,cp:{fmt:S.cp.fmt,hdr:S.cp.hdr,scope:S.cp.scope,date:S.cp.date}}}
-function cpPresetApply(p){const ids=SECS.map(s=>s[0]),ord=p.order.filter(id=>ids.includes(id));S.rep.order=[...ord,...ids.filter(id=>!ord.includes(id))];S.rep.on=new Set(p.on.filter(id=>ids.includes(id)));S.rep.title=p.title||S.rep.title;S.rep.author=p.author||'';S.rep.charts=p.charts!==false;S.rep.mem=null;if(p.cp)Object.assign(S.cp,p.cp)}
-function cpRepOpts(){return`<div style="display:grid;gap:8px;margin-bottom:12px"><div class="seg" style="margin:0">${[['tsv','TSV'],['text','نص مقروء'],['md','Markdown']].map(([f,l])=>`<button class="${S.cp.fmt===f?'on':''}" data-action="cpfmt" data-k="${f}">${l}</button>`).join('')}</div><div style="display:flex;gap:14px;flex-wrap:wrap;font-size:13px"><label style="display:flex;gap:6px"><input type="checkbox" data-cpo="hdr" ${S.cp.hdr?'checked':''}>صف العناوين</label><label style="display:flex;gap:6px"><input type="checkbox" data-cpo="scope" ${S.cp.scope?'checked':''}>سياق التقرير</label></div>${cpDateSeg()}</div>`}
+if(Array.isArray(st.presets))S.presets=st.presets.filter(p=>p&&typeof p.name==='string'&&p.name&&Array.isArray(p.order)&&Array.isArray(p.on)).slice(0,30).map(p=>({name:p.name.slice(0,60),order:p.order.map(String),on:p.on.map(String),title:typeof p.title==='string'?p.title.slice(0,120):'',author:typeof p.author==='string'?p.author.slice(0,120):'',charts:p.charts!==false,pages:p.pages!==false,cp:p.cp&&typeof p.cp==='object'?{fmt:['tsv','text','md'].includes(p.cp.fmt)?p.cp.fmt:'tsv',hdr:p.cp.hdr!==false,scope:!!p.cp.scope,date:['auto','iso','long'].includes(p.cp.date)?p.cp.date:'auto'}:null}))}
+function cpPresetNow(name){return{name,order:[...S.rep.order],on:[...S.rep.on],title:S.rep.title,author:S.rep.author,charts:S.rep.charts,pages:S.rep.pages,cp:{fmt:S.cp.fmt,hdr:S.cp.hdr,scope:S.cp.scope,date:S.cp.date}}}
+function cpPresetApply(p){const ids=SECS.map(s=>s[0]),ord=p.order.filter(id=>ids.includes(id));S.rep.order=[...ord,...ids.filter(id=>!ord.includes(id))];S.rep.on=new Set(p.on.filter(id=>ids.includes(id)));S.rep.title=p.title||S.rep.title;S.rep.author=p.author||'';S.rep.charts=p.charts!==false;S.rep.pages=p.pages!==false;S.rep.mem=null;if(p.cp)Object.assign(S.cp,p.cp)}
+function cpRepOpts(){return`<div style="display:grid;gap:8px;margin-bottom:12px"><div class="seg" style="margin:0">${[['tsv','TSV'],['text','نص مقروء'],['md','Markdown']].map(([f,l])=>`<button class="${S.cp.fmt===f?'on':''}" data-action="cpfmt" data-k="${f}">${l}</button>`).join('')}</div><div class="swg">${sw('data-cpo="hdr"','صف العناوين',S.cp.hdr)}${sw('data-cpo="scope"','سياق التقرير',S.cp.scope)}</div>${cpDateSeg()}</div>`}
 const cpDateSeg=()=>`<div class="seg" style="margin:0" role="group" aria-label="نمط التاريخ">${[['auto','تاريخ تلقائي'],['iso','ISO'],['long','عربي']].map(([k,l])=>`<button class="${S.cp.date===k?'on':''}" data-action="cpdate" data-k="${k}">${l}</button>`).join('')}</div>`;
-function cpPresetRow(){return`<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 12px"><select class="psel" data-rp="load" aria-label="القوالب المحفوظة" style="flex:1;min-width:140px"><option value="">قوالب محفوظة…</option>${S.presets.map((p,i)=>`<option value="${i}">${esc(p.name)}</option>`).join('')}</select>${S.presets.length?'<button class="btn" data-action="rpdel" style="padding:4px 10px;font-size:12px">حذف</button>':''}</div><div style="display:flex;gap:8px;margin:0 0 12px"><input class="inp" data-rpn placeholder="اسم القالب" maxlength="60" style="flex:1"><button class="btn" data-action="rpsave" style="padding:4px 10px;font-size:12px">حفظ الأقسام الحالية كقالب</button></div>`}
+function cpPresetRow(){return`<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 12px"><div style="flex:1;min-width:140px">${csel('rp','data-rp="load"',[['','قوالب محفوظة…'],...S.presets.map((p,i)=>[String(i),p.name])],S.rpSel??'',{al:'القوالب المحفوظة'})}</div>${S.presets.length?'<button class="btn" data-action="rpdel" style="padding:4px 10px;font-size:12px">حذف</button>':''}</div><div style="display:flex;gap:8px;margin:0 0 12px"><input class="inp" data-rpn placeholder="اسم القالب" maxlength="60" style="flex:1"><button class="btn" data-action="rpsave" style="padding:4px 10px;font-size:12px">حفظ الأقسام الحالية كقالب</button></div>`}
 function cpDecorate(){
 document.documentElement.classList.toggle('dense',S.cp.dense);
 const bc=$('#bcp');if(bc)bc.hidden=!S.visits.length;
@@ -711,7 +734,7 @@ function cpMenu(btn){const cm=$('#cmenu');if(cm.classList.contains('on')&&cm._b=
 const root=cpRoot(btn);if(!root)return;S.cpEl=root;cm._b=btn;
 const paged=[...root.querySelectorAll('[data-tbl]')].some(w=>{const T=S.T[w.dataset.tbl];return T&&(T.eff||T.rows).length>tblPs(T.o)});
 const dtl=root.closest('.dtl');
-cm.innerHTML=`<button class="tmi" role="menuitem" data-action="cpgo" data-f="tsv">${ic('copy')}<span>جدول (TSV)</span></button><button class="tmi" role="menuitem" data-action="cpgo" data-f="text">${ic('copy')}<span>نص مقروء</span></button><button class="tmi" role="menuitem" data-action="cpgo" data-f="md">${ic('copy')}<span>جدول Markdown</span></button>${paged&&S.cp.all?`<button class="tmi" role="menuitem" data-action="cpgo" data-f="tsv" data-p="1">${ic('copy')}<span>الصفحة الحالية فقط</span></button>`:''}${dtl?`<button class="tmi" role="menuitem" data-action="cpdtl">${ic('copy')}<span>كل لوحة التفاصيل</span></button>`:''}<div class="sep"></div><label><input type="checkbox" data-cpo="hdr" ${S.cp.hdr?'checked':''}>صف العناوين</label><label><input type="checkbox" data-cpo="scope" ${S.cp.scope?'checked':''}>كتلة السياق</label><label><input type="checkbox" data-cpo="all" ${S.cp.all?'checked':''}>كل الصفوف (لا الصفحة فقط)</label>${cpDateSeg()}`;
+cm.innerHTML=`<button class="tmi" role="menuitem" data-action="cpgo" data-f="tsv">${ic('copy')}<span>جدول (TSV)</span></button><button class="tmi" role="menuitem" data-action="cpgo" data-f="text">${ic('copy')}<span>نص مقروء</span></button><button class="tmi" role="menuitem" data-action="cpgo" data-f="md">${ic('copy')}<span>جدول Markdown</span></button>${paged&&S.cp.all?`<button class="tmi" role="menuitem" data-action="cpgo" data-f="tsv" data-p="1">${ic('copy')}<span>الصفحة الحالية فقط</span></button>`:''}${dtl?`<button class="tmi" role="menuitem" data-action="cpdtl">${ic('copy')}<span>كل لوحة التفاصيل</span></button>`:''}<div class="sep"></div>${sw('data-cpo="hdr"','صف العناوين',S.cp.hdr)}${sw('data-cpo="scope"','كتلة السياق',S.cp.scope)}${sw('data-cpo="all"','كل الصفوف (لا الصفحة فقط)',S.cp.all)}${cpDateSeg()}`;
 const r=btn.getBoundingClientRect();cm.style.top=Math.min(r.bottom+6,innerHeight-330)+'px';cm.style.left=Math.max(8,Math.min(r.left,innerWidth-262))+'px';pop.classList.remove('on');tm.classList.remove('on');cm.classList.add('on');const f=cm.querySelector('.tmi');if(f)f.focus()}
 function cpRefreshTables(){document.querySelectorAll('[data-tbl]').forEach(w=>{const id=w.dataset.tbl;if(S.tbl[id])S.tbl[id].p=0;if(S.T[id])w.innerHTML=tblH(id)});markScroll()}
 function cpKeyCopy(e){if(!((e.ctrlKey||e.metaKey)&&e.shiftKey&&(e.key==='C'||e.key==='c')))return;const t=e.target&&e.target.closest?e.target:document.activeElement,root=t&&t.closest?(t.closest('.kpis')||t.closest('.card')):null;if(!root||!root.querySelector(CPSEL)&&!root.matches(CPSEL))return;e.preventDefault();cpRun(cpBlocks(root,!S.cp.all),'tsv')}
@@ -727,11 +750,11 @@ else if(a==='cpdate'){S.cp.date=t.dataset.k;cpSave();t.parentNode.querySelectorA
 else if(a==='cpfmt'){S.cp.fmt=t.dataset.k;cpSave();t.parentNode.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b===t))}
 else if(a==='dense'){S.cp.dense=!S.cp.dense;cpSave();t.classList.toggle('on',S.cp.dense);t.setAttribute('aria-checked',S.cp.dense);document.documentElement.classList.toggle('dense',S.cp.dense);cpRefreshTables()}
 else if(a==='rpsave'){const inp=document.querySelector('#modal [data-rpn]'),n=inp?inp.value.trim():'';if(!n)toast('اكتب اسم القالب أولاً');else{const p=cpPresetNow(n.slice(0,60)),i=S.presets.findIndex(x=>x.name===p.name);i<0?S.presets.push(p):S.presets[i]=p;cpSave();openReport();toast('تم حفظ القالب')}}
-else if(a==='rpdel'){const s=document.querySelector('#modal [data-rp="load"]'),i=s?+s.value:NaN;if(s&&s.value!==''&&S.presets[i]){S.presets.splice(i,1);cpSave();openReport();toast('تم حذف القالب')}else toast('اختر قالباً أولاً')}});
+else if(a==='rpdel'){const s=document.querySelector('#modal [data-rp="load"]'),i=s?+s.value:NaN;if(s&&s.value!==''&&S.presets[i]){S.presets.splice(i,1);S.rpSel='';cpSave();openReport();toast('تم حذف القالب')}else toast('اختر قالباً أولاً')}});
 document.addEventListener('change',e=>{const t=e.target;
 if(t.dataset.cpo){S.cp[t.dataset.cpo]=t.checked;cpSave()}
 else if(t.dataset.cpps!=null){S.cp.ps=+t.value;cpSave();cpRefreshTables()}
-else if(t.dataset.rp==='load'&&t.value!==''){const p=S.presets[+t.value];if(p){cpPresetApply(p);openReport();toast('تم تحميل القالب')}}});
+else if(t.dataset.rp==='load'&&t.value!==''){const p=S.presets[+t.value];S.rpSel=t.value;if(p){cpPresetApply(p);openReport();toast('تم تحميل القالب')}}});
 addEventListener('scroll',()=>$('#cmenu').classList.remove('on'),{passive:true});
 
 const cmo=d=>({lbl:d.cm&&d.cm[0],val:d.cm&&d.cm[1],type:d.cm&&d.cm[2]});
@@ -840,7 +863,7 @@ const prioModel=a=>cpRaw('أولويات الخطة القادمة',[['التر�
 const uncurCard=a=>{const P=curPlan(a);if(!P)return'';const rows=uncurRows(a);return card('غير مغطاة في '+P.name+(P.cur?' (جارية)':''),ic('flag'),rows.length?tbl('uncur',uncurCols(),rows,{ps:30}):'<p class="mut">كل الجهات مغطاة في هذه الخطة.</p>')};
 const overdueCard=a=>{const rows=overdueRows(a);return card('جهات متأخرة عن الزيارة',ic('calendar'),`<p class="mut" style="font-size:12.5px;margin:0 0 10px">${cn(rows.length,U.site)} مرّ على آخر زيارة لها ${a.gapT} يوماً أو أكثر، مرتبة حسب المنطقة.</p>`+(rows.length?tbl('overdue',overdueCols(),rows,{ps:30}):EMP))};
 const SECS=[['sum','الملخص والمؤشرات'],['plans','الخطط: الأرقام والتغطية'],['plsum','ملخص الخطط بالكلمات'],['trans','الانتقال بين الخطط'],['ptree','شجرة التغطية لكل خطة'],['cov','تغطية المناطق عبر الخطط'],['gaps','الفجوات الكبيرة بين الخطط'],['overdue','جهات متأخرة عن الزيارة'],['uncur','غير مغطاة في الخطة الحالية'],['prio','أولويات الخطة القادمة'],['agenda','الأجندة الأسبوعية المقترحة'],['sites','عدد الزيارات لكل جهة'],['pfac','تفصيل الجهات في كل خطة'],['regions','المناطق'],['locs','المواقع والتكلفة'],['mem','الأعضاء'],['mdet','تفاصيل كل عضو'],['mmon','الأعضاء × الشهور'],['mreg','الأعضاء × المناطق'],['pairs','الشراكات'],['cal','التقويم'],['trend','الاتجاه الشهري'],['dq','جودة البيانات'],['sched','الجدول المقترح'],['log','سجل الزيارات الكامل']];
-S.rep={order:SECS.map(s=>s[0]),on:new Set(['sum','plans','ptree','cov','gaps','prio','sites','regions','mem']),mem:null,title:'تقرير المرور',author:'',charts:true,fmt:'pdf'};
+S.rep={order:SECS.map(s=>s[0]),on:new Set(['sum','plans','ptree','cov','gaps','prio','sites','regions','mem']),mem:null,title:'تقرير المرور',author:'',charts:true,pages:true,fmt:'pdf'};
 const logRows=(vs,D)=>vs.map(v=>[D(v.d),nm(v.site),nm(v.region),v.m.map(nm).join(' - ')]);
 const LOGH=['التاريخ','الجهة','المنطقة','الفريق'];
 const activeSecs=()=>S.rep.order.filter(id=>S.rep.on.has(id)&&(id!=='locs'||S.hasLoc));
@@ -848,11 +871,17 @@ const secName=id=>SECS.find(s=>s[0]===id)[1];
 const ptable=(h,r)=>`<table class="${h.length>11?'sm':''}"><thead><tr>${h.map(x=>`<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${r.map(x=>`<tr>${x.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
 function fsum(){const F=S.filters,p=[];if(F.from||F.to)p.push((F.from?fd(parseDate(F.from)):'…')+' — '+(F.to?fd(parseDate(F.to)):'…'));[['m','الأعضاء'],['r','المناطق'],['s','الجهات'],['l','المواقع'],['t','المرور'],['p','الخطة']].forEach(([k,l])=>{if(F[k].length)p.push(l+': '+F[k].map(x=>fl(k,x)).join(k==='m'&&F.mm==='all'?' + ':'، '))});return p.join(' · ')||'كل البيانات'}
 function periodTxt(){return S.f.length?fd(S.f[0].d)+' — '+fd(S.f[S.f.length-1].d):'—'}
-function doPDF(){const R=S.rep,ch=R.charts,now=new Date();let h=`<div class="pcov">${LOGO}<div><h1>${esc(R.title)}</h1>${R.author?`<div>${esc(R.author)}</div>`:''}<div class="mut">${esc(periodTxt())} · ${esc(fsum())}</div><div class="mut">${esc(fd(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())))}</div></div></div>`;
-activeSecs().forEach(id=>{const d=secData(id,fd);if(id==='mdet'){d.members.forEach(k=>{const vs=S.f.filter(v=>v.m.includes(k));h+=`<div class="pb"><h2>${esc(nm(k))}</h2><div class="pc">${miniK(mStats(vs))}</div>${ch?`<div class="pc">${bars(topK(cnt(vs,v=>v.site)).slice(0,10).map(([x,v])=>({label:nm(x),v})))}</div>`:''}${ptable(LOGH,logRows(vs,fd))}</div>`});return}
-if(id==='ptree'){const a=AN();[...a.plans].reverse().forEach(p=>{const rs=d.rows.filter(r=>r[0]===p.name+(p.cur?' (جارية)':''));h+=`<div class="pb"><h2>${esc(p.name)} · ${esc(fd(p.first)+' — '+fd(p.last))}</h2><div class="pc"><div class="mini"><div><small>التغطية</small><b>${pct(p.cov)}%</b></div><div><small>مغطاة</small><b>${p.sites.size}</b></div><div><small>غير مغطاة</small><b>${p.unc.length}</b></div><div><small>الزيارات</small><b>${p.n}</b></div></div></div>${ch?`<div class="pc">${bars(p.reg.filter(g=>g.tot).map(g=>({label:nm(g.r),v:pct(g.cov/g.tot),vs:g.cov+'/'+g.tot+' · '+pct(g.cov/g.tot)+'%'})),{max:100})}</div>`:''}${ptable(d.head.slice(1),rs.map(r=>r.slice(1)))}</div>`});return}
-h+=`<div class="pc"><h2>${esc(secName(id))}</h2>${ch&&d.chart?d.chart():''}</div>${id==='cal'&&ch?'':ptable(d.head,d.rows)}`});
-setPfoot(String(R.title)+' · مَسار');$('#print-root').innerHTML=h;setTimeout(()=>window.print(),60)}
+function doPDF(){const R=S.rep,ch=R.charts,pg=R.pages!==false,now=new Date(),pfx=t=>String(t).replace(/[\\"\r\n]/g,' '),secs=[];
+const cover=`<div class="pcov">${LOGO}<div><h1>${esc(R.title)}</h1>${R.author?`<div>${esc(R.author)}</div>`:''}<div class="mut">${esc(periodTxt())} · ${esc(fsum())}</div><div class="mut">${esc(fd(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())))}</div></div></div>`;
+activeSecs().forEach(id=>{const d=secData(id,fd);let h='';
+if(id==='mdet'){d.members.forEach(k=>{const vs=S.f.filter(v=>v.m.includes(k));h+=`<div class="pb"><h2>${esc(nm(k))}</h2><div class="pc">${miniK(mStats(vs))}</div>${ch?`<div class="pc">${bars(topK(cnt(vs,v=>v.site)).slice(0,10).map(([x,v])=>({label:nm(x),v})))}</div>`:''}${ptable(LOGH,logRows(vs,fd))}</div>`})}
+else if(id==='ptree'){const a=AN();[...a.plans].reverse().forEach(p=>{const rs=d.rows.filter(r=>r[0]===p.name+(p.cur?' (جارية)':''));h+=`<div class="pb"><h2>${esc(p.name)} · ${esc(fd(p.first)+' — '+fd(p.last))}</h2><div class="pc"><div class="mini"><div><small>التغطية</small><b>${pct(p.cov)}%</b></div><div><small>مغطاة</small><b>${p.sites.size}</b></div><div><small>غير مغطاة</small><b>${p.unc.length}</b></div><div><small>الزيارات</small><b>${p.n}</b></div></div></div>${ch?`<div class="pc">${bars(p.reg.filter(g=>g.tot).map(g=>({label:nm(g.r),v:pct(g.cov/g.tot),vs:g.cov+'/'+g.tot+' · '+pct(g.cov/g.tot)+'%'})),{max:100})}</div>`:''}${ptable(d.head.slice(1),rs.map(r=>r.slice(1)))}</div>`})}
+else h=`<div class="pc"><h2>${esc(secName(id))}</h2>${ch&&d.chart?d.chart():''}</div>${id==='cal'&&ch?'':ptable(d.head,d.rows)}`;
+secs.push([id,h])});
+let h='',x='';
+if(pg&&secs.length){secs.forEach(([id,sc],i)=>{const n='s'+i;x+=`@page ${n}{@top-right{content:"${pfx(secName(id))}";font-size:9px;color:#7D7180}}`;h+=i?`<section class="rs" style="page:${n}">${sc}</section>`:`<div style="page:${n}">${cover}${sc}</div>`})}
+else h=cover+secs.map(q=>q[1]).join('');
+setPfoot(String(R.title)+' · مَسار',x);$('#print-root').innerHTML=h;setTimeout(()=>window.print(),60)}
 const fname=(e,p='report')=>`masar-${p}-${iso(Date.now())}.${e}`;
 function dl(blob,n){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=n;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
 function doCSV(){const q=c=>{c=String(c??'');return/[",\n\r]/.test(c)?'"'+c.replace(/"/g,'""')+'"':c},ids=activeSecs(),L=[];ids.forEach((id,i)=>{const d=secData(id,iso);if(ids.length>1){if(i)L.push('');L.push(q(secName(id)))}L.push(d.head.map(q).join(','));d.rows.forEach(r=>L.push(r.map(q).join(',')))});dl(new Blob(['\uFEFF'+L.join('\r\n')],{type:'text/csv;charset=utf-8'}),fname('csv'))}
@@ -860,8 +889,8 @@ let XP;const XU=['https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js
 const xlsx=()=>XP??=new Promise((ok,no)=>{if(window.XLSX)return ok(XLSX);let i=0;const t=()=>{if(i>=XU.length){XP=null;return no(new Error('xlsx-load'))}const e=document.createElement('script');e.src=XU[i++];e.onload=()=>window.XLSX?ok(XLSX):t();e.onerror=()=>{e.remove();t()};document.head.appendChild(e)};t()});
 async function doXLSX(){const X=await xlsx(),wb=X.utils.book_new(),used=new Set(),L=x=>x&&typeof x==='object'?10:String(x??'').length;activeSecs().forEach(id=>{const m=secModel(id),head=m.columns.map(c=>c.label),aoa=[head,...m.rows.map(r=>r.map((v,i)=>{const c=m.columns[i];if(v==null)return null;if(c.type==='date')return{t:'n',v:v/DAY+25569,z:c.fmt==='month'?'yyyy-mm':'yyyy-mm-dd'};if(Array.isArray(v))return v.map(x=>c.fmt==='dates'&&typeof x==='number'?iso(x):x).join('، ');return typeof v==='number'&&(c.type==='dec'||c.type==='pct')?+v.toFixed(2):v}))],ws=X.utils.aoa_to_sheet(aoa);ws['!cols']=head.map((h,i)=>({wch:Math.min(50,Math.max(8,...aoa.map(r=>L(r[i])))+2)}));ws['!views']=[{RTL:true}];let n=secName(id).replace(/[\[\]:*?\/\\]/g,'').slice(0,31),b=n,j=2;while(used.has(n))n=b.slice(0,28)+' '+j++;used.add(n);X.utils.book_append_sheet(wb,ws,n)});wb.Workbook={Views:[{RTL:true}]};X.writeFile(wb,fname('xlsx'))}
 function repHTML(){const R=S.rep,mr=memberRows();return`<div style="display:flex;align-items:center;margin-bottom:10px"><h3 class="h" style="margin:0;flex:1">${ic('download')}تقرير</h3><button class="btn" data-action="close">${ic('x')}</button></div><p class="mut" style="font-size:12px;margin:0 0 12px">${esc(fsum())}</p>
-${cpPresetRow()}<ul class="secs" id="secs">${R.order.map(id=>id==='locs'&&!S.hasLoc?'':`<li draggable="true" data-id="${id}"><span class="mut">⋮⋮</span><label style="display:flex;gap:8px;flex:1"><input type="checkbox" data-rs="${id}" ${R.on.has(id)?'checked':''}>${secName(id)}</label>${id==='mdet'&&R.on.has('mdet')?`<div class="subm">${mr.map(r=>`<label class="chip ${!R.mem||R.mem.includes(r.k)?'on':''}" tabindex="0"><input type="checkbox" hidden data-rm="${esc(r.k)}" ${!R.mem||R.mem.includes(r.k)?'checked':''}>${esc(r.name)}</label>`).join('')}</div>`:''}</li>`).join('')}</ul>
-<div style="display:grid;gap:8px;margin-bottom:12px"><input class="inp" data-ro="title" value="${esc(R.title)}" placeholder="العنوان"><input class="inp" data-ro="author" value="${esc(R.author)}" placeholder="الجهة / المُعِد"><label style="display:flex;gap:8px;font-size:13px"><input type="checkbox" data-ro="charts" ${R.charts?'checked':''}>تضمين الرسوم</label></div>
+${cpPresetRow()}<ul class="secs" id="secs">${R.order.map(id=>id==='locs'&&!S.hasLoc?'':`<li draggable="true" data-id="${id}"><span class="mut">⋮⋮</span><label class="swr" style="flex:1"><span>${secName(id)}</span><input type="checkbox" class="sw" role="switch" data-rs="${id}" ${R.on.has(id)?'checked':''}></label>${id==='mdet'&&R.on.has('mdet')?`<div class="subm">${mr.map(r=>`<label class="chip ${!R.mem||R.mem.includes(r.k)?'on':''}" tabindex="0"><input type="checkbox" hidden data-rm="${esc(r.k)}" ${!R.mem||R.mem.includes(r.k)?'checked':''}>${esc(r.name)}</label>`).join('')}</div>`:''}</li>`).join('')}</ul>
+<div style="display:grid;gap:8px;margin-bottom:12px"><input class="inp" data-ro="title" value="${esc(R.title)}" placeholder="العنوان"><input class="inp" data-ro="author" value="${esc(R.author)}" placeholder="الجهة / المُعِد">${sw('data-ro="charts"','تضمين الرسوم',R.charts)}${R.fmt==='pdf'?sw('data-ro="pages"','كل قسم في صفحة مستقلة',R.pages!==false,'يبدأ كل قسم في صفحة جديدة وعنوانه أعلى كل صفحة'):''}</div>
 ${R.fmt==='copy'?cpRepOpts():''}<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><div class="seg" style="margin:0">${['pdf','xlsx','csv','copy'].map(f=>`<button class="${R.fmt===f?'on':''}" data-action="rfmt" data-k="${f}">${f==='copy'?'نسخ':f.toUpperCase()}</button>`).join('')}</div><span class="sp"></span><span class="err" id="rerr"></span><button class="btn p" data-action="export">${R.fmt==='copy'?ic('copy')+'نسخ':ic('download')+'تصدير'}</button></div>`}
 const TABS=[['overview','نظرة عامة','grid'],['plans','الخطط','tree'],['coverage','التغطية والفجوات','pie'],['priority','الخطة القادمة','flag'],['sites','الجهات','building'],['members','الأعضاء','users'],['regions','المناطق','layers'],['locations','المواقع','pin'],['quality','جودة البيانات','check']];
 function save(){try{localStorage.setItem('masar.v1',JSON.stringify({raw:S.raw,...cfgObj()}))}catch(e){}}
@@ -887,19 +916,43 @@ fitDock();placeBlob();scrollTab()}
 function fitDock(){const d=$('#dock');if(!d||!d.offsetWidth)return;d.classList.remove('tight','compact','scrolls');if(d.scrollWidth>d.clientWidth+1){d.classList.add('tight');if(d.scrollWidth>d.clientWidth+1){d.classList.add('compact');if(d.scrollWidth>d.clientWidth+1)d.classList.add('scrolls')}}}
 function markScroll(){document.querySelectorAll('.tw').forEach(w=>w.classList.toggle('hs',w.scrollWidth>w.clientWidth+1))}
 function scrollTab(){const d=$('#dock'),t=d&&d.querySelector('[aria-selected=true]');if(!t||d.scrollWidth<=d.clientWidth+1)return;const a=d.getBoundingClientRect(),b=t.getBoundingClientRect();d.scrollLeft+=(b.left+b.width/2)-(a.left+a.width/2)}
-function setPfoot(t){let s=document.getElementById('pst');if(!s){s=document.createElement('style');s.id='pst';document.head.appendChild(s)}s.textContent='@media print{@page{@bottom-right{content:"'+t.replace(/[\\"\r\n]/g,' ')+'";font-size:9px;color:#7D7180}}}'}
+function setPfoot(t,x){let s=document.getElementById('pst');if(!s){s=document.createElement('style');s.id='pst';document.head.appendChild(s)}s.textContent='@media print{@page{@bottom-right{content:"'+t.replace(/[\\"\r\n]/g,' ')+'";font-size:9px;color:#7D7180}}'+(x||'')+'}'}
 function placeBlob(instant){const d=$('#dock'),a=d.querySelector('[aria-selected=true]'),b=d.querySelector('.blob');if(!a||!b||!a.offsetWidth)return;const L=a.offsetLeft+'px',W=a.offsetWidth+'px';
 if(!blobSet||instant){b.style.transition='none';b.style.left=L;b.style.width=W;b.offsetWidth;b.style.transition='';blobSet=true}else{b.style.left=L;b.style.width=W}}
 function enter(){const c=$('#content');c.classList.remove('enter');void c.offsetWidth;c.classList.add('enter');clearTimeout(enter.t);enter.t=setTimeout(()=>c.classList.remove('enter'),800)}
 function setTab(k){if(k===S.tab||!V[k])return;swAt=performance.now();S.tab=k;S.lastTab=k;renderDock();S.CH=[];$('#content').innerHTML=V[k]();cpDecorate();enter();writeHash();markScroll();if(scrollY>0)scrollTo(0,0)}
-function render(){const c=$('#content');if(!S.visits.length){$('#fbar').innerHTML='';$('#slic').innerHTML='';$('#bcp').hidden=true;$('#dock').style.display='none';$('#range').textContent='';c.innerHTML=`<section class="card" style="max-width:760px;margin:20px auto;grid-column:1/-1"><h3 class="h">${ic('db')}البيانات</h3>${drawerBody(true)}</section>`;bindDrop(c);return}
+function render(){const c=$('#content');if(!S.visits.length){$('#fbar').innerHTML='';$('#slic').innerHTML='';$('#bcp').hidden=true;$('#dock').style.display='none';$('#range').textContent='';c.innerHTML=`<section class="card" style="max-width:760px;margin:20px auto;grid-column:1/-1"><h3 class="h">${ic('db')}البيانات</h3>${drawerBody(true)}</section>`;return}
 $('#dock').style.display='';$('#range').textContent=periodTxt()+' · '+cn(S.f.length,U.visit);const ch=S.lastTab!==S.tab;if(ch)swAt=performance.now();S.lastTab=S.tab;renderFilters();renderDock();S.CH=[];c.innerHTML=V[S.tab]();cpDecorate();if(ch)enter();writeHash();markScroll()}
 function refresh(){applyFilters();render()}
-function drawerBody(inl){const C=[['a','جدول الزيارات','مطلوب'],['b','دليل الجهات','اختياري'],['c','تكلفة المواقع','اختياري']];
-return`<div class="dz dc up"><label class="btn p" style="padding:6px 14px">${ic('upload')}رفع ملفات Excel / CSV<input type="file" class="vh" multiple accept=".xlsx,.xlsm,.xls,.csv,.tsv,.txt" data-fileall="1"></label><span class="mut" style="font-size:12px">يمكن رفع أكثر من ملف أو سحبها هنا؛ يُكتشف جدول الزيارات والدليل والتكلفة تلقائياً من كل الأوراق.</span></div><div data-imp>${impHTML()}</div><div class="dcards">${C.map(([k,t,s])=>`<div class="dc"><h3 class="h" style="margin-bottom:8px">${t} <span style="font-size:11px">· ${s}</span></h3><textarea data-raw="${k}" placeholder="الصق الجدول هنا أو اسحب ملفاً" spellcheck="false">${esc(S.raw[k])}</textarea><div class="row"><span data-cnt="${k}">${S.cnt[k]} صف</span><span class="sp"></span><label class="btn" style="padding:4px 10px">${ic('upload')}رفع<input type="file" class="vh" accept=".xlsx,.xlsm,.xls,.csv,.tsv,.txt" multiple data-file="${k}"></label><button class="btn" style="padding:4px 10px" data-action="clr" data-k="${k}">${ic('x')}مسح</button></div><div class="err" data-err="${k}">${esc(S.err[k]||'')}</div><div class="mut nt" data-nt="${k}">${(S.nt[k]||[]).map(x=>`<div>${esc(x)}</div>`).join('')}</div></div>`).join('')}</div>
-<div class="row" style="display:flex;gap:10px;align-items:center;margin-top:14px;font-size:12px"><button class="lnk mut" data-action="sample">بيانات تجريبية</button><button class="mut lnk" data-action="unm" data-unm ${S.un.length?'':'hidden'}>${unTxt()}</button><span class="sp"></span>${inl?'':`<button class="btn p" data-action="close">عرض</button>`}</div><div data-unml class="mut" style="font-size:12px;margin-top:6px"></div>`}
-function bindDrop(root){root.querySelectorAll('textarea[data-raw],.dz').forEach(t=>{const hasF=e=>e.dataTransfer&&[...e.dataTransfer.types].includes('Files');t.ondragover=e=>{if(hasF(e)){e.preventDefault();t.classList.add('drag')}};t.ondragleave=()=>t.classList.remove('drag');t.ondrop=e=>{t.classList.remove('drag');const fs=[...e.dataTransfer.files];if(!fs.length)return;e.preventDefault();importFiles(fs,fs.length===1&&t.dataset.raw?t.dataset.raw:undefined)}})}
-const IR={a:'جدول الزيارات',b:'دليل الجهات',c:'تكلفة المواقع'},KL={visits:'زيارات',person:'زيارات بصف لكل عضو',dir:'دليل جهات',cost:'تكلفة مواقع',other:'غير مستخدمة'},XRE=/\.(xlsx|xlsm|xls)$/i;
+I.chev='<path d="M6 9l6 6 6-6"/>';
+const cso=new Map();
+function csel(key,attrs,opts,val,o={}){cso.set(key,{opts});const cur=opts.find(x=>String(x[0])===String(val));
+return`<div class="cs${o.sm?' sm':''}" data-cs="${esc(key)}"><button type="button" class="csb" aria-haspopup="listbox" aria-expanded="false"${o.al?` aria-label="${esc(o.al)}"`:''}><span class="csv${cur?'':' ph'}">${esc(cur?cur[1]:(o.ph||''))}</span>${ic('chev')}</button><input type="hidden" ${attrs} value="${esc(val)}"></div>`}
+function csClose(f){csm.classList.remove('on');const b=csm._b;csm._b=null;csm._w=null;if(b){b.setAttribute('aria-expanded','false');if(f&&b.isConnected)b.focus()}}
+function csOpen(b){const w=b.closest('.cs'),d=w&&cso.get(w.dataset.cs);if(!d)return;
+if(csm.classList.contains('on')&&csm._b===b){csClose(true);return}
+document.querySelectorAll('.csb[aria-expanded=true]').forEach(x=>x.setAttribute('aria-expanded','false'));
+const v=w.querySelector('input[type=hidden]').value;
+csm.innerHTML=d.opts.map(([x,l,s])=>`<button type="button" class="cso${String(x)===v?' on':''}" role="option" aria-selected="${String(x)===v}" tabindex="-1" data-v="${esc(x)}"><span class="cot"><b>${esc(l)}</b>${s?`<small>${esc(s)}</small>`:''}</span><span class="ck">${ic('check')}</span></button>`).join('');
+csm._b=b;csm._w=w;b.setAttribute('aria-expanded','true');
+const r=b.getBoundingClientRect(),W=Math.min(innerWidth-16,Math.max(r.width,230));csm.style.width=W+'px';csm.classList.add('on');
+const H=csm.offsetHeight;let top=r.bottom+6;if(top+H>innerHeight-8)top=Math.max(8,r.top-6-H);
+csm.style.top=top+'px';csm.style.left=Math.max(8,Math.min(r.right-W,innerWidth-W-8))+'px';
+const t=csm.querySelector('.cso.on')||csm.querySelector('.cso');if(t){t.focus();t.scrollIntoView({block:'nearest'})}}
+function csPick(v){const w=csm._w;if(!w)return;const key=w.dataset.cs,inp=w.querySelector('input[type=hidden]');csClose(false);
+if(String(inp.value)!==String(v)){inp.value=v;const d=cso.get(key),c=d&&d.opts.find(x=>String(x[0])===String(v));if(c){const s=w.querySelector('.csv');s.textContent=c[1];s.classList.remove('ph')}inp.dispatchEvent(new Event('change',{bubbles:true}))}
+requestAnimationFrame(()=>{const n=[...document.querySelectorAll('.cs')].find(x=>x.dataset.cs===key);const b=n&&n.querySelector('.csb');if(b)b.focus()})}
+document.addEventListener('keydown',e=>{const on=csm.classList.contains('on');
+if(on&&csm.contains(e.target)){const L=[...csm.querySelectorAll('.cso')],i=L.indexOf(e.target),k=e.key,stop=()=>{e.preventDefault();e.stopPropagation()};
+if(k==='ArrowDown'){stop();L[(i+1)%L.length].focus()}else if(k==='ArrowUp'){stop();L[(i-1+L.length)%L.length].focus()}else if(k==='Home'){stop();L[0].focus()}else if(k==='End'){stop();L[L.length-1].focus()}else if(k==='Escape'||k==='Tab'){stop();csClose(true)}
+return}
+if(e.target.classList&&e.target.classList.contains('csb')&&(e.key==='ArrowDown'||e.key==='ArrowUp')){e.preventDefault();e.stopPropagation();csOpen(e.target);return}
+if(on&&e.key==='Escape'){e.stopPropagation();csClose(true)}},true);
+document.addEventListener('click',e=>{const b=e.target.closest('.csb');if(b){csOpen(b);return}const o=e.target.closest('#csm .cso');if(o){csPick(o.dataset.v);return}if(csm.classList.contains('on'))csClose()});
+document.addEventListener('scroll',e=>{if(csm.classList.contains('on')&&!csm.contains(e.target))csClose()},true);
+addEventListener('resize',()=>csClose());
+const sw=(attr,label,on,sub)=>`<label class="swr"><span>${label}${sub?`<small class="mut">${sub}</small>`:''}</span><input type="checkbox" class="sw" role="switch" ${attr} ${on?'checked':''}></label>`;
+const ROLE={a:{t:'جدول الزيارات',tag:'مطلوب',kinds:['visits','person'],hint:'يلزم عمودا جهة المرور والتاريخ'},b:{t:'دليل الجهات',tag:'اختياري',kinds:['dir'],hint:'الجهة، المنطقة، الموقع'},c:{t:'تكلفة المواقع',tag:'اختياري',kinds:['cost'],hint:'الموقع، بدل سفر، السعر، المسافة'}},RK=['a','b','c'],SMP={a:SA,b:SB,c:SC},XRE=/\.(xlsx|xlsm|xls)$/i,ACC='.xlsx,.xlsm,.xls,.csv,.tsv,.txt',SAVED='البيانات المحفوظة';
 const cell=v=>v==null?'':v,isTxt=v=>typeof v==='string'&&v.trim()!=='',iKey=(s,d)=>norm(s)+'|'+d,tsvC=v=>String(cell(v)).replace(/[\t\r\n]+/g,' ').trim();
 function sheetTables(file,sheet,aoa,hidden,off,X){const out=[];if(!aoa.length)return out;
 let hi=-1,bs=1;for(let i=0;i<Math.min(aoa.length,25);i++){const s=hRoles(aoa[i].map(norm)).size;if(s>bs){bs=s;hi=i}}
@@ -910,41 +963,52 @@ const ok=blocks.filter(([a,b])=>hRoles(hr.slice(a,b).map(norm)).size>=2);
 ok.forEach(([a,b])=>{const rows=aoa.slice(hi+1).map(r=>r.slice(a,b)).filter(r=>r.some(x=>String(cell(x)).trim()!==''));
 out.push({file,sheet,hidden,hdr:hr.slice(a,b),h:hr.slice(a,b).map(norm),rows,rng:X?X.utils.encode_col(off+a)+':'+X.utils.encode_col(off+b-1):'',nblk:ok.length})});
 return out}
-function tabInfo(t){const ix={};Object.keys(HVN).forEach(k=>ix[k]=hIdx(t.h,k));t.ix=ix;t.n=t.rows.length;t.kind='other';t.keys=0;t.nsites=0;t.score=0;
-if(ix.site>=0&&ix.date>=0){let ok=0,dn=0,dv=0,mf=0,mm=0,pf=0,rf=0;const keys=new Set();
-t.rows.forEach(r=>{const s=String(cell(r[ix.site])).trim(),dd=cell(r[ix.date]);if(String(dd).trim()!==''){dn++;const d=parseDate(dd);if(d!=null){dv++;if(s){ok++;keys.add(iKey(s,d))}}}
+function tabInfo(t){const ix={};Object.keys(HVN).forEach(k=>ix[k]=hIdx(t.h,k));t.ix=ix;t.n=t.rows.length;t.kind='other';t.keys=0;t.okRows=0;t.nsites=0;t.score=0;t.d0=null;t.d1=null;
+if(ix.site>=0&&ix.date>=0){let ok=0,dn=0,dv=0,mf=0,mm=0,pf=0,rf=0,d0=1/0,d1=-1/0;const keys=new Set();
+t.rows.forEach(r=>{const s=String(cell(r[ix.site])).trim(),dd=cell(r[ix.date]);if(String(dd).trim()!==''){dn++;const d=parseDate(dd);if(d!=null){dv++;if(s){ok++;keys.add(iKey(s,d));if(d<d0)d0=d;if(d>d1)d1=d}}}
 if(ix.mem>=0&&String(cell(r[ix.mem])).trim()){mf++;if(splitNames(r[ix.mem]).length>1)mm++}
 if(ix.plan>=0&&String(cell(r[ix.plan])).trim())pf++;if(ix.region>=0&&String(cell(r[ix.region])).trim())rf++});
 t.keys=keys.size;t.okRows=ok;
-if(dn>0&&dv/dn>=.5&&ok>=3){const person=ix.mem>=0&&mf>0&&mm/mf<.1&&ok/Math.max(1,keys.size)>=1.4;t.kind=person?'person':'visits';
+if(dn>0&&dv/dn>=.5&&ok>=3){const person=ix.mem>=0&&mf>0&&mm/mf<.1&&ok/Math.max(1,keys.size)>=1.4;t.kind=person?'person':'visits';t.d0=d0;t.d1=d1;
 t.score=(person?keys.size:ok)*1000+(ix.plan>=0&&pf/t.n>.5?300:0)+(ix.region>=0&&rf/t.n>.5?200:0)+(ix.type>=0?100:0)+(ix.mem>=0?50*mf/t.n:0)-(person?1:0)-(t.hidden?5000:0)}}
 else if(ix.site>=0&&ix.date<0&&(ix.region>=0||ix.loc>=0)&&t.n>=2){t.kind='dir';t.nsites=new Set(t.rows.map(r=>norm(cell(r[ix.site]))).filter(Boolean)).size}
 else if(ix.loc>=0&&ix.site<0&&(ix.allow>=0||ix.fare>=0||ix.km>=0)&&t.n>=1)t.kind='cost'}
-async function impAnalyze(files){const X=await xlsx(),T=[],skipped=[];let seq=0;
-for(const f of files){let tabs=[];
+async function impAnalyze(files){const X=await xlsx(),T=[],skipped=[];
+for(const f of files){
 if(XRE.test(f.name)){const wb=X.read(await f.arrayBuffer(),{type:'array'}),meta=(wb.Workbook&&wb.Workbook.Sheets)||[];
-wb.SheetNames.forEach((sn,si)=>{const ws=wb.Sheets[sn];if(!ws||!ws['!ref']){skipped.push({f:f.name,s:sn,why:'ورقة فارغة'});return}
+wb.SheetNames.forEach((sn,si)=>{const ws=wb.Sheets[sn];if(!ws||!ws['!ref']){skipped.push({f:f.name,s:sn});return}
 const aoa=X.utils.sheet_to_json(ws,{header:1,raw:true,blankrows:true,defval:''}),R0=X.utils.decode_range(ws['!ref']);
 (ws['!merges']||[]).forEach(m=>{if((m.e.r-m.s.r+1)*(m.e.c-m.s.c+1)>4000)return;const v=(aoa[m.s.r-R0.s.r]||[])[m.s.c-R0.s.c];if(v===''||v==null)return;for(let r=m.s.r;r<=m.e.r;r++)for(let c=m.s.c;c<=m.e.c;c++){const row=aoa[r-R0.s.r];if(row&&(row[c-R0.s.c]===''||row[c-R0.s.c]==null))row[c-R0.s.c]=v}});
 const ts=sheetTables(f.name,sn,aoa,!!(meta[si]&&meta[si].Hidden),R0.s.c,X);
-if(!ts.length)skipped.push({f:f.name,s:sn,why:'لا توجد أعمدة معروفة'});tabs.push(...ts)})}
+if(!ts.length)skipped.push({f:f.name,s:sn});T.push(...ts)})}
 else{const buf=await f.arrayBuffer();let txt;try{txt=new TextDecoder('utf-8',{fatal:true}).decode(buf)}catch(e){txt=new TextDecoder('windows-1256').decode(buf)}
-const ts=sheetTables(f.name,'',csvRows(txt),false,0,null);if(!ts.length)skipped.push({f:f.name,s:'',why:'لا توجد أعمدة معروفة'});tabs.push(...ts)}
-tabs.forEach(t=>{t.id='t'+seq++;T.push(t)})}
+const ts=sheetTables(f.name,'',csvRows(txt),false,0,null);if(!ts.length)skipped.push({f:f.name,s:''});T.push(...ts)}}
 T.forEach(tabInfo);return{T,skipped}}
 function tabRows(t){const ix=t.ix,out=[],gm=new Map();
 t.rows.forEach(r=>{const s=String(cell(r[ix.site])).trim();if(!s)return;const d=parseDate(cell(r[ix.date]));if(d==null)return;
 const o={site:s,d,k:iKey(s,d),region:ix.region>=0?String(cell(r[ix.region])).trim():'',plan:ix.plan>=0?String(cell(r[ix.plan])).trim().replace(/^(\d+)\.0+$/,'$1'):'',type:ix.type>=0?String(cell(r[ix.type])).trim():'',loc:ix.loc>=0?String(cell(r[ix.loc])).trim():'',mem:ix.mem>=0?splitNames(cell(r[ix.mem])):[]};
 if(t.kind==='person'){const g=gm.get(o.k);if(g){o.mem.forEach(x=>{if(!g.mem.includes(x))g.mem.push(x)});return}gm.set(o.k,o)}
 out.push(o)});return out}
-const tLab=t=>t.file+(t.sheet?' › '+t.sheet:'')+(t.nblk>1&&t.rng?' ('+t.rng+')':'');
-function impPlan(D,force){force=force||{};
-const V=D.T.filter(t=>t.kind==='visits'||t.kind==='person').sort((x,y)=>y.score-x.score),Dd=D.T.filter(t=>t.kind==='dir').sort((x,y)=>y.nsites-x.nsites||y.n-x.n),Cc=D.T.filter(t=>t.kind==='cost').sort((x,y)=>y.n-x.n);
-const sel=(arr,id)=>id==='none'?null:(arr.find(t=>t.id===id)||arr[0]||null);
-const R={cand:{a:V,b:Dd,c:Cc},use:{a:sel(V,force.a),b:sel(Dd,force.b),c:sel(Cc,force.c)},out:{},notes:[],stat:{}};
-const P=R.use.a;
+const tLab=t=>t.file+(t.sheet?' › '+t.sheet:'')+(t.nblk>1&&t.rng?' ('+t.rng+')':''),tShort=t=>t.file+(t.sheet?' › '+t.sheet:''),tkey=t=>t.file+'|'+t.sheet+'|'+t.rng;
+function tStat(t){if(t.kind==='dir')return cn(t.nsites,U.site);if(t.kind==='cost')return cn(t.n,U.row);const n=t.kind==='person'?t.keys:t.okRows;return cn(n,U.visit)+(t.d0!=null?' · '+fd(t.d0)+' — '+fd(t.d1):'')}
+function impNew(){return{pool:[],seq:0,seeded:false,force:{},R:null,err:{},skips:{}}}
+S.imp=impNew();
+function impSort(k,c){const f=k==='a'?(x,y)=>y.score-x.score:k==='b'?(x,y)=>y.nsites-x.nsites||y.n-x.n:(x,y)=>y.n-x.n;return[...c].sort((x,y)=>f(x,y)||(!!x.saved-!!y.saved))}
+function impCand(k){return impSort(k,S.imp.pool.filter(t=>ROLE[k].kinds.includes(t.kind)))}
+function impUse(k){const I=S.imp,f=I.force[k];if(f==='none')return null;const c=impCand(k);if(f){const t=c.find(x=>x.id===f);if(t)return t}return c[0]||null}
+function impSeed(){const I=S.imp;if(I.seeded)return;I.seeded=true;
+RK.forEach(k=>{const raw=S.raw[k];if(!raw||!raw.trim()||raw===SMP[k])return;
+sheetTables(SAVED,ROLE[k].t,csvRows(raw),false,0,null).forEach(t=>{tabInfo(t);if(t.kind==='other')return;t.id='t'+(++I.seq);t.saved=1;I.pool.push(t)})})}
+function impAdd(T,skipped,names){const I=S.imp,old={};
+RK.forEach(k=>{const f=I.force[k];if(f&&f!=='none'){const t=I.pool.find(x=>x.id===f);if(t&&names.includes(t.file))old[k]=tkey(t)}});
+I.pool=I.pool.filter(t=>!names.includes(t.file));
+names.forEach(n=>{I.skips[n]=skipped.filter(x=>x.f===n&&x.s).map(x=>x.s)});
+T.forEach(t=>{t.id='t'+(++I.seq);I.pool.push(t)});
+RK.forEach(k=>{if(old[k]){const t=T.find(x=>tkey(x)===old[k]);if(t)I.force[k]=t.id;else delete I.force[k]}})}
+function impPlan(){const I=S.imp,use={},out={},stat={};RK.forEach(k=>use[k]=impUse(k));
+const P=use.a;
 if(P){const rows=tabRows(P),pk=new Set(rows.map(o=>o.k));
-const E=V.filter(t=>t!==P).map(t=>{const er=tabRows(t),ek=new Set(er.map(o=>o.k));let ov=0;ek.forEach(k=>{if(pk.has(k))ov++});return{t,er,ek,ov:ek.size?ov/ek.size:0,mk:new Set(er.filter(o=>o.mem.length).map(o=>o.k)).size}}).filter(x=>x.ov>=.5&&x.ek.size>=3).sort((x,y)=>y.mk-x.mk);
+const E=I.pool.filter(t=>t!==P&&(t.kind==='visits'||t.kind==='person')).map(t=>{const er=tabRows(t),ek=new Set(er.map(o=>o.k));let ov=0;ek.forEach(k=>{if(pk.has(k))ov++});return{t,er,ek,ov:ek.size?ov/ek.size:0,mk:new Set(er.filter(o=>o.mem.length).map(o=>o.k)).size}}).filter(x=>x.ov>=.5&&x.ek.size>=3).sort((x,y)=>y.mk-x.mk);
 const maps=E.map(x=>{const m=new Map();x.er.forEach(o=>{(m.get(o.k)||m.set(o.k,[]).get(o.k)).push(o)});return m});
 const seen=new Map(),fill=new Map(E.map(x=>[x.t.id,0]));let filled=0,fReg=0,fLoc=0;
 rows.forEach(o=>{const n=seen.get(o.k)||0;seen.set(o.k,n+1);
@@ -954,54 +1018,75 @@ if(!o.loc)for(let j=0;j<E.length;j++){const a=maps[j].get(o.k);const x=a&&a.find
 let inferred=0;const withP=rows.filter(o=>o.plan!=='');
 if(withP.length&&withP.length<rows.length&&withP.length>=rows.length*.5){const rg=new Map();withP.forEach(o=>{const r=rg.get(o.plan);if(!r)rg.set(o.plan,[o.d,o.d]);else{if(o.d<r[0])r[0]=o.d;if(o.d>r[1])r[1]=o.d}});
 rows.forEach(o=>{if(o.plan!=='')return;let best='',bd=1/0;rg.forEach((r,p)=>{const dd=o.d<r[0]?r[0]-o.d:o.d>r[1]?o.d-r[1]:0;if(dd<bd){bd=dd;best=p}});if(best!==''&&bd<=15*DAY){o.plan=best;inferred++}})}
-const nom=rows.filter(o=>!o.mem.length).length;
 const L=[['جهة المرور','المنطقة','الخطة','المرور','التاريخ','القائم بالمرور','الموقع'].join('\t')];
 rows.forEach(o=>L.push([o.site,o.region,o.plan,o.type,iso(o.d),o.mem.join(' - '),o.loc].map(tsvC).join('\t')));
-R.out.a=L.join('\n');
+out.a=L.join('\n');
 const ds=rows.map(o=>o.d);
-R.stat.a={n:rows.length,keys:pk.size,nom,filled:E.map(x=>({t:x.t,n:fill.get(x.t.id)})).filter(x=>x.n>0),extra:E.filter(x=>x.t.kind==='visits').map(x=>({t:x.t,n:[...x.ek].filter(k=>!pk.has(k)).length})).filter(x=>x.n>0),inferred,fReg,fLoc,from:ds.length?Math.min(...ds):null,to:ds.length?Math.max(...ds):null}}
-const D0=R.use.b;
+stat.a={n:rows.length,keys:pk.size,filled:E.map(x=>({t:x.t,n:fill.get(x.t.id)})).filter(x=>x.n>0),extra:E.filter(x=>x.t.kind==='visits').map(x=>({t:x.t,n:[...x.ek].filter(k=>!pk.has(k)).length})).filter(x=>x.n>0),inferred,fReg,fLoc,from:ds.length?Math.min(...ds):null,to:ds.length?Math.max(...ds):null}}
+const D0=use.b;
 if(D0){const ix=D0.ix,ex=col(D0.h,'استبعاد','مستبعد'),L=[['الجهة','المنطقة','الموقع'].concat(ex>=0?['استبعاد']:[]).join('\t')];let n=0;
 D0.rows.forEach(r=>{const s=String(cell(r[ix.site])).trim();if(!s)return;n++;L.push([s,ix.region>=0?r[ix.region]:'',ix.loc>=0?r[ix.loc]:''].concat(ex>=0?[r[ex]]:[]).map(tsvC).join('\t'))});
-R.out.b=L.join('\n');R.stat.b={n}}
-const C0=R.use.c;
+out.b=L.join('\n');stat.b={n}}
+const C0=use.c;
 if(C0){const ix=C0.ix,L=['الموقع\tبدل سفر\tالسعر\tالمسافة'];let n=0;
 C0.rows.forEach(r=>{const s=String(cell(r[ix.loc])).trim();if(!s)return;n++;L.push([s,ix.allow>=0?r[ix.allow]:'',ix.fare>=0?r[ix.fare]:'',ix.km>=0?r[ix.km]:''].map(tsvC).join('\t'))});
-R.out.c=L.join('\n');R.stat.c={n}}
-return R}
-function impCommit(R,roles){const smp={a:SA,b:SB,c:SC};
-['a','b','c'].forEach(k=>{if(roles&&!roles.includes(k))return;if(R.out[k]!=null)S.raw[k]=R.out[k];else if(roles?!R.use[k]:S.raw[k]===smp[k])S.raw[k]=''});
-S.filters=F0();save();build();applyFilters();updDrawer();impRender();if(S.visits.length||!$('#content .dc'))render()}
-function impText(k,I){const st=I.R.stat[k],u=I.R.use[k];if(!u||!st)return'<span class="mut">لم يُعثر على جدول مناسب</span>';
-if(k==='a'){const p=[cn(st.n,U.visit)+' · '+fd(st.from)+' — '+fd(st.to)];if(st.nom)p.push(cn(st.nom,U.visit)+' بلا أعضاء');return p.join(' · ')}
-return cn(st.n,U.row)}
-function impHTML(){const I=S.imp;if(!I)return'';const rowH=k=>{const u=I.R.use[k],c=I.R.cand[k];
-return`<div class="imr"><b>${IR[k]}</b><select class="inp" data-impsel="${k}" aria-label="${IR[k]}">${k==='a'?'':`<option value="none" ${!u?'selected':''}>— بدون</option>`}${c.map(t=>`<option value="${t.id}" ${u===t?'selected':''}>${esc(tLab(t))} · ${t.kind==='dir'?cn(t.nsites,U.site):t.kind==='cost'?cn(t.n,U.row):cn(t.kind==='person'?t.keys:t.okRows,U.visit)}</option>`).join('')}</select><span class="mut">${impText(k,I)}</span></div>`};
-const a=I.only&&I.only!=='a'?null:I.R.stat.a,nt=[];
-if(a){a.filled.forEach(x=>nt.push(`أسماء الأعضاء لـ ${cn(x.n,U.visit)} مأخوذة من «${esc(tLab(x.t))}»`));
-if(a.fReg)nt.push(`منطقة ${cn(a.fReg,U.visit)} مأخوذة من أوراق أخرى`);
-if(a.inferred)nt.push(`خطة ${cn(a.inferred,U.visit)} استُنتجت من التاريخ`);
-a.extra.forEach(x=>nt.push(`«${esc(tLab(x.t))}» فيها ${cn(x.n,U.visit)} لا مقابل لها في الجدول المختار (لم تُضَف)`));
-if(a.nom)nt.push(`${cn(a.nom,U.visit)} بلا أسماء أعضاء في أي ورقة: تدخل في التغطية وتخرج من تحليل الأعضاء`)}
-const used=new Set(Object.values(I.R.use).filter(Boolean)),fil=a?new Set(a.filled.map(x=>x.t)):new Set();
-const all=I.D.T.map(t=>`<li>${esc(tLab(t))} — ${KL[t.kind]} · ${cn(t.n,U.row)}${used.has(t)?' · <b>مستخدمة</b>':fil.has(t)?' · مصدر أعضاء':''}</li>`).concat(I.D.skipped.map(x=>`<li class="mut">${esc(x.f+(x.s?' › '+x.s:''))} — متجاهلة: ${esc(x.why)}</li>`)).join('');
-return`<div class="imp"><h3 class="h" style="margin-bottom:6px">${ic('check')}نتيجة الاستيراد</h3><div class="mut" style="font-size:12px">اختيار تلقائي من ${cn(I.D.T.length,['جدول','جدولان','جداول','جدولاً'])} في ${I.files.length>1?I.files.length+' ملفات':'ملف'}. يمكنك تغيير أي اختيار.</div>${(I.only?[I.only]:['a','b','c']).map(rowH).join('')}${nt.length?`<ul>${nt.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}<details><summary>كل الأوراق والجداول المكتشفة</summary><ul>${all}</ul></details></div>`}
-function impRender(){document.querySelectorAll('[data-imp]').forEach(e=>{e.innerHTML=impHTML()})}
-function impPick(k,id){const I=S.imp;if(!I)return;I.force[k]=id;I.R=impPlan(I.D,I.force);impCommit(I.R,[k])}
-function impToast(I){const a=I.R.stat.a;if(a)toast('تم استيراد '+cn(a.n,U.visit)+' من «'+tLab(I.R.use.a)+'»');else toast('تم الاستيراد')}
-async function readFile(k,f){try{let txt;if(XRE.test(f.name)){const X=await xlsx(),wb=X.read(await f.arrayBuffer(),{type:'array'});txt=X.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,raw:true,blankrows:false,defval:''}).map(r=>r.map(c=>String(c??'').replace(/[\t\r\n]+/g,' ')).join('\t')).join('\n')}else{const buf=await f.arrayBuffer();try{txt=new TextDecoder('utf-8',{fatal:true}).decode(buf)}catch(e){txt=new TextDecoder('windows-1256').decode(buf)}}setRaw(k,txt)}catch(e){S.err[k]='تعذر قراءة الملف';updDrawer()}}
-async function importFiles(files,only){const k=only||'a';
-try{if(only&&files.length===1&&!XRE.test(files[0].name)){await readFile(only,files[0]);return}
-const D=await impAnalyze(files),force={};let R=impPlan(D,force);
-if(only&&!R.use[only]){await readFile(only,files[0]);S.nt[only]=['لم يُعثر على جدول مناسب لهذا الدور؛ استُخدمت أول ورقة كما هي'];updDrawer();return}
-if(!R.use.a&&!R.use.b&&!R.use.c){S.err[k]='لم يُعثر في الملف على جدول زيارات أو دليل جهات أو تكلفة مواقع (يلزم عمودا جهة المرور والتاريخ)';updDrawer();return}
-S.imp={D,R,force,files:files.map(f=>f.name),only:only||null};impCommit(R,only?[only]:null);impToast(S.imp);if(!$('#drawer').classList.contains('on'))openDrawer()}
-catch(e){S.err[k]=e&&e.message==='xlsx-load'?'تعذر تحميل مكتبة قراءة Excel، تحقق من الاتصال':'تعذر قراءة الملف';updDrawer()}}
-function setRaw(k,v){S.raw[k]=v;save();build();applyFilters();updDrawer();if(S.visits.length||!$('#content .dc'))render()}
-function updDrawer(){document.querySelectorAll('[data-raw]').forEach(t=>{if(t!==document.activeElement)t.value=S.raw[t.dataset.raw]});document.querySelectorAll('[data-cnt]').forEach(e=>{const n=S.cnt[e.dataset.cnt]+' صف';if(e.textContent!==n){e.textContent=n;e.classList.remove('pulse');e.offsetWidth;e.classList.add('pulse')}});document.querySelectorAll('[data-err]').forEach(e=>e.textContent=S.err[e.dataset.err]||'');document.querySelectorAll('[data-nt]').forEach(e=>{e.innerHTML=(S.nt[e.dataset.nt]||[]).map(x=>`<div>${esc(x)}</div>`).join('')});document.querySelectorAll('[data-unm]').forEach(e=>{e.textContent=unTxt();e.hidden=!S.un.length})}
-function openDrawer(){const d=$('#drawer');if(!d.classList.contains('on'))S.lf=document.activeElement;d.innerHTML=`<div style="display:flex;align-items:center;margin-bottom:14px"><h3 class="h" style="margin:0;flex:1">${ic('db')}البيانات</h3><button class="btn" data-action="close">${ic('x')}</button></div>`+drawerBody();bindDrop(d);d.classList.add('on');$('#ov').classList.add('on');const fb=d.querySelector('button');if(fb)fb.focus()}
+out.c=L.join('\n');stat.c={n}}
+return{use,out,stat}}
+function impCommit(){const I=S.imp,R=impPlan();I.R=R;
+RK.forEach(k=>{if(R.out[k]!=null)S.raw[k]=R.out[k];else if(I.force[k]==='none'||(I.pool.length&&S.raw[k]===SMP[k]))S.raw[k]=''});
+S.filters=F0();save();build();applyFilters();updDrawer();if(S.visits.length||!$('#content .dc'))render()}
+function impSummary(before){const p=[];RK.forEach(k=>{const u=impUse(k);if(u&&tkey(u)!==before[k])p.push(ROLE[k].t+' ← '+tShort(u))});return p.length?'تم: '+p.join(' · '):'تمت إضافة الملفات'}
+async function importFiles(files,role){files=[...files];if(!files.length)return;
+try{impSeed();const before={};RK.forEach(k=>{const u=impUse(k);before[k]=u?tkey(u):''});
+const{T,skipped}=await impAnalyze(files),I=S.imp;I.err={};
+impAdd(T,skipped,files.map(f=>f.name));
+if(role){const c=impSort(role,T.filter(t=>ROLE[role].kinds.includes(t.kind)));
+if(!c.length){I.err[role]='لم يُعثر في الملف على '+ROLE[role].t+' ('+ROLE[role].hint+')';impCommit();return}
+I.force[role]=c[0].id}
+else if(!T.length){I.err.a='لم يُعثر في الملفات على جدول زيارات أو دليل جهات أو تكلفة مواقع (يلزم عمودا جهة المرور والتاريخ)';updDrawer();if(!$('#drawer').classList.contains('on')&&!$('#content .dc'))openDrawer();return}
+impCommit();toast(impSummary(before));
+if(!$('#drawer').classList.contains('on')&&!$('#content .dc'))openDrawer()}
+catch(e){const k=role||'a';S.imp.err[k]=e&&e.message==='xlsx-load'?'تعذر تحميل مكتبة قراءة Excel، تحقق من الاتصال':'تعذر قراءة الملف';updDrawer()}}
+function impPickSrc(k,id){impSeed();S.imp.force[k]=id;S.imp.err={};impCommit()}
+function impClear(k){impSeed();S.imp.force[k]='none';S.imp.err={};impCommit()}
+function impRemove(name){const I=S.imp,was={};RK.forEach(k=>{const u=impUse(k);was[k]=!!u&&u.file===name});
+I.pool=I.pool.filter(t=>t.file!==name);delete I.skips[name];
+RK.forEach(k=>{const f=I.force[k];if(f&&f!=='none'&&!I.pool.some(t=>t.id===f))delete I.force[k];if(was[k]&&!impUse(k))I.force[k]='none'});
+I.err={};impCommit()}
+const errOf=k=>[S.imp.err[k],S.err[k]].filter(Boolean).join(' · '),ntOf=k=>(S.nt[k]||[]).map(x=>`<div>${esc(x)}</div>`).join('');
+function chipsHTML(){const I=S.imp,fs=[...new Set(I.pool.map(t=>t.file))],use=RK.map(k=>[k,impUse(k)]);
+return fs.map(f=>{const n=I.pool.filter(t=>t.file===f).length,used=use.filter(([k,u])=>u&&u.file===f).map(([k])=>ROLE[k].t),sk=I.skips[f]||[],
+tip=cn(n,['جدول','جدولان','جداول','جدولاً'])+(used.length?' · يُستخدم في: '+used.join('، '):' · غير مستخدم حالياً')+(sk.length?' · ورقات متجاهلة: '+sk.join('، '):'');
+return`<span class="chip on ifc" ${tipA(tip)}><span class="ifn">${esc(f)}</span>${used.length?`<em>${used.length}/3</em>`:''}<button type="button" data-action="frm" data-k="${esc(f)}" aria-label="إزالة الملف">${ic('x')}</button></span>`}).join('')
++`<button type="button" class="chip" data-action="fadd">${ic('upload')}إضافة ملفات</button><input type="file" class="vh" tabindex="-1" multiple accept="${ACC}" data-file="*">`}
+function srcHTML(k){const I=S.imp,c=impCand(k),u=impUse(k);
+if(!I.pool.length)return'';
+if(!c.length)return`<div class="mut isn">لا يوجد جدول مناسب في الملفات المرفوعة (${esc(ROLE[k].hint)})</div>`;
+const o=c.map(t=>[t.id,tLab(t),tStat(t)]);if(k!=='a')o.push(['none','بدون','']);
+let h=csel('imp-'+k,`data-impsel="${k}"`,o,u?u.id:'none',{al:ROLE[k].t});
+if(u)h+=`<div class="mut ist">${esc(tStat(u))}</div>`;
+if(k==='a'&&u&&I.R&&I.R.stat.a){const a=I.R.stat.a,l=[];
+a.filled.forEach(x=>l.push(`أسماء الأعضاء لـ ${cn(x.n,U.visit)} مأخوذة من «${esc(tLab(x.t))}»`));
+if(a.fReg)l.push(`منطقة ${cn(a.fReg,U.visit)} مأخوذة من أوراق أخرى`);
+if(a.inferred)l.push(`خطة ${cn(a.inferred,U.visit)} استُنتجت من التاريخ`);
+a.extra.forEach(x=>l.push(`«${esc(tLab(x.t))}» فيها ${cn(x.n,U.visit)} لا مقابل لها في الجدول المختار (لم تُضَف)`));
+if(l.length)h+=`<ul class="isl">${l.map(x=>`<li>${x}</li>`).join('')}</ul>`}
+return h}
+function impRender(){document.querySelectorAll('[data-ichips]').forEach(e=>{e.innerHTML=chipsHTML()});document.querySelectorAll('[data-isrc]').forEach(e=>{e.innerHTML=srcHTML(e.dataset.isrc)})}
+function drawerBody(inl){
+return`<div class="ifl" data-ichips>${chipsHTML()}</div><p class="mut ihint">اسحب ملفاً أو أكثر إلى أي حقل أو إلى الصفحة. تُفحص كل ورقة وكل جدول فيها ويأخذ كل حقل ما يناسبه، والملفات اللاحقة تُكمل الناقص ولا تهدم ما اخترته.</p>
+<div class="dcards">${RK.map(k=>`<div class="dc" data-role="${k}"><h3 class="h" style="margin-bottom:8px">${ROLE[k].t} <span style="font-size:11px">· ${ROLE[k].tag}</span></h3><div class="isrc" data-isrc="${k}">${srcHTML(k)}</div><textarea data-raw="${k}" placeholder="الصق الجدول هنا أو اسحب ملفاً" spellcheck="false">${esc(S.raw[k])}</textarea><div class="row"><span data-cnt="${k}">${S.cnt[k]} صف</span><span class="sp"></span><button type="button" class="btn" style="padding:4px 10px" data-action="fpick" data-k="${k}">${ic('upload')}رفع</button><button type="button" class="btn" style="padding:4px 10px" data-action="clr" data-k="${k}">${ic('x')}مسح</button><input type="file" class="vh" tabindex="-1" multiple accept="${ACC}" data-file="${k}"></div><div class="err" data-err="${k}">${esc(errOf(k))}</div><div class="mut nt" data-nt="${k}">${ntOf(k)}</div></div>`).join('')}</div>
+<div class="row" style="display:flex;gap:10px;align-items:center;margin-top:14px;font-size:12px"><button class="lnk mut" data-action="sample">بيانات تجريبية</button><button class="mut lnk" data-action="unm" data-unm ${S.un.length?'':'hidden'}>${unTxt()}</button><span class="sp"></span>${inl?'':`<button class="btn p" data-action="close">عرض</button>`}</div><div data-unml class="mut" style="font-size:12px;margin-top:6px"></div>`}
+function setRaw(k,v){S.imp=impNew();S.raw[k]=v;save();build();applyFilters();updDrawer();if(S.visits.length||!$('#content .dc'))render()}
+function updDrawer(){document.querySelectorAll('[data-raw]').forEach(t=>{if(t!==document.activeElement)t.value=S.raw[t.dataset.raw]});document.querySelectorAll('[data-cnt]').forEach(e=>{const n=S.cnt[e.dataset.cnt]+' صف';if(e.textContent!==n){e.textContent=n;e.classList.remove('pulse');e.offsetWidth;e.classList.add('pulse')}});document.querySelectorAll('[data-err]').forEach(e=>e.textContent=errOf(e.dataset.err));document.querySelectorAll('[data-nt]').forEach(e=>{e.innerHTML=ntOf(e.dataset.nt)});document.querySelectorAll('[data-unm]').forEach(e=>{e.textContent=unTxt();e.hidden=!S.un.length});impRender()}
+let dzCur=null;
+function dzSet(n){if(dzCur===n)return;if(dzCur)dzCur.classList.remove('drag');dzCur=n;if(n)n.classList.add('drag')}
+document.addEventListener('dragover',e=>{if(!e.dataTransfer||![...e.dataTransfer.types].includes('Files'))return;e.preventDefault();dzSet(e.target.closest?e.target.closest('.dc[data-role]'):null)});
+document.addEventListener('dragleave',e=>{if(!e.relatedTarget)dzSet(null)});
+document.addEventListener('drop',e=>{dzSet(null);const fs=e.dataTransfer?[...e.dataTransfer.files]:[];if(!fs.length)return;e.preventDefault();const z=e.target.closest?e.target.closest('.dc[data-role]'):null;importFiles(fs,z?z.dataset.role:undefined)});
+function openDrawer(){const d=$('#drawer');if(!d.classList.contains('on'))S.lf=document.activeElement;d.innerHTML=`<div style="display:flex;align-items:center;margin-bottom:14px"><h3 class="h" style="margin:0;flex:1">${ic('db')}البيانات</h3><button class="btn" data-action="close">${ic('x')}</button></div>`+drawerBody();d.classList.add('on');$('#ov').classList.add('on');const fb=d.querySelector('button');if(fb)fb.focus()}
 function openReport(){const m=$('#modal'),fresh=!m.classList.contains('on');if(fresh)S.lf=document.activeElement;m.innerHTML=repHTML();m.classList.add('on');$('#ov').classList.add('on');bindDrag();if(fresh){const fb=m.querySelector('button');if(fb)fb.focus()}}
-function closeAll(){const was=$('#drawer').classList.contains('on')||$('#modal').classList.contains('on');$('#drawer').classList.remove('on');$('#modal').classList.remove('on');$('#ov').classList.remove('on');pop.classList.remove('on');tm.classList.remove('on');$('#cmenu').classList.remove('on');if(was&&S.lf&&S.lf.isConnected)S.lf.focus()}
+function closeAll(){const was=$('#drawer').classList.contains('on')||$('#modal').classList.contains('on');$('#drawer').classList.remove('on');$('#modal').classList.remove('on');$('#ov').classList.remove('on');pop.classList.remove('on');tm.classList.remove('on');$('#cmenu').classList.remove('on');csClose();if(was&&S.lf&&S.lf.isConnected)S.lf.focus()}
 function bindDrag(){const ul=$('#secs');if(!ul)return;let dg=null;ul.querySelectorAll('li').forEach(li=>{li.ondragstart=e=>{dg=li;li.classList.add('dg');e.dataTransfer.effectAllowed='move'};li.ondragend=()=>{li.classList.remove('dg');S.rep.order=[...ul.children].map(x=>x.dataset.id).concat(S.rep.order.filter(id=>!ul.querySelector(`[data-id="${id}"]`)))};li.ondragover=e=>{e.preventDefault();if(!dg||dg===li)return;const r=li.getBoundingClientRect();ul.insertBefore(dg,e.clientY>r.top+r.height/2?li.nextSibling:li)}})}
 function setF(o){if(o.go){S.tab=o.go;delete o.go}const F=S.filters;Object.assign(F,o);refresh();scrollTo({top:0,behavior:SMB()})}
 function preset(k){const ref=S.visits.length?S.visits[S.visits.length-1].d:Date.now(),d=new Date(ref),y=d.getUTCFullYear(),m=d.getUTCMonth();let a='',b='';
@@ -1026,22 +1111,23 @@ if(m=s.match(/^(\d{2})(\d{2})(\d{4})$/)){const a=ok(+m[3],+m[2],+m[1]);if(a!=nul
 if(m=s.match(/^(\d{2})(\d{2})(\d{2})$/))return ok(Y(+m[3]),+m[2],+m[1]);
 if(m=s.match(/^(\d{1,2})\s+([^\d\s]+)\s*(\d{4}|\d{2})?$/)){const mo=monthIdx(m[2]);if(mo>=0)return ok(m[3]?Y(+m[3]):refYear(),mo+1,+m[1])}
 return null}
-const dateField=(k,l,v)=>{const[y,m,d]=v?v.split('-'):['','',''],g=(x,ph,val,n)=>`<input class="ds" data-s="${x}" maxlength="${n}" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="${ph}" aria-label="${ph}" value="${val}">`;
-return`<span class="dl">${l}</span><div class="df" data-f="${k}" role="group" aria-label="${l} تاريخ">${g('d','يوم',d,2)}<i>/</i>${g('m','شهر',m,2)}<i>/</i>${g('y','سنة',y,4)}<button class="dx" tabindex="-1" data-action="dclr" data-k="${k}" aria-label="مسح" ${v?'':'hidden'}>${ic('x')}</button><span class="dterr" role="alert"></span></div>`};
+const dateField=(k,l,v,nl)=>{const[y,m,d]=v?v.split('-'):['','',''],g=(x,ph,val,n)=>`<input class="ds" data-s="${x}" maxlength="${n}" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="${ph}" aria-label="${ph}" value="${val}">`;
+return`${nl?'':`<span class="dl">${l}</span>`}<div class="df" data-f="${k}" data-v="${v||''}" role="group" aria-label="${l} تاريخ">${g('d','يوم',d,2)}<i>/</i>${g('m','شهر',m,2)}<i>/</i>${g('y','سنة',y,4)}<button class="dx" tabindex="-1" data-action="dclr" data-k="${k}" aria-label="مسح" ${v?'':'hidden'}>${ic('x')}</button><span class="dterr" role="alert"></span></div>`};
 const seg=(df,x)=>df.querySelector(`[data-s="${x}"]`),dmax=(y,m)=>new Date(Date.UTC(y,m,0)).getUTCDate();
 function dateBad(df,msg){df.classList.add('bad');df.querySelector('.dterr').textContent=msg;df.querySelectorAll('.ds').forEach(i=>i.setAttribute('aria-invalid','true'))}
 function dateOk(df){df.classList.remove('bad');df.querySelector('.dterr').textContent='';df.querySelectorAll('.ds').forEach(i=>i.removeAttribute('aria-invalid'))}
 function readDate(df){const d=seg(df,'d').value,m=seg(df,'m').value,y=seg(df,'y').value;return{d,m,y,empty:!d&&!m&&!y,full:!!d&&!!m&&y.length===4}}
-function setSegs(df,v){const[y,m,d]=v?v.split('-'):['','',''];seg(df,'d').value=d;seg(df,'m').value=m;seg(df,'y').value=y;df.querySelector('.dx').hidden=!v}
+function setSegs(df,v){const[y,m,d]=v?v.split('-'):['','',''];seg(df,'d').value=d;seg(df,'m').value=m;seg(df,'y').value=y;df.dataset.v=v||'';df.querySelector('.dx').hidden=!v}
 function padSegs(df){df.querySelectorAll('.ds').forEach(t=>{const x=t.dataset.s;if(x!=='y'&&t.value.length===1)t.value='0'+t.value;else if(x==='y'&&t.value.length===2)t.value='20'+t.value})}
-function commitDate(df,final){if(!df.isConnected)return;const k=df.dataset.f,F=S.filters,r=readDate(df);
-if(r.empty){dateOk(df);if(F[k]){F[k]='';F.pr='';refresh()}return}
+function commitDate(df,final){if(!df.isConnected)return;const k=df.dataset.f,F=S.filters,sc=k==='sch',r=readDate(df),had=df.contains(document.activeElement);
+const done=v=>{if(sc){if((S.opt.sch.start||'')!==v){S.opt.sch.start=v;save();render();if(had){const n=document.querySelector('.df[data-f="sch"] [data-s="y"]');if(n){n.focus();n.select()}}}}else if((F[k]||'')!==v){F[k]=v;F.pr='';refresh()}};
+if(r.empty){dateOk(df);done('');return}
 if(!r.full){if(final)dateBad(df,'التاريخ غير مكتمل');return}
 const y=+r.y,m=+r.m,d=+r.d,t=Date.UTC(y,m-1,d),q=new Date(t);if(y<1900||y>2100||q.getUTCMonth()!==m-1||q.getUTCDate()!==d){dateBad(df,'تاريخ غير صالح');return}
-const v=iso(t),o=k==='from'?F.to:F.from;if(o&&(k==='from'?v>o:v<o)){dateBad(df,'ترتيب التواريخ غير صحيح');return}
-dateOk(df);setSegs(df,v);if(F[k]!==v){F[k]=v;F.pr='';refresh()}}
-const defDate=k=>new Date(S.filters[k]?parseDate(S.filters[k]):(S.visits.length?S.visits[k==='from'?0:S.visits.length-1].d:Date.now()));
-function stepSeg(df,x,dir,big){const k=df.dataset.f,r=readDate(df),D=defDate(k),y=+r.y||D.getUTCFullYear(),m=+r.m||D.getUTCMonth()+1,d=+r.d||D.getUTCDate();let t;
+const v=iso(t),o=sc?'':(k==='from'?F.to:F.from);if(o&&(k==='from'?v>o:v<o)){dateBad(df,'ترتيب التواريخ غير صحيح');return}
+dateOk(df);setSegs(df,v);done(v)}
+const defDate=(k,df)=>{const c=k==='sch'?(df&&df.dataset.v):S.filters[k];return new Date(c?parseDate(c):(k==='sch'?Date.now():(S.visits.length?S.visits[k==='from'?0:S.visits.length-1].d:Date.now())))};
+function stepSeg(df,x,dir,big){const k=df.dataset.f,r=readDate(df),D=defDate(k,df),y=+r.y||D.getUTCFullYear(),m=+r.m||D.getUTCMonth()+1,d=+r.d||D.getUTCDate();let t;
 if(r.empty)t=Date.UTC(D.getUTCFullYear(),D.getUTCMonth(),D.getUTCDate());
 else if(x==='d')t=Date.UTC(y,m-1,d+dir*(big?7:1));
 else if(x==='m'){const mm=m+dir*(big?3:1);t=Date.UTC(y,mm-1,Math.min(d,dmax(y,mm)))}
@@ -1055,7 +1141,7 @@ if(adv){const n=seg(df,x==='d'?'m':'y');n.focus();n.select()}
 if(adv||(x==='y'&&v.length===4))commitDate(df,false)}
 function segKey(e){const t=e.target,df=t.closest('.df'),k=df.dataset.f,x=t.dataset.s,O=['d','m','y'],i=O.indexOf(x),go=n=>{const q=seg(df,n);q.focus();q.select()};
 if(e.key==='Enter'){e.preventDefault();padSegs(df);commitDate(df,true);return true}
-if(e.key==='Escape'){setSegs(df,S.filters[k]);dateOk(df);return true}
+if(e.key==='Escape'){setSegs(df,k==='sch'?(df.dataset.v||''):S.filters[k]);dateOk(df);return true}
 if(e.key==='Backspace'&&!t.value&&i>0){e.preventDefault();go(O[i-1]);return true}
 if(e.key.length===1&&/[\/.\-\s]/.test(e.key)){e.preventDefault();if(t.value&&i<2){padSegs(df);go(O[i+1]);commitDate(df,false)}return true}
 if(e.key==='ArrowRight'&&i<2&&t.selectionEnd===t.value.length){e.preventDefault();go(O[i+1]);return true}
@@ -1065,7 +1151,7 @@ return false}
 let tmr;const deb=(f,ms=150)=>{clearTimeout(tmr);tmr=setTimeout(f,ms)};
 const refocus=(id,pos)=>{const n=document.getElementById(id);if(n){n.focus();try{n.setSelectionRange(pos,pos)}catch(e){}}};
 document.addEventListener('toggle',e=>{if(e.target.id==='wbox')S.sel.wopen=e.target.open},true);
-document.addEventListener('click',e=>{const t=e.target.closest('[data-action]');if(!pop.contains(e.target)&&!e.target.closest('[data-action="ms"]'))pop.classList.remove('on');if(!e.target.closest('#tmenu')&&!e.target.closest('[data-action="tmenu"]'))tm.classList.remove('on');if(!t)return;const a=t.dataset.action,k=t.dataset.k,F=S.filters;
+document.addEventListener('click',e=>{const t=e.target.closest('[data-action]');if(!pop.contains(e.target)&&!e.target.closest('[data-action="ms"]'))pop.classList.remove('on');if(!e.target.closest('#tmenu')&&!e.target.closest('#csm')&&!e.target.closest('[data-action="tmenu"]'))tm.classList.remove('on');if(!t)return;const a=t.dataset.action,k=t.dataset.k,F=S.filters;
 if(a==='mchk'){e.stopPropagation();const i=F.m.indexOf(k);i<0?F.m.push(k):F.m.splice(i,1);refresh();return}
 switch(a){case'drawer':openDrawer();break;case'report':if(S.visits.length)openReport();else openDrawer();break;case'close':closeAll();break;
 case'tmenu':toggleTheme(t);break;case'theme':setTheme(k);break;
@@ -1102,20 +1188,22 @@ case'scsv':dl(new Blob([cpCSV([secModel('sched')],{date:'iso'})],{type:'text/csv
 case'cfgx':dl(new Blob([JSON.stringify(cfgObj(),null,2)],{type:'application/json'}),fname('json','settings'));break;
 case'pcopy':cpRun([prioModel(AN())],'tsv',{...cpOpts(),date:'iso'});break;
 case'pcsv':dl(new Blob([cpCSV([prioModel(AN())],{date:'iso'})],{type:'text/csv;charset=utf-8'}),fname('csv','next-plan'));break;
-case'sample':S.raw={a:SA,b:SB,c:SC};save();build();applyFilters();render();updDrawer();break;
-case'clr':S.raw[k]='';save();build();applyFilters();render();updDrawer();break;
+case'sample':S.raw={a:SA,b:SB,c:SC};S.imp=impNew();save();build();applyFilters();render();updDrawer();break;
+case'clr':impClear(k);break;
+case'fpick':{const i=t.closest('.dc').querySelector('input[type=file]');if(i)i.click();break}
+case'fadd':{const i=t.parentNode.querySelector('input[type=file]');if(i)i.click();break}
+case'frm':impRemove(k);break;
 case'unm':document.querySelectorAll('[data-unml]').forEach(x=>x.textContent=x.textContent?'':S.un.map(nm).join('، '));break;
 case'rfmt':{S.rep.fmt=k;openReport();const n=document.querySelector(`#modal [data-action="rfmt"][data-k="${k}"]`);if(n)n.focus();break}
 case'export':{if(!activeSecs().length){$('#rerr').textContent='لا أقسام';break}$('#rerr').textContent='';const f=S.rep.fmt;if(f==='pdf'){closeAll();doPDF()}else if(f==='csv')doCSV();else if(f==='copy')cpReport();else doXLSX().catch(()=>$('#rerr').textContent='تعذر تحميل مكتبة XLSX');break}}});
 document.addEventListener('change',e=>{const t=e.target;if(t.dataset.pk){const k=t.dataset.pk,F=S.filters;F[k]=t.checked?[...F[k],t.value]:F[k].filter(x=>x!==t.value);refresh()}
 else if(t.dataset.cfg){const f=t.files[0];if(f)importCfg(f);t.value=''}
 else if(t.dataset.sortsel){const id=t.dataset.sortsel,st=S.tbl[id];st.k=t.value;st.d=ASC.includes(t.value)?1:-1;document.getElementById('t-'+id).innerHTML=tblH(id);markScroll()}
-else if(t.dataset.file){const fs=[...t.files];if(fs.length)importFiles(fs,fs.length===1?t.dataset.file:undefined);t.value=''}
-else if(t.dataset.fileall){const fs=[...t.files];if(fs.length)importFiles(fs);t.value=''}
-else if(t.dataset.impsel){impPick(t.dataset.impsel,t.value)}
+else if(t.dataset.file){const fs=[...t.files],r=t.dataset.file==='*'?undefined:t.dataset.file;t.value='';if(fs.length)importFiles(fs,r)}
+else if(t.dataset.impsel){impPickSrc(t.dataset.impsel,t.value)}
 else if(t.dataset.rs){const id=t.dataset.rs;t.checked?S.rep.on.add(id):S.rep.on.delete(id);openReport();const n=document.querySelector(`[data-rs="${id}"]`);if(n)n.focus()}
 else if(t.dataset.rm){const all=memberRows().map(r=>r.k);let m=S.rep.mem||all.slice();m=t.checked?[...new Set([...m,t.dataset.rm])]:m.filter(x=>x!==t.dataset.rm);S.rep.mem=m.length===all.length?null:m;t.parentNode.classList.toggle('on',t.checked)}
-else if(t.dataset.ro==='charts')S.rep.charts=t.checked});
+else if(t.dataset.ro==='charts'||t.dataset.ro==='pages')S.rep[t.dataset.ro]=t.checked});
 document.addEventListener('input',e=>{const t=e.target;if(t.classList.contains('ds'))segInput(t);
 else if(t.dataset.raw){const k=t.dataset.raw;S.raw[k]=t.value;deb(()=>setRaw(k,t.value),300)}
 else if(t.dataset.search){const k=t.dataset.search,id=t.id,pos=t.selectionStart;S.sel[k]=t.value;deb(()=>{render();const n=document.getElementById(id);if(n){n.focus();n.setSelectionRange(pos,pos)}})}
@@ -1123,7 +1211,7 @@ else if(t.dataset.popq!=null){const q=norm(t.value);pop.querySelectorAll('label[
 else if(t.dataset.opt){const k=t.dataset.opt,id=t.id,pos=t.selectionStart,v=Math.round(+latin(t.value));if(!isFinite(v)||v<1)return;S.opt[k]=k==='gapT'?Math.min(720,Math.max(7,v)):Math.min(500,v);save();deb(()=>{S.memo={};render();const n=document.getElementById(id);if(n){n.focus();try{n.setSelectionRange(pos,pos)}catch(e){}}})}
 else if(t.dataset.w){const k=t.dataset.w,id=t.id,pos=t.selectionStart,v=Math.round(+latin(t.value));if(t.value.trim()===''||!isFinite(v)||v<0)return;S.opt.w[k]=Math.min(100,v);save();deb(()=>{S.memo={};render();refocus(id,pos)})}
 else if(t.dataset.sch){const k=t.dataset.sch,id=t.id,pos=t.selectionStart;let v=t.value.trim();if(k==='per'||k==='team'){v=Math.round(+latin(v));if(!isFinite(v)||v<1)return;v=Math.min(k==='per'?20:12,v)}S.opt.sch[k]=v;save();deb(()=>{render();refocus(id,pos)},k==='start'?50:300)}
-else if(t.dataset.ro&&t.dataset.ro!=='charts')S.rep[t.dataset.ro]=t.value});
+else if(t.dataset.ro&&t.dataset.ro!=='charts'&&t.dataset.ro!=='pages')S.rep[t.dataset.ro]=t.value});
 document.addEventListener('paste',e=>{const t=e.target;if(t.dataset&&t.dataset.raw)setTimeout(()=>setRaw(t.dataset.raw,t.value),0)});
 document.addEventListener('mouseover',e=>{const t=e.target.closest('[data-tip]');if(t){tip.textContent=t.dataset.tip;tip.style.opacity=1}else tip.style.opacity=0});
 document.addEventListener('mousemove',e=>{if(tip.style.opacity==1){const w=tip.offsetWidth;tip.style.left=Math.min(innerWidth-w-8,Math.max(8,e.clientX-w/2))+'px';tip.style.top=(e.clientY-36)+'px'}});
@@ -1138,14 +1226,12 @@ const tg=e.target;
 if((e.key==='Enter'||e.key===' ')&&tg.matches&&tg.matches('[data-action]:not(button):not(input):not(a):not(textarea):not(select)')){e.preventDefault();tg.dispatchEvent(new MouseEvent('click',{bubbles:true}))}
 else if(e.key===' '&&tg.matches&&tg.matches('label.chip[tabindex]')){e.preventDefault();const c=tg.querySelector('input');if(c)c.click()}
 if((e.key==='ArrowDown'||e.key==='ArrowUp')&&tm.classList.contains('on')){e.preventDefault();const L=[...tm.querySelectorAll('.tmi')],i=L.indexOf(document.activeElement);L[(i+(e.key==='ArrowDown'?1:-1)+L.length)%L.length].focus()}
-if(e.key==='Tab'){const o=$('#drawer.on,#modal.on');if(o){const f=[...o.querySelectorAll('button,input,textarea,select,[tabindex="0"]')].filter(x=>!x.disabled&&!x.hidden&&x.offsetParent!==null);if(f.length){const a=f[0],z=f[f.length-1],cur=document.activeElement;if(!o.contains(cur)){e.preventDefault();a.focus()}else if(e.shiftKey&&cur===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&cur===z){e.preventDefault();a.focus()}}}}
+if(e.key==='Tab'){const o=$('#drawer.on,#modal.on');if(o){const f=[...o.querySelectorAll('button,input,textarea,select,[tabindex="0"]')].filter(x=>!x.disabled&&!x.hidden&&x.offsetParent!==null&&!x.classList.contains('vh'));if(f.length){const a=f[0],z=f[f.length-1],cur=document.activeElement;if(!o.contains(cur)){e.preventDefault();a.focus()}else if(e.shiftKey&&cur===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&cur===z){e.preventDefault();a.focus()}}}}
 const t=e.target.closest&&e.target.closest('.tab');if(t&&(e.key==='ArrowLeft'||e.key==='ArrowRight'||e.key==='Home'||e.key==='End')){e.preventDefault();const L=[...document.querySelectorAll('.tab')],i=L.indexOf(t),n=e.key==='Home'?0:e.key==='End'?L.length-1:(i+(e.key==='ArrowLeft'?1:-1)+L.length)%L.length;setTab(L[n].dataset.k);document.querySelector('.tab[aria-selected=true]').focus()}});
 addEventListener('resize',()=>{syncTop();fitDock();placeBlob(true);scrollTab();markScroll()});addEventListener('scroll',()=>pop.classList.remove('on'),{passive:true});addEventListener('afterprint',()=>{$('#print-root').innerHTML=''});
 if(mql.addEventListener)mql.addEventListener('change',()=>{if(document.documentElement.dataset.pref==='system')applyTheme('system')});
 addEventListener('storage',e=>{if(e.key==='masar.theme'&&THEMES.some(x=>x[0]===e.newValue))applyTheme(e.newValue)});
 addEventListener('hashchange',()=>{const t=S.tab,f=JSON.stringify(S.filters);readHash();if(t!==S.tab||f!==JSON.stringify(S.filters))refresh()});
-document.addEventListener('dragover',e=>{if(e.dataTransfer&&[...e.dataTransfer.types].includes('Files'))e.preventDefault()});
-document.addEventListener('drop',e=>{if(e.defaultPrevented)return;const fs=e.dataTransfer?[...e.dataTransfer.files]:[];if(!fs.length)return;e.preventDefault();importFiles(fs)});
 (function init(){$('#logo').innerHTML=LOGO+'<span>مَسار</span>';$('#bdata').innerHTML=ic('db')+'<span>البيانات</span>';$('#brep').innerHTML=ic('download')+'<span>تقرير</span>';$('#bcp').innerHTML=ic('copy')+'<span>نسخ التبويب</span>';
 let st=null;try{st=JSON.parse(localStorage.getItem('masar.v1'))}catch(e){}
 if(st&&st.raw){S.raw={a:'',b:'',c:'',...st.raw};applyCfg(st)}else S.raw={a:SA,b:SB,c:SC};
