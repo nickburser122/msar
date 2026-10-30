@@ -10,6 +10,12 @@ Paste or upload three tables in «البيانات» (CSV / TSV / XLSX):
 
 Everything is stored in `localStorage` (`masar.v1`).
 
+## Smart import (v3.1)
+- Upload one or many `.xlsx` / `.xls` / `.csv` files at once (button or drag and drop anywhere). Every sheet and every side-by-side table in a sheet is scanned; the header row is found even under title rows, merged cells are filled, hidden sheets are deprioritised.
+- Tables are classified as visits, per-member visit rows, facility directory or location cost, then the best visits table is selected (most distinct site+date visits, with plan, region and type columns preferred). Pickers let you override any choice.
+- Member names are filled from sibling sheets that cover the same site and date; region, location and plan gaps are filled the same way. Visits that still have no members stay in coverage and are listed in data quality.
+- Previously only the first sheet was read, so a workbook whose first sheet was not the visits table lost most or all rows.
+
 ## What's new in v3 — "what you see is what you copy"
 - **One table model, two renderers.** Every on-screen table and chart is backed by plain data (`columns` with `type`, raw `rows`). The screen renders HTML from it; copy, CSV, XLSX and PDF serialise the same model. Column builders (`plansCols`, `prioCols`, `sitesCols`, ...) are shared by the tabs and the report, so exports match the screen. `modelOf(id)` returns the model with the current sort, search and filters applied.
 - **Copy in every card.** Copy button plus a small menu in each card header: TSV with header row (default), readable text, Markdown, current page only. Writes `text/html` and `text/plain` together, so Word / Google Docs get a real RTL table and Excel / editors get TSV. Toast reports the row count. `Ctrl/Cmd+Shift+C` copies the focused card.

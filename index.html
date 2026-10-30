@@ -76,6 +76,8 @@ th{color:var(--muted);font-weight:500;cursor:pointer;font-size:12px}tbody tr:hov
 .dc textarea{width:100%;height:110px;resize:vertical;background:var(--surface-2);border:1px dashed var(--line);border-radius:14px;padding:10px;font-size:12px;outline:0}
 .dc textarea.drag,.dc textarea:focus{border-color:var(--plum-2)}.dc .row{display:flex;gap:8px;align-items:center;margin-top:8px;font-size:12px;color:var(--muted)}
 .err{color:var(--bad);font-size:12px}
+.dc.up{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px;border-style:dashed}.dc.up.drag{border-color:var(--plum-2)}
+.imp{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:14px;margin-bottom:14px}.imr{display:grid;gap:6px;margin:12px 0}.imr b{font-weight:500}.imr .inp{width:100%;text-overflow:ellipsis}.imp ul{margin:8px 0 0;padding-inline-start:20px;font-size:12.5px;line-height:1.8}.imp details{margin-top:10px}.imp summary{cursor:pointer;font-size:12px;color:var(--muted)}.nt{font-size:12px;margin-top:4px}
 .modal{position:fixed;top:5vh;left:50%;transform:translate(-50%,10px);width:min(680px,94vw);max-height:90vh;overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:22px;padding:20px;z-index:90;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s var(--e),transform .22s var(--e),visibility 0s .22s}
 .modal.on{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0);transition-delay:0s}
 .secs{list-style:none;padding:0;margin:0 0 14px;display:grid;gap:6px}.secs li{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 12px;border-radius:14px;background:var(--surface-2);cursor:grab}.secs li.dg{opacity:.4}
@@ -221,7 +223,7 @@ const SA='جهة المرور\tالمنطقة\tالخطة\tالمرور\tالت�
 const SB='الجهة\tالمنطقة\tالموقع\nهيئة التأمين الصحي\tاخري\tالقاهرة\nالمحافظة\tاخري\tدمنهور\nسنترال دمنهور\tاخري\tدمنهور\nلجان الانتخابات\tاخري\tدمنهور\nمبني العيادة التخصصية\tاخري\tدمنهور\nكفر الشيخ\tاخري\tكفر الشيخ\nادارة الفرع\tادارة الفرع\tدمنهور\nالتوثيق والمعلومات\tادارة الفرع\tدمنهور\nالشئون الطبية\tادارة الفرع\tدمنهور\nاللجنة الطبية\tالتانية\tدمنهور\nمركز دمنهور للاشعة\tاشعة\tدمنهور\nالمستقبل للاشعة\tاشعة\tدمنهور\nكفر الدوار سكان\tاشعة\tكفر الدوار\nابو المطامير\tالاولي\tابو المطامير\nادكو طلاب\tالاولي\tادكو\nالبيضا\tالاولي\tالبيضا\nرشيد طلاب\tالاولي\tرشيد\nكفر الدوار طلاب\tالاولي\tكفر الدوار\nابو حمص\tالتانية\tابو حمص\nالرحمانية\tالتانية\tالرحمانية\nالمحمودية\tالتانية\tالمحمودية\nدمنهور الشاملة\tالتانية\tدمنهور\nدمنهور طلاب\tالتانية\tدمنهور\nالدلنجات\tالثالثة\tالدلنجات\nايتاي البارود\tالثالثة\tايتاي البارود\nبدر\tالثالثة\tبدر\nقليشان\tالثالثة\tقليشان\nوادي النطرون\tالثالثة\tوادي النطرون\nكوم حمادة طلاب\tالثالثة\tكوم حمادة\nمعمل البرج\tمعمل\tدمنهور\nمستشفي دمنهور التخصصي\tمستشفي\tدمنهور\nحضانات الامل\tحضانات\tدمنهور\nمركز الكلي دمنهور\tغسيل كلوي\tدمنهور';
 const SC='الموقع\tبدل سفر\tالسعر\tالمسافة\nابو المطامير\tFALSE\t22\t38.2\nابو حمص\tFALSE\t13.5\t21\nادفينا\tFALSE\t23\t33\nادكو\tFALSE\t23\t40.5\nالبيضا\tFALSE\t28\t7\nالدلنجات\tFALSE\t18\t26.6\nدمنهور\tFALSE\t0\t0\nايتاي البارود\tFALSE\t15\t30\nالرحمانية\tTRUE\t12\t18\nكفر الدوار\tFALSE\t20\t30\nرشيد\tFALSE\t30\t55\nالمحمودية\tFALSE\t14\t22\nبدر\tTRUE\t18\t28\nوادي النطرون\tTRUE\t35\t70\nكوم حمادة\tFALSE\t17\t24\nقليشان\tFALSE\t16\t25\nالقاهرة\tTRUE\t60\t160\nكفر الشيخ\tTRUE\t45\t90';
 const W0={nv:60,nvp:7,tr:20,trs:10,sn2:20,sn1:12,sn0:6,gp:5,lw:8},WL=[['nv','لم تُزر قط: الأساس'],['nvp','لم تُزر قط: لكل خطة مكتملة (حتى 4)'],['tr','غابت عن آخر خطة'],['trs','لكل خطة غياب إضافية (حتى 3)'],['sn2','منذ آخر زيارة ≥ 1.5 × الحد'],['sn1','منذ آخر زيارة ≥ الحد'],['sn0','منذ آخر زيارة ≥ 90 يوماً'],['gp','فجوة سابقة ≥ 1.5 × الحد'],['lw','زيارات أقل من نصف وسيط المنطقة']];
-const S={raw:{a:'',b:'',c:''},visits:[],rows:[],dir:new Map(),cost:new Map(),filters:{},tab:'overview',sel:{},tbl:{},D:new Map(),cnt:{a:0,b:0,c:0},err:{},un:[],f:[],fNoM:[],prev:null,memo:{},hasLoc:false,excl:new Set(),dexcl:new Set(),dis:new Set(),alias:{s:{},m:{}},q:{bad:[],dup:[],reg:[]},dqc:{},opt:{gapT:120,ong:'auto',slots:0,w:{...W0},sch:{start:'',per:0,days:'',team:0,plan:''}}};
+const S={raw:{a:'',b:'',c:''},visits:[],rows:[],dir:new Map(),cost:new Map(),filters:{},tab:'overview',sel:{},tbl:{},D:new Map(),cnt:{a:0,b:0,c:0},err:{},un:[],f:[],fNoM:[],prev:null,memo:{},hasLoc:false,excl:new Set(),dexcl:new Set(),dis:new Set(),alias:{s:{},m:{}},q:{bad:[],dup:[],reg:[],nom:[],skip:0},nt:{},imp:null,dqc:{},opt:{gapT:120,ong:'auto',slots:0,w:{...W0},sch:{start:'',per:0,days:'',team:0,plan:''}}};
 const $=s=>document.querySelector(s),pop=$('#pop'),tip=$('#tip'),tm=$('#tmenu');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm=s=>String(s??'').replace(/[\u0640\u064B-\u065F\u0670]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/ؤ/g,'و').replace(/ئ/g,'ي').replace(/\s+/g,' ').trim().toLowerCase();
@@ -240,28 +242,48 @@ const U={site:['جهة','جهتان','جهات','جهة'],day:['يوم','يوم�
 const act=(a,o)=>`class="lnk" role="button" tabindex="0" data-action="${a}" ${Object.entries(o).map(([k,v])=>`data-${k}="${esc(v)}"`).join(' ')}`;
 const A=(k,f)=>S.memo[k]??=f();
 const MM={jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
-function parseTable(txt){txt=String(txt||'').replace(/^\uFEFF/,'').replace(/\r/g,'');const L=txt.split('\n').filter(l=>l.trim());if(!L.length)return null;const d=L[0].includes('\t')?'\t':(L[0].includes(';')&&!L[0].includes(',')?';':',');
-const sp=l=>{if(d==='\t')return l.split('\t');const o=[];let c='',q=false;for(let i=0;i<l.length;i++){const ch=l[i];if(q){if(ch=='"'){if(l[i+1]=='"'){c+='"';i++}else q=false}else c+=ch}else if(ch=='"')q=true;else if(ch==d){o.push(c);c=''}else c+=ch}o.push(c);return o};
-return{h:sp(L[0]).map(norm),rows:L.slice(1).map(sp)}}
+const HV={site:['جهة المرور','الجهة','جهة'],date:['التاريخ','اليوم','تاريخ'],region:['المنطقة'],plan:['الخطة'],type:['المرور','الغرض من المرور','نوع المرور','الغرض'],mem:['القائم بالمرور','القائم','الاعضاء','الفريق'],loc:['الموقع'],allow:['بدل سفر','بدل'],fare:['السعر'],km:['المسافة']},HVN={},HF=new Set(['site','date','region','plan','mem','loc','allow']),MSEP=/[-–—،,;\/+\n\r]+/;
+Object.keys(HV).forEach(k=>HVN[k]=HV[k].map(norm));
+const hIdx=(h,k)=>{const a=HVN[k];for(const x of a){const i=h.indexOf(x);if(i>=0)return i}if(HF.has(k))for(const x of a){const i=h.findIndex(y=>y&&y.includes(x));if(i>=0)return i}return -1};
+const hRoles=h=>{const s=new Set();Object.keys(HVN).forEach(k=>{if(HVN[k].some(x=>h.includes(x)))s.add(k)});return s};
+const splitNames=v=>String(v??'').split(MSEP).map(x=>x.replace(/\s+/g,' ').trim()).filter(Boolean);
+const num=v=>{const s=latin(String(v??'')).replace(/٫/g,'.').replace(/,(?=\d{1,2}$)/,'.').replace(/[^\d.\-]/g,'');return parseFloat(s)||0};
+function csvRows(txt,qOn=true){txt=String(txt||'').replace(/^﻿/,'').replace(/\r\n?/g,'\n');
+const head=txt.split('\n').slice(0,20).join('\n');let d=',';if(head.includes('\t'))d='\t';else{const sc=(head.match(/;/g)||[]).length,cc=(head.match(/,/g)||[]).length;if(sc>cc)d=';'}
+const rows=[];let row=[],f='',q=false,fresh=true;
+for(let i=0;i<txt.length;i++){const c=txt[i];
+if(q){if(c==='"'){if(txt[i+1]==='"'){f+='"';i++}else q=false}else f+=c;continue}
+if(c==='"'&&qOn&&fresh){q=true;fresh=false;continue}
+if(c===d){row.push(f);f='';fresh=true;continue}
+if(c==='\n'){row.push(f);rows.push(row);row=[];f='';fresh=true;continue}
+f+=c;fresh=false}
+if(q&&qOn)return csvRows(txt,false);
+row.push(f);rows.push(row);
+return rows.filter(r=>r.some(x=>String(x).trim()!==''))}
+function parseTable(txt){const R=csvRows(txt);if(!R.length)return null;let hi=0,bs=1;for(let i=0;i<Math.min(R.length,15);i++){const s=hRoles(R[i].map(norm)).size;if(s>bs){bs=s;hi=i}}return{h:R[hi].map(norm),rows:R.slice(hi+1),hi}}
 const colx=(h,n)=>h.indexOf(norm(n));
 const col=(h,...n)=>{n=n.map(norm);for(const x of n){const i=h.indexOf(x);if(i>=0)return i}for(const x of n){const i=h.findIndex(y=>y.includes(x));if(i>=0)return i}return -1};
-function parseDate(v){if(v==null)return null;const s=String(v).trim();if(!s)return null;let m;
-if(/^\d+(\.\d+)?$/.test(s)){const n=+s;return n>20000&&n<80000?Date.UTC(1899,11,30)+Math.floor(n)*DAY:null}
-if(m=s.match(/(\d{4})-(\d{1,2})-(\d{1,2})/))return Date.UTC(+m[1],m[2]-1,+m[3]);
-if(m=s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{2,4})/))return Date.UTC(m[3].length==2?2000+(+m[3]):+m[3],m[2]-1,+m[1]);
-if(m=s.match(/(\d{1,2})[\s-]+([A-Za-z]{3})[A-Za-z]*\.?[\s-]+(\d{4})/)){const k=MM[m[2].toLowerCase()];if(k!=null)return Date.UTC(+m[3],k,+m[1])}
-const t=Date.parse(s);if(!isNaN(t)){const d=new Date(t);return Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())}return null}
-function build(){S.D=new Map();S.visits=[];S.dir=new Map();S.cost=new Map();S.err={};S.cnt={a:0,b:0,c:0};S.un=[];S.tbl={};S.dexcl=new Set();S.q={bad:[],dup:[],reg:[]};S.dqc={};
-const C=parseTable(S.raw.c);if(C){const i=[col(C.h,'الموقع'),col(C.h,'بدل سفر','بدل'),col(C.h,'السعر'),col(C.h,'المسافة')];if(i[0]<0)S.err.c='عمود الموقع غير موجود';else C.rows.forEach(r=>{const k=key(r[i[0]]);if(!k)return;const a=String(r[i[1]]??'').trim().toLowerCase();S.cost.set(k,{allow:a==='true'||a==='1'||a==='نعم',fare:parseFloat(r[i[2]])||0,km:parseFloat(r[i[3]])||0});S.cnt.c++})}
-const B=parseTable(S.raw.b);if(B){const i=[col(B.h,'الجهة','جهة'),col(B.h,'المنطقة'),col(B.h,'الموقع'),col(B.h,'استبعاد','مستبعد')];if(i[0]<0)S.err.b='عمود الجهة غير موجود';else B.rows.forEach(r=>{const k=ali('s',key(r[i[0]]));if(!k)return;S.cnt.b++;if(i[3]>=0&&yes(r[i[3]]))S.dexcl.add(k);if(S.dir.has(k))return;S.dir.set(k,{region:i[1]>=0?key(r[i[1]]):'',loc:i[2]>=0?key(r[i[2]]):''})})}
-const Ta=parseTable(S.raw.a);if(Ta){const i={s:col(Ta.h,'جهة المرور','الجهة','جهة'),r:col(Ta.h,'المنطقة'),p:col(Ta.h,'الخطة'),t:colx(Ta.h,'المرور'),d:col(Ta.h,'التاريخ'),m:col(Ta.h,'القائم بالمرور','القائم')};
-if(i.s<0||i.d<0||i.m<0)S.err.a='الأعمدة المطلوبة: جهة المرور، التاريخ، القائم بالمرور';else{let bad=0;const locs=new Set([...S.dir.values()].map(x=>x.loc)),un=new Set(),und=key('غير محدد');
-Ta.rows.forEach((r,ri)=>{const d=parseDate(r[i.d]);if(d==null){bad++;S.q.bad.push({row:ri+2,val:String(r[i.d]??'').trim(),site:String(r[i.s]??'').trim()});return}const site=ali('s',key(r[i.s]));if(!site)return;const m=[...new Set(String(r[i.m]??'').split(/[-–—،]/).map(x=>ali('m',key(x))).filter(Boolean))];if(!m.length)return;
-let loc=S.dir.get(site)?.loc||(S.cost.has(site)||locs.has(site)?site:'');if(!loc){loc=und;if(B||C)un.add(site)}
+function parseDate(v){if(v==null)return null;if(v instanceof Date)return isNaN(v)?null:Date.UTC(v.getFullYear(),v.getMonth(),v.getDate());const s=latin(String(v)).trim();if(!s)return null;let m;
+const mk=(y,mo,d)=>{if(y<1900||y>2100||mo<1||mo>12||d<1||d>31)return null;const t=Date.UTC(y,mo-1,d);return new Date(t).getUTCMonth()===mo-1?t:null};
+if(/^\d+(\.\d+)?$/.test(s)){const n=+s;if(n>20000&&n<80000)return Date.UTC(1899,11,30)+Math.floor(n)*DAY;return s.length>=6?parseLoose(s):null}
+if(m=s.match(/(?:^|\D)(\d{4})[-\/.](\d{1,2})[-\/.](\d{1,2})(?!\d)/))return mk(+m[1],+m[2],+m[3]);
+if(m=s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{2,4})(?!\d)/)){let a=+m[1],b=+m[2],y=+m[3];if(y<100)y+=2000;if(b>12&&a<=12)[a,b]=[b,a];return mk(y,b,a)}
+if(m=s.match(/(\d{1,2})[\s-]+([A-Za-z]{3})[A-Za-z]*\.?[\s-]+(\d{4})/)){const k=MM[m[2].toLowerCase()];if(k!=null)return mk(+m[3],k+1,+m[1])}
+const p=parseLoose(s);if(p!=null)return p;
+if(/\d{4}/.test(s)&&/[A-Za-z]{3}/.test(s)){const t=Date.parse(s);if(!isNaN(t)){const d=new Date(t);return Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())}}return null}
+function build(){S.D=new Map();S.visits=[];S.dir=new Map();S.cost=new Map();S.err={};S.nt={};S.cnt={a:0,b:0,c:0};S.un=[];S.tbl={};S.dexcl=new Set();S.q={bad:[],dup:[],reg:[],nom:[],skip:0};S.dqc={};
+const C=parseTable(S.raw.c);if(C){const i=[hIdx(C.h,'loc'),hIdx(C.h,'allow'),hIdx(C.h,'fare'),hIdx(C.h,'km')];if(i[0]<0)S.err.c='عمود الموقع غير موجود';else C.rows.forEach(r=>{const k=key(r[i[0]]);if(!k)return;S.cost.set(k,{allow:yes(r[i[1]]),fare:num(r[i[2]]),km:num(r[i[3]])});S.cnt.c++})}
+const B=parseTable(S.raw.b);if(B){const i=[hIdx(B.h,'site'),hIdx(B.h,'region'),hIdx(B.h,'loc'),col(B.h,'استبعاد','مستبعد')];if(i[0]<0)S.err.b='عمود الجهة غير موجود';else B.rows.forEach(r=>{const k=ali('s',key(r[i[0]]));if(!k)return;S.cnt.b++;if(i[3]>=0&&yes(r[i[3]]))S.dexcl.add(k);if(S.dir.has(k))return;S.dir.set(k,{region:i[1]>=0?key(r[i[1]]):'',loc:i[2]>=0?key(r[i[2]]):''})})}
+const Ta=parseTable(S.raw.a);if(Ta){const i={s:hIdx(Ta.h,'site'),r:hIdx(Ta.h,'region'),p:hIdx(Ta.h,'plan'),t:hIdx(Ta.h,'type'),d:hIdx(Ta.h,'date'),m:hIdx(Ta.h,'mem'),l:hIdx(Ta.h,'loc')};
+if(i.s<0||i.d<0)S.err.a='الأعمدة المطلوبة: جهة المرور، التاريخ';else{let bad=0;const locs=new Set([...S.dir.values()].map(x=>x.loc)),un=new Set(),und=key('غير محدد');
+Ta.rows.forEach((r,ri)=>{const rs=String(r[i.s]??'').trim(),rd=r[i.d];if(!rs&&String(rd??'').trim()==='')return;const d=parseDate(rd);if(d==null){bad++;S.q.bad.push({row:ri+Ta.hi+2,val:String(rd??'').trim(),site:rs});return}const site=ali('s',key(rs));if(!site){S.q.skip++;return}const m=i.m>=0?[...new Set(String(r[i.m]??'').split(MSEP).map(x=>ali('m',key(x))).filter(Boolean))]:[];
+const rl=i.l>=0&&String(r[i.l]??'').trim()?key(r[i.l]):'';let loc=S.dir.get(site)?.loc||rl||(S.cost.has(site)||locs.has(site)?site:'');if(!loc){loc=und;if(B||C)un.add(site)}
 const region=i.r>=0&&String(r[i.r]??'').trim()?key(r[i.r]):(S.dir.get(site)?.region||und);
 const c=S.cost.get(loc);S.visits.push({site,region,loc,plan:i.p>=0?String(r[i.p]??'').trim().replace(/^(\d+)\.0+$/,'$1'):'',type:i.t>=0?key(r[i.t]):'',d,m,km:c?c.km:0,cost:c?c.fare*m.length:0})});
 S.un=[...un];if(bad)S.err.a=cn(bad,U.row)+' بتاريخ غير صالح'}}
 S.visits.sort((a,b)=>a.d-b.d);S.visits.forEach((v,i)=>v.i=i);S.cnt.a=S.visits.length;S.hasLoc=!!(B||C)&&S.visits.length>0;
+S.q.nom=S.visits.filter(v=>!v.m.length).map(v=>({s:v.site,d:v.d}));
+const nt=[];if(S.q.skip)nt.push(cn(S.q.skip,U.row)+' بلا اسم جهة لم تُحتسب');if(S.q.nom.length)nt.push(cn(S.q.nom.length,U.visit)+' بلا أسماء أعضاء: تدخل في التغطية وتخرج من تحليل الأعضاء');if(nt.length)S.nt.a=nt;
 S.q.dup=[...cnt(S.visits,v=>v.site+'|'+v.d)].filter(x=>x[1]>1).map(([k,n])=>{const[s,d]=k.split('|');return{s,d:+d,n}});
 S.q.reg=[...grp(S.visits,v=>v.site)].map(([s,a])=>({s,rs:[...new Set(a.map(v=>v.region))],dr:S.dir.get(s)?.region||''})).filter(o=>o.rs.length>1||(o.dr&&!o.rs.includes(o.dr)))}
 const F0=()=>({from:'',to:'',pr:'all',m:[],mm:'any',r:[],s:[],l:[],t:[],p:[]});S.filters=F0();
@@ -272,7 +294,7 @@ if(fr!=null&&to!=null){const len=to-fr+DAY;S.prev=S.visits.filter(v=>match(v,F,f
 const refDate=()=>S.filters.to?parseDate(S.filters.to):(S.visits.length?S.visits[S.visits.length-1].d:Date.now());
 const topK=m=>[...m].sort((a,b)=>b[1]-a[1]);
 const cnt=(vs,f)=>{const m=new Map();vs.forEach(v=>[].concat(f(v)).forEach(k=>m.set(k,(m.get(k)||0)+1)));return m};
-function stats(vs){const mem=new Map(),site=new Map(),reg=new Map(),loc=new Map(),days=new Set();let team=0,cost=0,km=0;vs.forEach(v=>{days.add(v.d);team+=v.m.length;cost+=v.cost;km+=v.km;v.m.forEach(m=>mem.set(m,(mem.get(m)||0)+1));site.set(v.site,(site.get(v.site)||0)+1);reg.set(v.region,(reg.get(v.region)||0)+1);loc.set(v.loc,(loc.get(v.loc)||0)+1)});return{n:vs.length,days:days.size,mem,site,reg,loc,team:vs.length?team/vs.length:0,cost,km}}
+function stats(vs){const mem=new Map(),site=new Map(),reg=new Map(),loc=new Map(),days=new Set();let team=0,wm=0,cost=0,km=0;vs.forEach(v=>{days.add(v.d);team+=v.m.length;if(v.m.length)wm++;cost+=v.cost;km+=v.km;v.m.forEach(m=>mem.set(m,(mem.get(m)||0)+1));site.set(v.site,(site.get(v.site)||0)+1);reg.set(v.region,(reg.get(v.region)||0)+1);loc.set(v.loc,(loc.get(v.loc)||0)+1)});return{n:vs.length,days:days.size,mem,site,reg,loc,team:wm?team/wm:0,cost,km}}
 function gaps(ds){const u=[...new Set(ds)].sort((a,b)=>a-b),g=u.slice(1).map((d,i)=>Math.round((d-u[i])/DAY));return{max:g.length?Math.max(...g):0,avg:g.length?g.reduce((s,x)=>s+x,0)/g.length:0,list:g}}
 function monthly(vs,range){const r=range||S.f;if(!r.length)return[];const a=new Date(r[0].d),b=new Date(r[r.length-1].d),map=cnt(vs,v=>{const d=new Date(v.d);return d.getUTCFullYear()*12+d.getUTCMonth()}),out=[];let y=a.getUTCFullYear(),m=a.getUTCMonth();const e=b.getUTCFullYear()*12+b.getUTCMonth();while(y*12+m<=e){const t=Date.UTC(y,m,1);out.push({t,x:ML.format(t),y:map.get(y*12+m)||0});if(++m>11){m=0;y++}}return out}
 function pairs(vs){const m=new Map();vs.forEach(v=>{const s=[...v.m].sort();for(let i=0;i<s.length;i++)for(let j=i+1;j<s.length;j++){const k=s[i]+'|'+s[j];m.set(k,(m.get(k)||0)+1)}});return m}
@@ -316,7 +338,7 @@ const weekdays=vs=>{const c=cnt(vs,v=>new Date(v.d).getUTCDay());return[6,0,1,2,
 const unvisited=()=>A('unv',()=>{const v=new Set(S.f.map(x=>x.site));return[...uniMap().keys()].filter(k=>!v.has(k))});
 function kpi(l,v,cur,prev,fm=n0){let d='';if(prev!=null){const df=cur-prev;d=`<i>${df>0?'▲':df<0?'▼':'•'} ${fm(Math.abs(df))}</i>`}return`<div class="kpi"><small>${l}</small><strong>${v}</strong>${d}</div>`}
 function findings(){const s=A('st',()=>stats(S.f)),o=[],ref=refDate();if(!s.n)return o;
-const[tm,tv]=topK(s.mem)[0];o.push({t:`${nm(tm)}: أعلى عدد زيارات (${tv})`,q:{m:[tm],mm:'any'}});
+const tmo=topK(s.mem)[0];if(tmo)o.push({t:`${nm(tmo[0])}: أعلى عدد زيارات (${tmo[1]})`,q:{m:[tmo[0]],mm:'any'}});
 const last=new Map();S.f.forEach(v=>last.set(v.site,v.d));const ls=[...last].sort((a,b)=>a[1]-b[1])[0],dd=Math.round((ref-ls[1])/DAY);if(dd>0)o.push({t:`${nm(ls[0])}: لم تُزر منذ ${cn(dd,U.day)}`,q:{s:[ls[0]]}});
 const pr=topK(A('pairs',()=>pairs(S.f)))[0];if(pr){const[a,b]=pr[0].split('|');o.push({t:`أكثر ثنائي مشترك: ${nm(a)} + ${nm(b)} (${pr[1]})`,q:{m:[a,b],mm:'all'}})}
 const wd=weekdays(S.f).sort((a,b)=>b.v-a.v)[0];o.push({t:`${wd.full}: أكثر أيام المرور`,q:{}});
@@ -385,7 +407,7 @@ const L=plans[plans.length-1],ongoing=!!L&&(mode==='yes'||(mode==='auto'&&(ref-L
 const ukeys=[...UN.keys()],uvals=[...UN.values()];
 plans.forEach((P,i)=>{P.i=i;P.cur=ongoing&&i===plans.length-1;P.days=new Set(P.vs.map(v=>v.d)).size;P.n=P.vs.length;P.sites=new Map();P.siteD=new Map();
 P.vs.forEach(v=>{if(!UN.has(v.site))return;P.sites.set(v.site,(P.sites.get(v.site)||0)+1);(P.siteD.get(v.site)||P.siteD.set(v.site,[]).get(v.site)).push(v.d)});
-P.nIn=0;P.sites.forEach(x=>P.nIn+=x);P.cov=UN.size?P.sites.size/UN.size:0;P.rev=P.nIn-P.sites.size;P.team=P.n?P.vs.reduce((s,v)=>s+v.m.length,0)/P.n:0;P.unc=ukeys.filter(k=>!P.sites.has(k))});
+P.nIn=0;P.sites.forEach(x=>P.nIn+=x);P.cov=UN.size?P.sites.size/UN.size:0;P.rev=P.nIn-P.sites.size;const pw=P.vs.filter(v=>v.m.length).length;P.team=pw?P.vs.reduce((s,v)=>s+v.m.length,0)/pw:0;P.unc=ukeys.filter(k=>!P.sites.has(k))});
 plans.forEach((P,i)=>{if(!i)return;const Q=plans[i-1];P.nw=[...P.sites.keys()].filter(k=>!Q.sites.has(k)).length;P.dr=[...Q.sites.keys()].filter(k=>!P.sites.has(k)).length;P.kept=P.sites.size-P.nw;P.dcov=P.cov-Q.cov});
 const regTot=cnt(uvals,o=>o.region),regs=[...regTot.keys()].sort((a,b)=>nm(a).localeCompare(nm(b),'ar'));
 plans.forEach(P=>{P.reg=regs.map(r=>{const all=uvals.filter(o=>o.region===r).map(o=>o.k),c=all.filter(k=>P.sites.has(k));return{r,tot:all.length,cov:c.length,covK:c,uncK:all.filter(k=>!P.sites.has(k))}})});
@@ -397,7 +419,7 @@ let streak=0,run=0;cp.forEach((P,i)=>{if(byP[i])run=0;else if(++run>streak)strea
 const gl=[];
 for(let q=1;q<iv.length;q++){const i=iv[q-1],j=iv[q],f=plans[i].siteD.get(k),t=plans[j].siteD.get(k),from=f[f.length-1],to=t[0];gl.push({k,from,to,fi:i,ti:j,days:Math.max(0,Math.round((to-from)/DAY)),skip:j-i-1,open:false})}
 if(last!=null&&iv.length)gl.push({k,from:last,to:ref,fi:iv[iv.length-1],ti:null,days:Math.max(0,since),skip:trail,open:true});
-return{k,name:nm(k),region:o.region,loc:o.loc,vs:a,n:a.length,byP,byT:cnt(a,v=>v.type),ds,g,gl,first,last,since,trail,streak,missed:cp.filter((P,i)=>!byP[i]).length,pcov:byP.filter(Boolean).length,maxGap:g.max,avgGap:g.avg,tm:a.length?topK(cnt(a,v=>v.m))[0][0]:''}});
+return{k,name:nm(k),region:o.region,loc:o.loc,vs:a,n:a.length,byP,byT:cnt(a,v=>v.type),ds,g,gl,first,last,since,trail,streak,missed:cp.filter((P,i)=>!byP[i]).length,pcov:byP.filter(Boolean).length,maxGap:g.max,avgGap:g.avg,tm:(a.length&&topK(cnt(a,v=>v.m))[0]||[''])[0]}});
 const rm=new Map(rows.map(r=>[r.k,r])),med0=new Map();
 grp(rows,r=>r.region).forEach((a,r)=>med0.set(r,med(a.filter(x=>x.n>0).map(x=>x.n))));
 const w=S.opt.w;rows.forEach(r=>{const re=[],add=(c,l,p)=>{re.push([c,l,p]);return p};let s=0;
@@ -466,7 +488,7 @@ function simPairs(keys,cm,t,pref){const o=[];for(let i=0;i<keys.length;i++)for(l
 function dqData(){return S.dqc.v??=(()=>{const und=key('غير محدد'),sc=cnt(S.visits,v=>v.site),mc=cnt(S.visits,v=>v.m),sk=[...new Set([...S.dir.keys(),...sc.keys()])].filter(k=>k!==und),inD=k=>S.dir.has(k)?1:0;
 const ds=simPairs(sk,sc,'s',inD),dm=simPairs([...mc.keys()],mc,'m',()=>0),dk=[...S.dir.keys()];
 const nd=S.dir.size?[...sc.keys()].filter(k=>!S.dir.has(k)&&k!==und).map(k=>{let best='',s=0;dk.forEach(d=>{const a=sqz(k),b=sqz(d),x=Math.max(simil(k,d),Math.min(a.length,b.length)>=4&&(a.includes(b)||b.includes(a))?.7:0);if(x>s){s=x;best=d}});return{k,n:sc.get(k),best:s>=.55?best:'',s}}).sort((x,y)=>y.n-x.n):[];
-return{ds,dm,nd,n:ds.length+dm.length+nd.length+S.q.bad.length+S.q.dup.length+S.q.reg.length}})()}
+return{ds,dm,nd,n:ds.length+dm.length+nd.length+S.q.bad.length+S.q.dup.length+S.q.reg.length+S.q.nom.length}})()}
 function merge(t,f,to){if(!f||!to||f===to||!S.alias[t])return;if(ali(t,to)===f){toast('لا يمكن التوحيد: يوجد توحيد معاكس');return}S.alias[t][f]=to;
 if(t==='s'){if(S.excl.delete(f))S.excl.add(to);if(S.sel.site===f)S.sel.site=to;const F=S.filters;if(F.s.includes(f))F.s=[...new Set(F.s.map(x=>x===f?to:x))]}else{const F=S.filters;if(F.m.includes(f))F.m=[...new Set(F.m.map(x=>x===f?to:x))];if(S.sel.m)S.sel.m=S.sel.m.map(x=>x===f?to:x)}
 save();build();refresh();toast('تم التوحيد: '+nm(f)+' ← '+nm(to))}
@@ -502,13 +524,14 @@ return card('جدول مقترح للخطة القادمة',ic('calendar'),`<div
 V.quality=()=>{const q=dqData(),hasD=S.dir.size>0,sb='style="padding:3px 10px;font-size:12px"';
 const pairT=(id,L,t)=>tbl(id,pairCols(t,sb),L,{sort:'s'});
 const al=[...Object.entries(S.alias.s).map(x=>['s',...x]),...Object.entries(S.alias.m).map(x=>['m',...x])];
-let h=`<div class="kpis">${kpiP('جهات متشابهة',q.ds.length)}${kpiP('أعضاء متشابهون',q.dm.length)}${hasD?kpiP('جهات خارج الدليل',q.nd.length):''}${kpiP('تواريخ غير صالحة',S.q.bad.length)}${kpiP('زيارات مكررة',S.q.dup.length,'الجهة نفسها في اليوم نفسه')}${kpiP('مناطق متعارضة',S.q.reg.length)}</div>`
+let h=`<div class="kpis">${kpiP('جهات متشابهة',q.ds.length)}${kpiP('أعضاء متشابهون',q.dm.length)}${hasD?kpiP('جهات خارج الدليل',q.nd.length):''}${kpiP('تواريخ غير صالحة',S.q.bad.length)}${kpiP('زيارات مكررة',S.q.dup.length,'الجهة نفسها في اليوم نفسه')}${kpiP('مناطق متعارضة',S.q.reg.length)}${kpiP('زيارات بلا أعضاء',S.q.nom.length,'خارج تحليل الأعضاء')}</div>`
 +`<section class="card note"><div>${ic('check')}</div><div><b>لماذا يهم هذا</b><div class="mut" style="font-size:13px">الاسم المكتوب بطريقتين يُحسب جهتين: واحدة مزارة وأخرى «لم تُزر قط»، فتتضخم قائمة غير المغطاة وتتغير الأولويات. التوحيد لا يعدّل بياناتك الأصلية؛ يُطبَّق عند القراءة ويمكن التراجع عنه في أي وقت.</div></div></section>`;
 if(q.ds.length)h+=card('جهات متشابهة الأسماء',ic('building'),pairT('dqs',q.ds,'s'));
 if(q.dm.length)h+=card('أعضاء متشابهون في الاسم',ic('users'),pairT('dqm',q.dm,'m'));
 if(q.nd.length)h+=card('جهات في الزيارات غير موجودة في الدليل',ic('pin'),tbl('dqn',[{k:'name',label:'الجهة في الزيارات',v:o=>nm(o.k),f:o=>lk('sites',o.k)},{k:'n',label:'الزيارات',type:'int'},{k:'best',label:'أقرب اسم في الدليل',v:o=>o.s,cp:[{label:'أقرب اسم في الدليل',t:o=>o.best?nm(o.best):null},{label:'درجة التشابه %',type:'pct',t:o=>o.best?pct(o.s):null}],f:o=>o.best?`${esc(nm(o.best))} <span class="mut">${pct(o.s)}%</span>`:'<span class="mut">لا يوجد اسم قريب</span>'},{k:'x',label:'',v:()=>0,f:o=>o.best?`<button class="btn" ${sb} data-action="merge" data-t="s" data-f="${esc(o.k)}" data-k="${esc(o.best)}">توحيد باسم «${esc(nm(o.best))}»</button>`:''}],q.nd,{sort:'n'}));
 if(S.q.bad.length)h+=card('صفوف بتاريخ غير صالح',ic('calendar'),tbl('dqb',[{k:'row',label:'الصف',type:'int'},{k:'val',label:'القيمة',t:o=>o.val,f:o=>esc(o.val||'(فارغ)')},{k:'site',label:'الجهة'}],S.q.bad,{sort:'row',dir:1}),'c6');
 if(S.q.dup.length)h+=card('زيارات مكررة في اليوم نفسه',ic('layers'),tbl('dqd',[{k:'s',label:'الجهة',v:o=>nm(o.s),f:o=>lk('sites',o.s)},{k:'d',label:'التاريخ',type:'date',f:o=>fd(o.d)},{k:'n',label:'مرات',type:'int'}],S.q.dup,{sort:'d'}),'c6');
+if(S.q.nom.length)h+=card('زيارات بلا أسماء أعضاء',ic('users'),tbl('dqo',[{k:'s',label:'الجهة',v:o=>nm(o.s),f:o=>lk('sites',o.s)},{k:'d',label:'التاريخ',type:'date',f:o=>fd(o.d)}],S.q.nom,{sort:'d'}),'c6');
 if(S.q.reg.length)h+=card('جهات بمناطق متعارضة',ic('layers'),tbl('dqr',[{k:'s',label:'الجهة',v:o=>nm(o.s),f:o=>lk('sites',o.s)},{k:'rs',label:'المناطق في الزيارات',type:'list',v:o=>o.rs.length,t:o=>o.rs.map(nm),f:o=>esc(o.rs.map(nm).join('، '))},{k:'dr',label:'منطقة الدليل',v:o=>nm(o.dr),t:o=>o.dr?nm(o.dr):null,f:o=>o.dr?esc(nm(o.dr)):'—'}],S.q.reg,{sort:'rs'}));
 if(!q.n)h+=card('لا توجد ملاحظات',ic('check'),'<p class="mut">لم يُعثر على أسماء متشابهة أو تواريخ غير صالحة أو تكرار في البيانات الحالية.</p>');
 if(al.length)h+=card('التوحيدات المطبقة',ic('check'),`<div style="display:flex;flex-wrap:wrap;gap:6px">${al.map(([t,f,to])=>`<span class="chip">${t==='m'?ic('users'):ic('building')}${esc(nm(f))} ← ${esc(nm(to))}<button class="lnk" data-action="unmerge" data-t="${t}" data-k="${esc(f)}">تراجع</button></span>`).join('')}</div>`);
@@ -833,7 +856,8 @@ setPfoot(String(R.title)+' · مَسار');$('#print-root').innerHTML=h;setTimeo
 const fname=(e,p='report')=>`masar-${p}-${iso(Date.now())}.${e}`;
 function dl(blob,n){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=n;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
 function doCSV(){const q=c=>{c=String(c??'');return/[",\n\r]/.test(c)?'"'+c.replace(/"/g,'""')+'"':c},ids=activeSecs(),L=[];ids.forEach((id,i)=>{const d=secData(id,iso);if(ids.length>1){if(i)L.push('');L.push(q(secName(id)))}L.push(d.head.map(q).join(','));d.rows.forEach(r=>L.push(r.map(q).join(',')))});dl(new Blob(['\uFEFF'+L.join('\r\n')],{type:'text/csv;charset=utf-8'}),fname('csv'))}
-let XP;const xlsx=()=>XP??=new Promise((ok,no)=>{if(window.XLSX)return ok(XLSX);const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';s.onload=()=>ok(XLSX);s.onerror=()=>{XP=null;no()};document.head.appendChild(s)});
+let XP;const XU=['https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js','https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js','https://unpkg.com/xlsx@0.18.5/dist/xlsx.full.min.js'];
+const xlsx=()=>XP??=new Promise((ok,no)=>{if(window.XLSX)return ok(XLSX);let i=0;const t=()=>{if(i>=XU.length){XP=null;return no(new Error('xlsx-load'))}const e=document.createElement('script');e.src=XU[i++];e.onload=()=>window.XLSX?ok(XLSX):t();e.onerror=()=>{e.remove();t()};document.head.appendChild(e)};t()});
 async function doXLSX(){const X=await xlsx(),wb=X.utils.book_new(),used=new Set(),L=x=>x&&typeof x==='object'?10:String(x??'').length;activeSecs().forEach(id=>{const m=secModel(id),head=m.columns.map(c=>c.label),aoa=[head,...m.rows.map(r=>r.map((v,i)=>{const c=m.columns[i];if(v==null)return null;if(c.type==='date')return{t:'n',v:v/DAY+25569,z:c.fmt==='month'?'yyyy-mm':'yyyy-mm-dd'};if(Array.isArray(v))return v.map(x=>c.fmt==='dates'&&typeof x==='number'?iso(x):x).join('، ');return typeof v==='number'&&(c.type==='dec'||c.type==='pct')?+v.toFixed(2):v}))],ws=X.utils.aoa_to_sheet(aoa);ws['!cols']=head.map((h,i)=>({wch:Math.min(50,Math.max(8,...aoa.map(r=>L(r[i])))+2)}));ws['!views']=[{RTL:true}];let n=secName(id).replace(/[\[\]:*?\/\\]/g,'').slice(0,31),b=n,j=2;while(used.has(n))n=b.slice(0,28)+' '+j++;used.add(n);X.utils.book_append_sheet(wb,ws,n)});wb.Workbook={Views:[{RTL:true}]};X.writeFile(wb,fname('xlsx'))}
 function repHTML(){const R=S.rep,mr=memberRows();return`<div style="display:flex;align-items:center;margin-bottom:10px"><h3 class="h" style="margin:0;flex:1">${ic('download')}تقرير</h3><button class="btn" data-action="close">${ic('x')}</button></div><p class="mut" style="font-size:12px;margin:0 0 12px">${esc(fsum())}</p>
 ${cpPresetRow()}<ul class="secs" id="secs">${R.order.map(id=>id==='locs'&&!S.hasLoc?'':`<li draggable="true" data-id="${id}"><span class="mut">⋮⋮</span><label style="display:flex;gap:8px;flex:1"><input type="checkbox" data-rs="${id}" ${R.on.has(id)?'checked':''}>${secName(id)}</label>${id==='mdet'&&R.on.has('mdet')?`<div class="subm">${mr.map(r=>`<label class="chip ${!R.mem||R.mem.includes(r.k)?'on':''}" tabindex="0"><input type="checkbox" hidden data-rm="${esc(r.k)}" ${!R.mem||R.mem.includes(r.k)?'checked':''}>${esc(r.name)}</label>`).join('')}</div>`:''}</li>`).join('')}</ul>
@@ -872,12 +896,109 @@ function render(){const c=$('#content');if(!S.visits.length){$('#fbar').innerHTM
 $('#dock').style.display='';$('#range').textContent=periodTxt()+' · '+cn(S.f.length,U.visit);const ch=S.lastTab!==S.tab;if(ch)swAt=performance.now();S.lastTab=S.tab;renderFilters();renderDock();S.CH=[];c.innerHTML=V[S.tab]();cpDecorate();if(ch)enter();writeHash();markScroll()}
 function refresh(){applyFilters();render()}
 function drawerBody(inl){const C=[['a','جدول الزيارات','مطلوب'],['b','دليل الجهات','اختياري'],['c','تكلفة المواقع','اختياري']];
-return`<div class="dcards">${C.map(([k,t,s])=>`<div class="dc"><h3 class="h" style="margin-bottom:8px">${t} <span style="font-size:11px">· ${s}</span></h3><textarea data-raw="${k}" placeholder="الصق الجدول هنا أو اسحب ملفاً" spellcheck="false">${esc(S.raw[k])}</textarea><div class="row"><span data-cnt="${k}">${S.cnt[k]} صف</span><span class="sp"></span><label class="btn" style="padding:4px 10px">${ic('upload')}رفع<input type="file" class="vh" accept=".xlsx,.xls,.csv,.tsv,.txt" data-file="${k}"></label><button class="btn" style="padding:4px 10px" data-action="clr" data-k="${k}">${ic('x')}مسح</button></div><div class="err" data-err="${k}">${esc(S.err[k]||'')}</div></div>`).join('')}</div>
+return`<div class="dz dc up"><label class="btn p" style="padding:6px 14px">${ic('upload')}رفع ملفات Excel / CSV<input type="file" class="vh" multiple accept=".xlsx,.xlsm,.xls,.csv,.tsv,.txt" data-fileall="1"></label><span class="mut" style="font-size:12px">يمكن رفع أكثر من ملف أو سحبها هنا؛ يُكتشف جدول الزيارات والدليل والتكلفة تلقائياً من كل الأوراق.</span></div><div data-imp>${impHTML()}</div><div class="dcards">${C.map(([k,t,s])=>`<div class="dc"><h3 class="h" style="margin-bottom:8px">${t} <span style="font-size:11px">· ${s}</span></h3><textarea data-raw="${k}" placeholder="الصق الجدول هنا أو اسحب ملفاً" spellcheck="false">${esc(S.raw[k])}</textarea><div class="row"><span data-cnt="${k}">${S.cnt[k]} صف</span><span class="sp"></span><label class="btn" style="padding:4px 10px">${ic('upload')}رفع<input type="file" class="vh" accept=".xlsx,.xlsm,.xls,.csv,.tsv,.txt" multiple data-file="${k}"></label><button class="btn" style="padding:4px 10px" data-action="clr" data-k="${k}">${ic('x')}مسح</button></div><div class="err" data-err="${k}">${esc(S.err[k]||'')}</div><div class="mut nt" data-nt="${k}">${(S.nt[k]||[]).map(x=>`<div>${esc(x)}</div>`).join('')}</div></div>`).join('')}</div>
 <div class="row" style="display:flex;gap:10px;align-items:center;margin-top:14px;font-size:12px"><button class="lnk mut" data-action="sample">بيانات تجريبية</button><button class="mut lnk" data-action="unm" data-unm ${S.un.length?'':'hidden'}>${unTxt()}</button><span class="sp"></span>${inl?'':`<button class="btn p" data-action="close">عرض</button>`}</div><div data-unml class="mut" style="font-size:12px;margin-top:6px"></div>`}
-function bindDrop(root){root.querySelectorAll('textarea[data-raw]').forEach(t=>{t.ondragover=e=>{e.preventDefault();t.classList.add('drag')};t.ondragleave=()=>t.classList.remove('drag');t.ondrop=e=>{e.preventDefault();t.classList.remove('drag');const f=e.dataTransfer.files[0];if(f)readFile(t.dataset.raw,f)}})}
-async function readFile(k,f){try{let txt;if(/\.xlsx?$/i.test(f.name)){const X=await xlsx(),wb=X.read(await f.arrayBuffer(),{type:'array'});txt=X.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,raw:true,blankrows:false,defval:''}).map(r=>r.map(c=>String(c??'').replace(/[\t\r\n]+/g,' ')).join('\t')).join('\n')}else{const buf=await f.arrayBuffer();try{txt=new TextDecoder('utf-8',{fatal:true}).decode(buf)}catch(e){txt=new TextDecoder('windows-1256').decode(buf)}}setRaw(k,txt)}catch(e){S.err[k]='تعذر قراءة الملف';updDrawer()}}
+function bindDrop(root){root.querySelectorAll('textarea[data-raw],.dz').forEach(t=>{const hasF=e=>e.dataTransfer&&[...e.dataTransfer.types].includes('Files');t.ondragover=e=>{if(hasF(e)){e.preventDefault();t.classList.add('drag')}};t.ondragleave=()=>t.classList.remove('drag');t.ondrop=e=>{t.classList.remove('drag');const fs=[...e.dataTransfer.files];if(!fs.length)return;e.preventDefault();importFiles(fs,fs.length===1&&t.dataset.raw?t.dataset.raw:undefined)}})}
+const IR={a:'جدول الزيارات',b:'دليل الجهات',c:'تكلفة المواقع'},KL={visits:'زيارات',person:'زيارات بصف لكل عضو',dir:'دليل جهات',cost:'تكلفة مواقع',other:'غير مستخدمة'},XRE=/\.(xlsx|xlsm|xls)$/i;
+const cell=v=>v==null?'':v,isTxt=v=>typeof v==='string'&&v.trim()!=='',iKey=(s,d)=>norm(s)+'|'+d,tsvC=v=>String(cell(v)).replace(/[\t\r\n]+/g,' ').trim();
+function sheetTables(file,sheet,aoa,hidden,off,X){const out=[];if(!aoa.length)return out;
+let hi=-1,bs=1;for(let i=0;i<Math.min(aoa.length,25);i++){const s=hRoles(aoa[i].map(norm)).size;if(s>bs){bs=s;hi=i}}
+if(hi<0)return out;
+const hr=aoa[hi],W=hr.length,blocks=[];let c=0;
+while(c<W){while(c<W&&!isTxt(hr[c]))c++;if(c>=W)break;let e=c;while(e<W&&isTxt(hr[e]))e++;blocks.push([c,e]);c=e}
+const ok=blocks.filter(([a,b])=>hRoles(hr.slice(a,b).map(norm)).size>=2);
+ok.forEach(([a,b])=>{const rows=aoa.slice(hi+1).map(r=>r.slice(a,b)).filter(r=>r.some(x=>String(cell(x)).trim()!==''));
+out.push({file,sheet,hidden,hdr:hr.slice(a,b),h:hr.slice(a,b).map(norm),rows,rng:X?X.utils.encode_col(off+a)+':'+X.utils.encode_col(off+b-1):'',nblk:ok.length})});
+return out}
+function tabInfo(t){const ix={};Object.keys(HVN).forEach(k=>ix[k]=hIdx(t.h,k));t.ix=ix;t.n=t.rows.length;t.kind='other';t.keys=0;t.nsites=0;t.score=0;
+if(ix.site>=0&&ix.date>=0){let ok=0,dn=0,dv=0,mf=0,mm=0,pf=0,rf=0;const keys=new Set();
+t.rows.forEach(r=>{const s=String(cell(r[ix.site])).trim(),dd=cell(r[ix.date]);if(String(dd).trim()!==''){dn++;const d=parseDate(dd);if(d!=null){dv++;if(s){ok++;keys.add(iKey(s,d))}}}
+if(ix.mem>=0&&String(cell(r[ix.mem])).trim()){mf++;if(splitNames(r[ix.mem]).length>1)mm++}
+if(ix.plan>=0&&String(cell(r[ix.plan])).trim())pf++;if(ix.region>=0&&String(cell(r[ix.region])).trim())rf++});
+t.keys=keys.size;t.okRows=ok;
+if(dn>0&&dv/dn>=.5&&ok>=3){const person=ix.mem>=0&&mf>0&&mm/mf<.1&&ok/Math.max(1,keys.size)>=1.4;t.kind=person?'person':'visits';
+t.score=(person?keys.size:ok)*1000+(ix.plan>=0&&pf/t.n>.5?300:0)+(ix.region>=0&&rf/t.n>.5?200:0)+(ix.type>=0?100:0)+(ix.mem>=0?50*mf/t.n:0)-(person?1:0)-(t.hidden?5000:0)}}
+else if(ix.site>=0&&ix.date<0&&(ix.region>=0||ix.loc>=0)&&t.n>=2){t.kind='dir';t.nsites=new Set(t.rows.map(r=>norm(cell(r[ix.site]))).filter(Boolean)).size}
+else if(ix.loc>=0&&ix.site<0&&(ix.allow>=0||ix.fare>=0||ix.km>=0)&&t.n>=1)t.kind='cost'}
+async function impAnalyze(files){const X=await xlsx(),T=[],skipped=[];let seq=0;
+for(const f of files){let tabs=[];
+if(XRE.test(f.name)){const wb=X.read(await f.arrayBuffer(),{type:'array'}),meta=(wb.Workbook&&wb.Workbook.Sheets)||[];
+wb.SheetNames.forEach((sn,si)=>{const ws=wb.Sheets[sn];if(!ws||!ws['!ref']){skipped.push({f:f.name,s:sn,why:'ورقة فارغة'});return}
+const aoa=X.utils.sheet_to_json(ws,{header:1,raw:true,blankrows:true,defval:''}),R0=X.utils.decode_range(ws['!ref']);
+(ws['!merges']||[]).forEach(m=>{if((m.e.r-m.s.r+1)*(m.e.c-m.s.c+1)>4000)return;const v=(aoa[m.s.r-R0.s.r]||[])[m.s.c-R0.s.c];if(v===''||v==null)return;for(let r=m.s.r;r<=m.e.r;r++)for(let c=m.s.c;c<=m.e.c;c++){const row=aoa[r-R0.s.r];if(row&&(row[c-R0.s.c]===''||row[c-R0.s.c]==null))row[c-R0.s.c]=v}});
+const ts=sheetTables(f.name,sn,aoa,!!(meta[si]&&meta[si].Hidden),R0.s.c,X);
+if(!ts.length)skipped.push({f:f.name,s:sn,why:'لا توجد أعمدة معروفة'});tabs.push(...ts)})}
+else{const buf=await f.arrayBuffer();let txt;try{txt=new TextDecoder('utf-8',{fatal:true}).decode(buf)}catch(e){txt=new TextDecoder('windows-1256').decode(buf)}
+const ts=sheetTables(f.name,'',csvRows(txt),false,0,null);if(!ts.length)skipped.push({f:f.name,s:'',why:'لا توجد أعمدة معروفة'});tabs.push(...ts)}
+tabs.forEach(t=>{t.id='t'+seq++;T.push(t)})}
+T.forEach(tabInfo);return{T,skipped}}
+function tabRows(t){const ix=t.ix,out=[],gm=new Map();
+t.rows.forEach(r=>{const s=String(cell(r[ix.site])).trim();if(!s)return;const d=parseDate(cell(r[ix.date]));if(d==null)return;
+const o={site:s,d,k:iKey(s,d),region:ix.region>=0?String(cell(r[ix.region])).trim():'',plan:ix.plan>=0?String(cell(r[ix.plan])).trim().replace(/^(\d+)\.0+$/,'$1'):'',type:ix.type>=0?String(cell(r[ix.type])).trim():'',loc:ix.loc>=0?String(cell(r[ix.loc])).trim():'',mem:ix.mem>=0?splitNames(cell(r[ix.mem])):[]};
+if(t.kind==='person'){const g=gm.get(o.k);if(g){o.mem.forEach(x=>{if(!g.mem.includes(x))g.mem.push(x)});return}gm.set(o.k,o)}
+out.push(o)});return out}
+const tLab=t=>t.file+(t.sheet?' › '+t.sheet:'')+(t.nblk>1&&t.rng?' ('+t.rng+')':'');
+function impPlan(D,force){force=force||{};
+const V=D.T.filter(t=>t.kind==='visits'||t.kind==='person').sort((x,y)=>y.score-x.score),Dd=D.T.filter(t=>t.kind==='dir').sort((x,y)=>y.nsites-x.nsites||y.n-x.n),Cc=D.T.filter(t=>t.kind==='cost').sort((x,y)=>y.n-x.n);
+const sel=(arr,id)=>id==='none'?null:(arr.find(t=>t.id===id)||arr[0]||null);
+const R={cand:{a:V,b:Dd,c:Cc},use:{a:sel(V,force.a),b:sel(Dd,force.b),c:sel(Cc,force.c)},out:{},notes:[],stat:{}};
+const P=R.use.a;
+if(P){const rows=tabRows(P),pk=new Set(rows.map(o=>o.k));
+const E=V.filter(t=>t!==P).map(t=>{const er=tabRows(t),ek=new Set(er.map(o=>o.k));let ov=0;ek.forEach(k=>{if(pk.has(k))ov++});return{t,er,ek,ov:ek.size?ov/ek.size:0,mk:new Set(er.filter(o=>o.mem.length).map(o=>o.k)).size}}).filter(x=>x.ov>=.5&&x.ek.size>=3).sort((x,y)=>y.mk-x.mk);
+const maps=E.map(x=>{const m=new Map();x.er.forEach(o=>{(m.get(o.k)||m.set(o.k,[]).get(o.k)).push(o)});return m});
+const seen=new Map(),fill=new Map(E.map(x=>[x.t.id,0]));let filled=0,fReg=0,fLoc=0;
+rows.forEach(o=>{const n=seen.get(o.k)||0;seen.set(o.k,n+1);
+if(!o.mem.length)for(let j=0;j<E.length;j++){const a=(maps[j].get(o.k)||[]).filter(x=>x.mem.length);if(a.length){o.mem=a[Math.min(n,a.length-1)].mem.slice();fill.set(E[j].t.id,fill.get(E[j].t.id)+1);filled++;break}}
+if(!o.region)for(let j=0;j<E.length;j++){const a=maps[j].get(o.k);const x=a&&a.find(y=>y.region);if(x){o.region=x.region;fReg++;break}}
+if(!o.loc)for(let j=0;j<E.length;j++){const a=maps[j].get(o.k);const x=a&&a.find(y=>y.loc);if(x){o.loc=x.loc;fLoc++;break}}});
+let inferred=0;const withP=rows.filter(o=>o.plan!=='');
+if(withP.length&&withP.length<rows.length&&withP.length>=rows.length*.5){const rg=new Map();withP.forEach(o=>{const r=rg.get(o.plan);if(!r)rg.set(o.plan,[o.d,o.d]);else{if(o.d<r[0])r[0]=o.d;if(o.d>r[1])r[1]=o.d}});
+rows.forEach(o=>{if(o.plan!=='')return;let best='',bd=1/0;rg.forEach((r,p)=>{const dd=o.d<r[0]?r[0]-o.d:o.d>r[1]?o.d-r[1]:0;if(dd<bd){bd=dd;best=p}});if(best!==''&&bd<=15*DAY){o.plan=best;inferred++}})}
+const nom=rows.filter(o=>!o.mem.length).length;
+const L=[['جهة المرور','المنطقة','الخطة','المرور','التاريخ','القائم بالمرور','الموقع'].join('\t')];
+rows.forEach(o=>L.push([o.site,o.region,o.plan,o.type,iso(o.d),o.mem.join(' - '),o.loc].map(tsvC).join('\t')));
+R.out.a=L.join('\n');
+const ds=rows.map(o=>o.d);
+R.stat.a={n:rows.length,keys:pk.size,nom,filled:E.map(x=>({t:x.t,n:fill.get(x.t.id)})).filter(x=>x.n>0),extra:E.filter(x=>x.t.kind==='visits').map(x=>({t:x.t,n:[...x.ek].filter(k=>!pk.has(k)).length})).filter(x=>x.n>0),inferred,fReg,fLoc,from:ds.length?Math.min(...ds):null,to:ds.length?Math.max(...ds):null}}
+const D0=R.use.b;
+if(D0){const ix=D0.ix,ex=col(D0.h,'استبعاد','مستبعد'),L=[['الجهة','المنطقة','الموقع'].concat(ex>=0?['استبعاد']:[]).join('\t')];let n=0;
+D0.rows.forEach(r=>{const s=String(cell(r[ix.site])).trim();if(!s)return;n++;L.push([s,ix.region>=0?r[ix.region]:'',ix.loc>=0?r[ix.loc]:''].concat(ex>=0?[r[ex]]:[]).map(tsvC).join('\t'))});
+R.out.b=L.join('\n');R.stat.b={n}}
+const C0=R.use.c;
+if(C0){const ix=C0.ix,L=['الموقع\tبدل سفر\tالسعر\tالمسافة'];let n=0;
+C0.rows.forEach(r=>{const s=String(cell(r[ix.loc])).trim();if(!s)return;n++;L.push([s,ix.allow>=0?r[ix.allow]:'',ix.fare>=0?r[ix.fare]:'',ix.km>=0?r[ix.km]:''].map(tsvC).join('\t'))});
+R.out.c=L.join('\n');R.stat.c={n}}
+return R}
+function impCommit(R,roles){const smp={a:SA,b:SB,c:SC};
+['a','b','c'].forEach(k=>{if(roles&&!roles.includes(k))return;if(R.out[k]!=null)S.raw[k]=R.out[k];else if(roles?!R.use[k]:S.raw[k]===smp[k])S.raw[k]=''});
+S.filters=F0();save();build();applyFilters();updDrawer();impRender();if(S.visits.length||!$('#content .dc'))render()}
+function impText(k,I){const st=I.R.stat[k],u=I.R.use[k];if(!u||!st)return'<span class="mut">لم يُعثر على جدول مناسب</span>';
+if(k==='a'){const p=[cn(st.n,U.visit)+' · '+fd(st.from)+' — '+fd(st.to)];if(st.nom)p.push(cn(st.nom,U.visit)+' بلا أعضاء');return p.join(' · ')}
+return cn(st.n,U.row)}
+function impHTML(){const I=S.imp;if(!I)return'';const rowH=k=>{const u=I.R.use[k],c=I.R.cand[k];
+return`<div class="imr"><b>${IR[k]}</b><select class="inp" data-impsel="${k}" aria-label="${IR[k]}">${k==='a'?'':`<option value="none" ${!u?'selected':''}>— بدون</option>`}${c.map(t=>`<option value="${t.id}" ${u===t?'selected':''}>${esc(tLab(t))} · ${t.kind==='dir'?cn(t.nsites,U.site):t.kind==='cost'?cn(t.n,U.row):cn(t.kind==='person'?t.keys:t.okRows,U.visit)}</option>`).join('')}</select><span class="mut">${impText(k,I)}</span></div>`};
+const a=I.only&&I.only!=='a'?null:I.R.stat.a,nt=[];
+if(a){a.filled.forEach(x=>nt.push(`أسماء الأعضاء لـ ${cn(x.n,U.visit)} مأخوذة من «${esc(tLab(x.t))}»`));
+if(a.fReg)nt.push(`منطقة ${cn(a.fReg,U.visit)} مأخوذة من أوراق أخرى`);
+if(a.inferred)nt.push(`خطة ${cn(a.inferred,U.visit)} استُنتجت من التاريخ`);
+a.extra.forEach(x=>nt.push(`«${esc(tLab(x.t))}» فيها ${cn(x.n,U.visit)} لا مقابل لها في الجدول المختار (لم تُضَف)`));
+if(a.nom)nt.push(`${cn(a.nom,U.visit)} بلا أسماء أعضاء في أي ورقة: تدخل في التغطية وتخرج من تحليل الأعضاء`)}
+const used=new Set(Object.values(I.R.use).filter(Boolean)),fil=a?new Set(a.filled.map(x=>x.t)):new Set();
+const all=I.D.T.map(t=>`<li>${esc(tLab(t))} — ${KL[t.kind]} · ${cn(t.n,U.row)}${used.has(t)?' · <b>مستخدمة</b>':fil.has(t)?' · مصدر أعضاء':''}</li>`).concat(I.D.skipped.map(x=>`<li class="mut">${esc(x.f+(x.s?' › '+x.s:''))} — متجاهلة: ${esc(x.why)}</li>`)).join('');
+return`<div class="imp"><h3 class="h" style="margin-bottom:6px">${ic('check')}نتيجة الاستيراد</h3><div class="mut" style="font-size:12px">اختيار تلقائي من ${cn(I.D.T.length,['جدول','جدولان','جداول','جدولاً'])} في ${I.files.length>1?I.files.length+' ملفات':'ملف'}. يمكنك تغيير أي اختيار.</div>${(I.only?[I.only]:['a','b','c']).map(rowH).join('')}${nt.length?`<ul>${nt.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}<details><summary>كل الأوراق والجداول المكتشفة</summary><ul>${all}</ul></details></div>`}
+function impRender(){document.querySelectorAll('[data-imp]').forEach(e=>{e.innerHTML=impHTML()})}
+function impPick(k,id){const I=S.imp;if(!I)return;I.force[k]=id;I.R=impPlan(I.D,I.force);impCommit(I.R,[k])}
+function impToast(I){const a=I.R.stat.a;if(a)toast('تم استيراد '+cn(a.n,U.visit)+' من «'+tLab(I.R.use.a)+'»');else toast('تم الاستيراد')}
+async function readFile(k,f){try{let txt;if(XRE.test(f.name)){const X=await xlsx(),wb=X.read(await f.arrayBuffer(),{type:'array'});txt=X.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,raw:true,blankrows:false,defval:''}).map(r=>r.map(c=>String(c??'').replace(/[\t\r\n]+/g,' ')).join('\t')).join('\n')}else{const buf=await f.arrayBuffer();try{txt=new TextDecoder('utf-8',{fatal:true}).decode(buf)}catch(e){txt=new TextDecoder('windows-1256').decode(buf)}}setRaw(k,txt)}catch(e){S.err[k]='تعذر قراءة الملف';updDrawer()}}
+async function importFiles(files,only){const k=only||'a';
+try{if(only&&files.length===1&&!XRE.test(files[0].name)){await readFile(only,files[0]);return}
+const D=await impAnalyze(files),force={};let R=impPlan(D,force);
+if(only&&!R.use[only]){await readFile(only,files[0]);S.nt[only]=['لم يُعثر على جدول مناسب لهذا الدور؛ استُخدمت أول ورقة كما هي'];updDrawer();return}
+if(!R.use.a&&!R.use.b&&!R.use.c){S.err[k]='لم يُعثر في الملف على جدول زيارات أو دليل جهات أو تكلفة مواقع (يلزم عمودا جهة المرور والتاريخ)';updDrawer();return}
+S.imp={D,R,force,files:files.map(f=>f.name),only:only||null};impCommit(R,only?[only]:null);impToast(S.imp);if(!$('#drawer').classList.contains('on'))openDrawer()}
+catch(e){S.err[k]=e&&e.message==='xlsx-load'?'تعذر تحميل مكتبة قراءة Excel، تحقق من الاتصال':'تعذر قراءة الملف';updDrawer()}}
 function setRaw(k,v){S.raw[k]=v;save();build();applyFilters();updDrawer();if(S.visits.length||!$('#content .dc'))render()}
-function updDrawer(){document.querySelectorAll('[data-raw]').forEach(t=>{if(t!==document.activeElement)t.value=S.raw[t.dataset.raw]});document.querySelectorAll('[data-cnt]').forEach(e=>{const n=S.cnt[e.dataset.cnt]+' صف';if(e.textContent!==n){e.textContent=n;e.classList.remove('pulse');e.offsetWidth;e.classList.add('pulse')}});document.querySelectorAll('[data-err]').forEach(e=>e.textContent=S.err[e.dataset.err]||'');document.querySelectorAll('[data-unm]').forEach(e=>{e.textContent=unTxt();e.hidden=!S.un.length})}
+function updDrawer(){document.querySelectorAll('[data-raw]').forEach(t=>{if(t!==document.activeElement)t.value=S.raw[t.dataset.raw]});document.querySelectorAll('[data-cnt]').forEach(e=>{const n=S.cnt[e.dataset.cnt]+' صف';if(e.textContent!==n){e.textContent=n;e.classList.remove('pulse');e.offsetWidth;e.classList.add('pulse')}});document.querySelectorAll('[data-err]').forEach(e=>e.textContent=S.err[e.dataset.err]||'');document.querySelectorAll('[data-nt]').forEach(e=>{e.innerHTML=(S.nt[e.dataset.nt]||[]).map(x=>`<div>${esc(x)}</div>`).join('')});document.querySelectorAll('[data-unm]').forEach(e=>{e.textContent=unTxt();e.hidden=!S.un.length})}
 function openDrawer(){const d=$('#drawer');if(!d.classList.contains('on'))S.lf=document.activeElement;d.innerHTML=`<div style="display:flex;align-items:center;margin-bottom:14px"><h3 class="h" style="margin:0;flex:1">${ic('db')}البيانات</h3><button class="btn" data-action="close">${ic('x')}</button></div>`+drawerBody();bindDrop(d);d.classList.add('on');$('#ov').classList.add('on');const fb=d.querySelector('button');if(fb)fb.focus()}
 function openReport(){const m=$('#modal'),fresh=!m.classList.contains('on');if(fresh)S.lf=document.activeElement;m.innerHTML=repHTML();m.classList.add('on');$('#ov').classList.add('on');bindDrag();if(fresh){const fb=m.querySelector('button');if(fb)fb.focus()}}
 function closeAll(){const was=$('#drawer').classList.contains('on')||$('#modal').classList.contains('on');$('#drawer').classList.remove('on');$('#modal').classList.remove('on');$('#ov').classList.remove('on');pop.classList.remove('on');tm.classList.remove('on');$('#cmenu').classList.remove('on');if(was&&S.lf&&S.lf.isConnected)S.lf.focus()}
@@ -989,7 +1110,9 @@ case'export':{if(!activeSecs().length){$('#rerr').textContent='لا أقسام';
 document.addEventListener('change',e=>{const t=e.target;if(t.dataset.pk){const k=t.dataset.pk,F=S.filters;F[k]=t.checked?[...F[k],t.value]:F[k].filter(x=>x!==t.value);refresh()}
 else if(t.dataset.cfg){const f=t.files[0];if(f)importCfg(f);t.value=''}
 else if(t.dataset.sortsel){const id=t.dataset.sortsel,st=S.tbl[id];st.k=t.value;st.d=ASC.includes(t.value)?1:-1;document.getElementById('t-'+id).innerHTML=tblH(id);markScroll()}
-else if(t.dataset.file){const f=t.files[0];if(f)readFile(t.dataset.file,f);t.value=''}
+else if(t.dataset.file){const fs=[...t.files];if(fs.length)importFiles(fs,fs.length===1?t.dataset.file:undefined);t.value=''}
+else if(t.dataset.fileall){const fs=[...t.files];if(fs.length)importFiles(fs);t.value=''}
+else if(t.dataset.impsel){impPick(t.dataset.impsel,t.value)}
 else if(t.dataset.rs){const id=t.dataset.rs;t.checked?S.rep.on.add(id):S.rep.on.delete(id);openReport();const n=document.querySelector(`[data-rs="${id}"]`);if(n)n.focus()}
 else if(t.dataset.rm){const all=memberRows().map(r=>r.k);let m=S.rep.mem||all.slice();m=t.checked?[...new Set([...m,t.dataset.rm])]:m.filter(x=>x!==t.dataset.rm);S.rep.mem=m.length===all.length?null:m;t.parentNode.classList.toggle('on',t.checked)}
 else if(t.dataset.ro==='charts')S.rep.charts=t.checked});
@@ -1021,6 +1144,8 @@ addEventListener('resize',()=>{syncTop();fitDock();placeBlob(true);scrollTab();m
 if(mql.addEventListener)mql.addEventListener('change',()=>{if(document.documentElement.dataset.pref==='system')applyTheme('system')});
 addEventListener('storage',e=>{if(e.key==='masar.theme'&&THEMES.some(x=>x[0]===e.newValue))applyTheme(e.newValue)});
 addEventListener('hashchange',()=>{const t=S.tab,f=JSON.stringify(S.filters);readHash();if(t!==S.tab||f!==JSON.stringify(S.filters))refresh()});
+document.addEventListener('dragover',e=>{if(e.dataTransfer&&[...e.dataTransfer.types].includes('Files'))e.preventDefault()});
+document.addEventListener('drop',e=>{if(e.defaultPrevented)return;const fs=e.dataTransfer?[...e.dataTransfer.files]:[];if(!fs.length)return;e.preventDefault();importFiles(fs)});
 (function init(){$('#logo').innerHTML=LOGO+'<span>مَسار</span>';$('#bdata').innerHTML=ic('db')+'<span>البيانات</span>';$('#brep').innerHTML=ic('download')+'<span>تقرير</span>';$('#bcp').innerHTML=ic('copy')+'<span>نسخ التبويب</span>';
 let st=null;try{st=JSON.parse(localStorage.getItem('masar.v1'))}catch(e){}
 if(st&&st.raw){S.raw={a:'',b:'',c:'',...st.raw};applyCfg(st)}else S.raw={a:SA,b:SB,c:SC};
