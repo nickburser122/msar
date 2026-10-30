@@ -18,11 +18,17 @@ Everything is stored in `localStorage` (`masar.v1`).
 3. Each field picks the best candidate from the whole pool (visits: most distinct site+date visits, with plan, region and type columns preferred). A field can be overridden from its own dropdown, including «بدون» for the optional ones.
 4. Member names, region, location and plan gaps in the chosen visits table are filled from sibling visit tables covering the same site and date.
 
+Member names are filled per purpose: a visit takes its team from the most aggregated source record for the same site, day and purpose (rows split by agency-car use are merged back into one team; two rows for one visit day keep one-to-one teams; a plan visit never borrows the inspector of a different purpose on the same day).
+
 Consequences: uploading `خطة_المرور.xlsx` and then `مأموريات.xlsx` (or the reverse) gives the same result: visits from the plan file, directory and costs from `مأموريات`'s `الجهات` sheet, member names filled in. Uploading to one field forces that field from the new file and leaves the others alone. Files appear as chips and can be removed individually; the fields re-resolve from what remains.
 
 ## UI controls (v3.2)
 - No native browser controls: dropdowns (sources, sort, rows per page, saved report templates), switches and date fields are app components with the same look, keyboard support (arrows, Home / End, Enter, Escape, Tab) and phone-safe popup placement.
 - Report modal: every section has an include switch. «تضمين الرسوم» toggles charts; **«كل قسم في صفحة مستقلة»** (PDF) starts each section on its own page with its title in the running header. Turn it off for a continuous flow. The choice is saved with report presets.
+
+## Printing / PDF (v3.2)
+- A4 landscape, 12 mm margins, running section title top, page numbers bottom. Tables use the full page width; numbers and dates stay on one line, long lists wrap at spaces, header rows repeat on every page, rows never split across pages. The summary prints as KPI tiles plus a two-column findings list.
+- With «كل قسم في صفحة مستقلة» on, every section starts on a new page; member details start a page per member.
 
 ## What's new in v3 — "what you see is what you copy"
 - **One table model, two renderers.** Every on-screen table and chart is backed by plain data (`columns` with `type`, raw `rows`). The screen renders HTML from it; copy, CSV, XLSX and PDF serialise the same model. Column builders (`plansCols`, `prioCols`, `sitesCols`, ...) are shared by the tabs and the report, so exports match the screen. `modelOf(id)` returns the model with the current sort, search and filters applied.

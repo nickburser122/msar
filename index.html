@@ -212,11 +212,15 @@ main{padding:0 14px 110px}
 html.dense th,html.dense td{padding:3px 8px}html.dense table{font-size:12.5px}html.dense .card{padding:12px}html.dense .rc2{padding:8px 10px}
 .cpt th{cursor:default}
 @media print{@page{size:A4 landscape;margin:12mm;@bottom-center{content:counter(page) " / " counter(pages);font-size:9px;color:#7D7180;direction:ltr;unicode-bidi:bidi-override}}
-body{background:#fff!important;color:#2A2430}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}body::before,body::after,.app,.ov,.drawer,.modal,.pop,#tip{display:none!important}
+body{background:#fff!important;color:#2A2430}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}body::before,body::after,.app,.ov,.drawer,.modal,.pop,#tip,#toast{display:none!important}
 #print-root{display:block;color-scheme:light;--plum-2:#8F5A82;--ok:#2F7A5C;--bad:#B24848;--accent:#B5702F;--bg:#fff;--surface:#fff;--surface-2:#F7F1F4;--line:#E5DCE2;--text:#2A2430;--muted:#7D7180;--plum-soft:#EFE1EA;font-size:11px;color:#2A2430}
 #print-root h1{font-weight:500;font-size:22px;margin:0}#print-root h2{font-weight:500;font-size:15px;color:#7E4E73;margin:16px 0 8px}
-#print-root table{font-size:10px}#print-root table.sm{font-size:8.5px}#print-root table.sm th,#print-root table.sm td{padding:3px 4px}#print-root th,#print-root td{padding:4px 6px;white-space:normal}#print-root thead{display:table-header-group}#print-root tr{break-inside:avoid}
-.pc{break-inside:avoid;break-after:avoid;margin-bottom:12px}#print-root h2{break-after:avoid}#print-root td{overflow-wrap:anywhere}.pb{break-before:page}.rs{break-before:page}.pcov{display:flex;align-items:center;gap:14px;border-bottom:2px solid #7E4E73;padding-bottom:12px;margin-bottom:14px}.pcov svg{width:54px;height:54px}}
+#print-root table{width:100%;font-size:10.5px;border-collapse:collapse;table-layout:auto}#print-root table.sm{font-size:8.5px}#print-root table.nr{width:auto;min-width:60%}
+#print-root th,#print-root td{padding:5px 8px;white-space:normal;vertical-align:top;text-align:right;line-height:1.5;border-bottom:1px solid #EFE6EB;overflow-wrap:break-word}#print-root table.sm th,#print-root table.sm td{padding:3px 5px}
+#print-root th{color:#7D7180;font-weight:500;font-size:.92em;vertical-align:bottom;border-bottom:1.5px solid #CDB9C6;cursor:default}#print-root tbody tr:nth-child(even){background:#FAF6F8}
+#print-root .pcn{white-space:nowrap;text-align:center}#print-root td.pcn{font-variant-numeric:tabular-nums}#print-root .pcw{min-width:190px}
+#print-root thead{display:table-header-group}#print-root tr{break-inside:avoid}
+.pc{break-inside:avoid;break-after:avoid;margin-bottom:12px}#print-root h2{break-after:avoid}#print-root .pb{break-before:page}#print-root .pblk{break-inside:avoid;margin-bottom:22px}#print-root .pfl{list-style:none;margin:14px 0 0;padding:0;columns:2;column-gap:32px}#print-root .pfl li{break-inside:avoid;padding:6px 0;border-bottom:1px solid #EFE6EB;font-size:11.5px;line-height:1.6}#print-root .psec{break-before:page}.pcov{display:flex;align-items:center;gap:14px;border-bottom:2px solid #7E4E73;padding-bottom:12px;margin-bottom:14px}.pcov svg{width:54px;height:54px}}
 </style></head>
 <body>
 <noscript><p style="padding:20px">يتطلب مَسار تفعيل JavaScript.</p></noscript>
@@ -865,21 +869,23 @@ const overdueCard=a=>{const rows=overdueRows(a);return card('جهات متأخر
 const SECS=[['sum','الملخص والمؤشرات'],['plans','الخطط: الأرقام والتغطية'],['plsum','ملخص الخطط بالكلمات'],['trans','الانتقال بين الخطط'],['ptree','شجرة التغطية لكل خطة'],['cov','تغطية المناطق عبر الخطط'],['gaps','الفجوات الكبيرة بين الخطط'],['overdue','جهات متأخرة عن الزيارة'],['uncur','غير مغطاة في الخطة الحالية'],['prio','أولويات الخطة القادمة'],['agenda','الأجندة الأسبوعية المقترحة'],['sites','عدد الزيارات لكل جهة'],['pfac','تفصيل الجهات في كل خطة'],['regions','المناطق'],['locs','المواقع والتكلفة'],['mem','الأعضاء'],['mdet','تفاصيل كل عضو'],['mmon','الأعضاء × الشهور'],['mreg','الأعضاء × المناطق'],['pairs','الشراكات'],['cal','التقويم'],['trend','الاتجاه الشهري'],['dq','جودة البيانات'],['sched','الجدول المقترح'],['log','سجل الزيارات الكامل']];
 S.rep={order:SECS.map(s=>s[0]),on:new Set(['sum','plans','ptree','cov','gaps','prio','sites','regions','mem']),mem:null,title:'تقرير المرور',author:'',charts:true,pages:true,fmt:'pdf'};
 const logRows=(vs,D)=>vs.map(v=>[D(v.d),nm(v.site),nm(v.region),v.m.map(nm).join(' - ')]);
-const LOGH=['التاريخ','الجهة','المنطقة','الفريق'];
+const LOGH=['التاريخ','الجهة','المنطقة','الفريق'],LOGC=[{type:'date'},{type:'text'},{type:'text'},{type:'list'}];
 const activeSecs=()=>S.rep.order.filter(id=>S.rep.on.has(id)&&(id!=='locs'||S.hasLoc));
 const secName=id=>SECS.find(s=>s[0]===id)[1];
-const ptable=(h,r)=>`<table class="${h.length>11?'sm':''}"><thead><tr>${h.map(x=>`<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${r.map(x=>`<tr>${x.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+const pcc=(c,i)=>{const t=c&&c[i]?c[i].type:'text';return t==='list'?'pcw':t==='text'?'':'pcn'};
+const ptable=(h,r,c)=>`<table class="${[h.length>14?'sm':'',h.length<=3?'nr':''].filter(Boolean).join(' ')}"><thead><tr>${h.map((x,i)=>`<th class="${pcc(c,i)}">${esc(x)}</th>`).join('')}</tr></thead><tbody>${r.map(x=>`<tr>${x.map((v,i)=>`<td class="${pcc(c,i)}">${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
 function fsum(){const F=S.filters,p=[];if(F.from||F.to)p.push((F.from?fd(parseDate(F.from)):'…')+' — '+(F.to?fd(parseDate(F.to)):'…'));[['m','الأعضاء'],['r','المناطق'],['s','الجهات'],['l','المواقع'],['t','المرور'],['p','الخطة']].forEach(([k,l])=>{if(F[k].length)p.push(l+': '+F[k].map(x=>fl(k,x)).join(k==='m'&&F.mm==='all'?' + ':'، '))});return p.join(' · ')||'كل البيانات'}
 function periodTxt(){return S.f.length?fd(S.f[0].d)+' — '+fd(S.f[S.f.length-1].d):'—'}
 function doPDF(){const R=S.rep,ch=R.charts,pg=R.pages!==false,now=new Date(),pfx=t=>String(t).replace(/[\\"\r\n]/g,' '),secs=[];
 const cover=`<div class="pcov">${LOGO}<div><h1>${esc(R.title)}</h1>${R.author?`<div>${esc(R.author)}</div>`:''}<div class="mut">${esc(periodTxt())} · ${esc(fsum())}</div><div class="mut">${esc(fd(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())))}</div></div></div>`;
 activeSecs().forEach(id=>{const d=secData(id,fd);let h='';
-if(id==='mdet'){d.members.forEach(k=>{const vs=S.f.filter(v=>v.m.includes(k));h+=`<div class="pb"><h2>${esc(nm(k))}</h2><div class="pc">${miniK(mStats(vs))}</div>${ch?`<div class="pc">${bars(topK(cnt(vs,v=>v.site)).slice(0,10).map(([x,v])=>({label:nm(x),v})))}</div>`:''}${ptable(LOGH,logRows(vs,fd))}</div>`})}
-else if(id==='ptree'){const a=AN();[...a.plans].reverse().forEach(p=>{const rs=d.rows.filter(r=>r[0]===p.name+(p.cur?' (جارية)':''));h+=`<div class="pb"><h2>${esc(p.name)} · ${esc(fd(p.first)+' — '+fd(p.last))}</h2><div class="pc"><div class="mini"><div><small>التغطية</small><b>${pct(p.cov)}%</b></div><div><small>مغطاة</small><b>${p.sites.size}</b></div><div><small>غير مغطاة</small><b>${p.unc.length}</b></div><div><small>الزيارات</small><b>${p.n}</b></div></div></div>${ch?`<div class="pc">${bars(p.reg.filter(g=>g.tot).map(g=>({label:nm(g.r),v:pct(g.cov/g.tot),vs:g.cov+'/'+g.tot+' · '+pct(g.cov/g.tot)+'%'})),{max:100})}</div>`:''}${ptable(d.head.slice(1),rs.map(r=>r.slice(1)))}</div>`})}
-else h=`<div class="pc"><h2>${esc(secName(id))}</h2>${ch&&d.chart?d.chart():''}</div>${id==='cal'&&ch?'':ptable(d.head,d.rows)}`;
+if(id==='mdet'){d.members.forEach(k=>{const vs=S.f.filter(v=>v.m.includes(k));h+=`<div class="pb"><h2>${esc(nm(k))}</h2><div class="pc">${miniK(mStats(vs))}</div>${ch?`<div class="pc">${bars(topK(cnt(vs,v=>v.site)).slice(0,10).map(([x,v])=>({label:nm(x),v})))}</div>`:''}${ptable(LOGH,logRows(vs,fd),LOGC)}</div>`})}
+else if(id==='ptree'){const a=AN();[...a.plans].reverse().forEach(p=>{const rs=d.rows.filter(r=>r[0]===p.name+(p.cur?' (جارية)':''));h+=`<div class="pblk"><h2>${esc(p.name)} · ${esc(fd(p.first)+' — '+fd(p.last))}</h2><div class="pc"><div class="mini"><div><small>التغطية</small><b>${pct(p.cov)}%</b></div><div><small>مغطاة</small><b>${p.sites.size}</b></div><div><small>غير مغطاة</small><b>${p.unc.length}</b></div><div><small>الزيارات</small><b>${p.n}</b></div></div></div>${ch?`<div class="pc">${bars(p.reg.filter(g=>g.tot).map(g=>({label:nm(g.r),v:pct(g.cov/g.tot),vs:g.cov+'/'+g.tot+' · '+pct(g.cov/g.tot)+'%'})),{max:100})}</div>`:''}${ptable(d.head.slice(1),rs.map(r=>r.slice(1)),d.model.columns.slice(1))}</div>`})}
+else if(id==='sum'){const K=d.rows.filter(r=>r[0]!=='مؤشر'),L=d.rows.filter(r=>r[0]==='مؤشر'),fv=v=>typeof v==='number'&&Number.isInteger(v)?n0(v):esc(v);h=`<div class="pc"><h2>${esc(secName(id))}</h2><div class="mini">${K.map(r=>`<div><small>${esc(r[0])}</small><b>${fv(r[1])}</b></div>`).join('')}</div></div>${L.length?`<ul class="pfl">${L.map(r=>`<li>${esc(r[1])}</li>`).join('')}</ul>`:''}`}
+else h=`<div class="pc"><h2>${esc(secName(id))}</h2>${ch&&d.chart?d.chart():''}</div>${id==='cal'&&ch?'':ptable(d.head,d.rows,d.model.columns)}`;
 secs.push([id,h])});
 let h='',x='';
-if(pg&&secs.length){secs.forEach(([id,sc],i)=>{const n='s'+i;x+=`@page ${n}{@top-right{content:"${pfx(secName(id))}";font-size:9px;color:#7D7180}}`;h+=i?`<section class="rs" style="page:${n}">${sc}</section>`:`<div style="page:${n}">${cover}${sc}</div>`})}
+if(pg&&secs.length){secs.forEach(([id,sc],i)=>{const n='s'+i;x+=`@page ${n}{@top-right{content:"${pfx(secName(id))}";font-size:9px;color:#7D7180}}`;h+=i?`<section class="psec" style="page:${n}">${sc}</section>`:`<div style="page:${n}">${cover}${sc}</div>`})}
 else h=cover+secs.map(q=>q[1]).join('');
 setPfoot(String(R.title)+' · مَسار',x);$('#print-root').innerHTML=h;setTimeout(()=>window.print(),60)}
 const fname=(e,p='report')=>`masar-${p}-${iso(Date.now())}.${e}`;
@@ -1010,9 +1016,11 @@ const P=use.a;
 if(P){const rows=tabRows(P),pk=new Set(rows.map(o=>o.k));
 const E=I.pool.filter(t=>t!==P&&(t.kind==='visits'||t.kind==='person')).map(t=>{const er=tabRows(t),ek=new Set(er.map(o=>o.k));let ov=0;ek.forEach(k=>{if(pk.has(k))ov++});return{t,er,ek,ov:ek.size?ov/ek.size:0,mk:new Set(er.filter(o=>o.mem.length).map(o=>o.k)).size}}).filter(x=>x.ov>=.5&&x.ek.size>=3).sort((x,y)=>y.mk-x.mk);
 const maps=E.map(x=>{const m=new Map();x.er.forEach(o=>{(m.get(o.k)||m.set(o.k,[]).get(o.k)).push(o)});return m});
-const seen=new Map(),fill=new Map(E.map(x=>[x.t.id,0]));let filled=0,fReg=0,fLoc=0;
-rows.forEach(o=>{const n=seen.get(o.k)||0;seen.set(o.k,n+1);
-if(!o.mem.length)for(let j=0;j<E.length;j++){const a=(maps[j].get(o.k)||[]).filter(x=>x.mem.length);if(a.length){o.mem=a[Math.min(n,a.length-1)].mem.slice();fill.set(E[j].t.id,fill.get(E[j].t.id)+1);filled++;break}}
+const seen=new Map(),fill=new Map(E.map(x=>[x.t.id,0])),tot=new Map(),tk=o=>o.k+'|'+norm(o.type);rows.forEach(o=>tot.set(tk(o),(tot.get(tk(o))||0)+1));let filled=0,fReg=0,fLoc=0;
+const lt=(x,y)=>{for(let i=0;i<x.length;i++)if(x[i]!==y[i])return x[i]<y[i];return false},pickMem=(o,n)=>{const k=tot.get(tk(o));let best=null;for(let j=0;j<E.length;j++){let a=(maps[j].get(o.k)||[]).filter(x=>x.mem.length);if(!a.length)continue;const st=a.filter(x=>x.type&&o.type&&norm(x.type)===norm(o.type)),ty=st.length>0&&E[j].t.kind!=='person'?0:1;if(st.length)a=st;const sc=[ty,k>1&&a.length!==k?1:0,a.length,E[j].t.kind==='person'?1:0];if(!best||lt(sc,best.sc))best={j,a,sc}}
+if(!best)return null;const a=best.a;return{j:best.j,mem:a.length===1?a[0].mem.slice():k===1?[...new Set(a.flatMap(x=>x.mem))]:a[Math.min(n,a.length-1)].mem.slice()}};
+rows.forEach(o=>{const n=seen.get(tk(o))||0;seen.set(tk(o),n+1);
+if(!o.mem.length){const q=pickMem(o,n);if(q){o.mem=q.mem;fill.set(E[q.j].t.id,fill.get(E[q.j].t.id)+1);filled++}}
 if(!o.region)for(let j=0;j<E.length;j++){const a=maps[j].get(o.k);const x=a&&a.find(y=>y.region);if(x){o.region=x.region;fReg++;break}}
 if(!o.loc)for(let j=0;j<E.length;j++){const a=maps[j].get(o.k);const x=a&&a.find(y=>y.loc);if(x){o.loc=x.loc;fLoc++;break}}});
 let inferred=0;const withP=rows.filter(o=>o.plan!=='');
